@@ -1,101 +1,112 @@
-import Image from "next/image";
+'use client';
+import Link from 'next/link';
+import WeatherWidget from '../components/weather-widget';
+import { useState, useEffect } from 'react';
+import { TrafficSummary } from '../types';
+
+const TEMPLATES = [
+  { title: 'Beach Day', emoji: '🏖️', desc: 'Sun, sand & seafood', vibes: 'chill,nature', categories: 'beaches,street-food' },
+  { title: 'Cafe Hopping', emoji: '☕', desc: 'Best brews in Chennai', vibes: 'chill,artsy', categories: 'cafes' },
+  { title: 'Heritage Walk', emoji: '🛕', desc: 'Temples, history & culture', vibes: 'cultural', categories: 'temples-heritage,art-museums' },
+  { title: 'Adventure Day', emoji: '🏄', desc: 'Thrills & excitement', vibes: 'adventure,social', categories: 'sports-fun' },
+  { title: 'Foodie Trail', emoji: '🍜', desc: 'Eat your way through Chennai', vibes: 'foodie', categories: 'street-food,cafes' },
+  { title: 'Photo Walk', emoji: '📸', desc: 'Capture Chennai\'s beauty', vibes: 'artsy,nature', categories: 'photography,temples-heritage' },
+];
+
+const SEVERITY_EMOJI: Record<string, string> = {
+  clear: '🟢', light: '🟡', moderate: '🟠', heavy: '🔴', standstill: '⛔',
+};
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [trafficSummary, setTrafficSummary] = useState<TrafficSummary | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    fetch('/api/traffic?summary=true')
+      .then(r => r.ok ? r.json() : null)
+      .then(setTrafficSummary)
+      .catch(() => null);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#FAF7F2]">
+      {/* Hero */}
+      <section className="relative bg-gradient-to-br from-[#1B4965] to-[#2d7da8] text-white py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-sm text-[#FFB703] font-medium mb-2">வாரயிறுதி</p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            Plan your Chennai weekend.<br />
+            <span className="text-[#FFB703]">Dodge the traffic.</span> Zero cost.
+          </h1>
+          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+            The free weekend planner built for people who LIVE in Chennai.
+            Real-time traffic intelligence so you spend time enjoying, not stuck in traffic.
+          </p>
+          <Link
+            href="/plan"
+            className="inline-block px-8 py-4 bg-[#FFB703] text-[#1B4965] text-lg font-bold rounded-full hover:bg-[#e5a503] transition-all shadow-lg hover:shadow-xl hover:scale-105"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            Plan My Weekend ✨
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      <div className="max-w-5xl mx-auto px-4 -mt-8 relative z-10 space-y-8">
+        {/* Weather */}
+        <WeatherWidget />
+
+        {/* Traffic Summary Strip */}
+        {trafficSummary && (
+          <div className="bg-white rounded-xl shadow-md p-4">
+            <h3 className="text-sm font-semibold text-gray-500 mb-2">
+              Chennai traffic right now {trafficSummary.isLive ? '📡' : '📊'}
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {trafficSummary.corridors.map((c) => (
+                <span key={c.name} className="text-sm">
+                  {SEVERITY_EMOJI[c.severity]} {c.name}
+                  {c.avgDelay > 0 && <span className="text-gray-400 ml-1">(+{c.avgDelay}m)</span>}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Quick Templates */}
+        <section>
+          <h2 className="text-2xl font-bold text-[#1B4965] mb-4">Quick Plans</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {TEMPLATES.map((t) => (
+              <Link
+                key={t.title}
+                href={`/plan?vibes=${t.vibes}&categories=${t.categories}`}
+                className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all hover:scale-105 border border-gray-100"
+              >
+                <span className="text-3xl mb-2 block">{t.emoji}</span>
+                <h3 className="font-bold text-[#1B4965]">{t.title}</h3>
+                <p className="text-sm text-gray-500">{t.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* How It Works */}
+        <section className="pb-16">
+          <h2 className="text-2xl font-bold text-[#1B4965] mb-6 text-center">How it works</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { icon: '🎯', title: 'Pick your preferences', desc: 'Mood, budget, who\'s coming, where you\'re starting from' },
+              { icon: '🚦', title: 'Get a traffic-smart plan', desc: 'We check live traffic and build a route that avoids jams' },
+              { icon: '🎉', title: 'Go enjoy Chennai!', desc: 'Navigate stop by stop. Check traffic before heading out.' },
+            ].map((s) => (
+              <div key={s.title} className="text-center bg-white rounded-xl p-6 shadow-sm">
+                <span className="text-4xl mb-3 block">{s.icon}</span>
+                <h3 className="font-bold text-[#1B4965] mb-1">{s.title}</h3>
+                <p className="text-sm text-gray-500">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
