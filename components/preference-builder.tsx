@@ -35,6 +35,8 @@ const VIBE_LABELS: Record<Vibe, string> = {
   chill: '😌 Chill', adventure: '🏄 Adventure', romantic: '💕 Romantic',
   cultural: '🏛️ Cultural', social: '🎉 Social', artsy: '🎨 Artsy',
   family: '👨‍👩‍👧‍👦 Family', foodie: '🍜 Foodie', nature: '🌿 Nature',
+  productive: '💻 Productive', wellness: '🧘 Wellness',
+  nightout: '🌙 Night Out', learning: '🎓 Learn Something',
 };
 
 const GROUP_LABELS: Record<GroupType, string> = {

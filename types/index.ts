@@ -32,7 +32,13 @@ export type PlaceCategory =
   | 'shopping'
   | 'art-museums'
   | 'street-food'
-  | 'photography';
+  | 'photography'
+  | 'nightlife'
+  | 'wellness'
+  | 'coworking-study'
+  | 'movies-entertainment'
+  | 'nature-getaways'
+  | 'workshops-classes';
 
 export type Vibe =
   | 'chill'
@@ -43,7 +49,11 @@ export type Vibe =
   | 'artsy'
   | 'family'
   | 'foodie'
-  | 'nature';
+  | 'nature'
+  | 'productive'
+  | 'wellness'
+  | 'nightout'
+  | 'learning';
 
 export type GroupType = 'solo' | 'couple' | 'friends' | 'family' | 'large-group';
 
@@ -135,14 +145,20 @@ export interface TrafficSummary {
 
 export const CATEGORY_LABELS: Record<PlaceCategory, string> = {
   beaches: '🏖️ Beaches',
-  cafes: '☕ Cafes',
-  parks: '🌳 Parks',
+  cafes: '☕ Cafes & Restaurants',
+  parks: '🌳 Parks & Gardens',
   'sports-fun': '🎯 Sports & Fun',
   'temples-heritage': '🛕 Temples & Heritage',
   shopping: '🛍️ Shopping',
   'art-museums': '🎨 Art & Museums',
   'street-food': '🍜 Street Food',
   photography: '📸 Photography Spots',
+  nightlife: '🌙 Nightlife & Pubs',
+  wellness: '🧘 Wellness & Spa',
+  'coworking-study': '💻 Coworking & Study',
+  'movies-entertainment': '🎬 Movies & Entertainment',
+  'nature-getaways': '🌿 Nature Getaways',
+  'workshops-classes': '🎓 Workshops & Classes',
 };
 
 export const CATEGORY_ICONS: Record<PlaceCategory, string> = {
@@ -155,6 +171,12 @@ export const CATEGORY_ICONS: Record<PlaceCategory, string> = {
   'art-museums': '🎨',
   'street-food': '🍜',
   photography: '📸',
+  nightlife: '🌙',
+  wellness: '🧘',
+  'coworking-study': '💻',
+  'movies-entertainment': '🎬',
+  'nature-getaways': '🌿',
+  'workshops-classes': '🎓',
 };
 
 export const AREAS = [
