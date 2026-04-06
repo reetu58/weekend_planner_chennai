@@ -49,7 +49,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const startCoords = AREA_COORDINATES[prefs.startArea] || { lat: 13.0418, lng: 80.2341 };
+    // Use custom lat/lng if provided (from map search / GPS), otherwise fall back to area lookup
+    const startCoords = (prefs.startLat && prefs.startLng)
+      ? { lat: prefs.startLat, lng: prefs.startLng }
+      : AREA_COORDINATES[prefs.startArea] || { lat: 13.0418, lng: 80.2341 };
     const places = selected.map(s => s.place);
 
     // Simple nearest-neighbor ordering

@@ -65,6 +65,7 @@ export type Duration = 120 | 240 | 360 | 480;
 
 export interface UserPrefs {
   day: DayChoice;
+  date?: string; // ISO date string e.g. "2026-04-11" — overrides day if set
   duration: Duration;
   timeSlot: TimeSlot;
   departureTime: string;
@@ -73,6 +74,8 @@ export interface UserPrefs {
   vibes: Vibe[];
   categories: PlaceCategory[];
   startArea: string;
+  startLat?: number; // Custom lat from map/search — overrides startArea
+  startLng?: number; // Custom lng from map/search — overrides startArea
 }
 
 export type TrafficSeverity = 'clear' | 'light' | 'moderate' | 'heavy' | 'standstill';

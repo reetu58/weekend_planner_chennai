@@ -52,8 +52,10 @@ export function scorePlace(place: Place, prefs: UserPrefs): number {
     return 0; // Closed on chosen day
   }
 
-  // Distance from starting area (closer = better, but not too heavily weighted)
-  const startCoords = AREA_COORDINATES[prefs.startArea];
+  // Distance from starting location (use custom lat/lng if available, else area lookup)
+  const startCoords = (prefs.startLat && prefs.startLng)
+    ? { lat: prefs.startLat, lng: prefs.startLng }
+    : AREA_COORDINATES[prefs.startArea];
   if (startCoords) {
     const dist = haversineDistance(startCoords.lat, startCoords.lng, place.lat, place.lng);
     if (dist < 5) score += 10;
