@@ -101,7 +101,17 @@ export default function ExplorePage() {
             <div key={place.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all">
               {place.photoUrl && (
                 <div className="w-full h-32 bg-gray-100 overflow-hidden">
-                  <img src={place.photoUrl} alt={place.name} className="w-full h-full object-cover" loading="lazy" />
+                  <img
+                    src={place.photoUrl}
+                    alt={place.name}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    onError={(e) => {
+                      const t = e.target as HTMLImageElement;
+                      const fb = `https://placehold.co/800x400/1B4965/FFB703?text=${encodeURIComponent(place.name)}`;
+                      if (t.src !== fb) t.src = fb;
+                    }}
+                  />
                 </div>
               )}
               <div className="p-4">

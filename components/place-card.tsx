@@ -105,6 +105,11 @@ export default function PlaceCard({ stop, isFirst, onSwap, onCheckTraffic, isChe
             alt={place.name}
             className="w-full h-full object-cover"
             loading="lazy"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              const fallback = `https://placehold.co/800x400/1B4965/FFB703?text=${encodeURIComponent(place.name)}`;
+              if (target.src !== fallback) target.src = fallback;
+            }}
           />
           <div className="absolute top-2 left-2">
             <span className="w-8 h-8 bg-[#1B4965] text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
