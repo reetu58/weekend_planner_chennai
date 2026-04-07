@@ -24,7 +24,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Head to the south end for fewer crowds. The sundal vendors near the parking lot are the OG.',
     googleMapsUrl: 'https://maps.google.com/?q=Besant+Nagar+Beach+Chennai',
     imageKeyword: 'besant-nagar-beach',
-    photoUrl: 'https://source.unsplash.com/800x400/?besant+nagar+beach,chennai',
+    photoUrl: '/api/photo?q=Besant+Nagar+Beach',
     googleSearchUrl: 'https://www.google.com/search?q=Besant+Nagar+Beach+Chennai',
   },
   {
@@ -50,7 +50,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Go early morning for the best sunrise. Evening gets very crowded on weekends.',
     googleMapsUrl: 'https://maps.google.com/?q=Marina+Beach+Chennai',
     imageKeyword: 'marina-beach',
-    photoUrl: 'https://source.unsplash.com/800x400/?marina+beach,chennai',
+    photoUrl: '/api/photo?q=Marina+Beach',
     googleSearchUrl: 'https://www.google.com/search?q=Marina+Beach+Chennai',
   },
   {
@@ -76,7 +76,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Visit during evening pooja (6 PM) for the best atmosphere. Temple street food after is a must.',
     googleMapsUrl: 'https://maps.google.com/?q=Kapaleeshwarar+Temple+Chennai',
     imageKeyword: 'kapaleeshwarar-temple',
-    photoUrl: 'https://source.unsplash.com/800x400/?kapaleeshwarar+temple,chennai',
+    photoUrl: '/api/photo?q=Kapaleeshwarar+Temple',
     googleSearchUrl: 'https://www.google.com/search?q=Kapaleeshwarar+Temple+Chennai',
   },
   {
@@ -102,7 +102,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Grab a garden table and try the cold brew. Weekend brunch gets packed — go before 10 AM.',
     googleMapsUrl: 'https://maps.google.com/?q=Amethyst+Cafe+Chennai',
     imageKeyword: 'amethyst-cafe',
-    photoUrl: 'https://source.unsplash.com/800x400/?amethyst+cafe,chennai',
+    photoUrl: '/api/photo?q=Amethyst',
     googleSearchUrl: 'https://www.google.com/search?q=Amethyst+Chennai',
   },
   {
@@ -128,7 +128,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Food court on 3rd floor has the best variety. Go after 6 PM on Saturday for the vibe.',
     googleMapsUrl: 'https://maps.google.com/?q=Phoenix+MarketCity+Chennai',
     imageKeyword: 'phoenix-marketcity',
-    photoUrl: 'https://source.unsplash.com/800x400/?phoenix+marketcity,chennai',
+    photoUrl: '/api/photo?q=Phoenix+MarketCity',
     googleSearchUrl: 'https://www.google.com/search?q=Phoenix+MarketCity+Chennai',
   },
   {
@@ -154,7 +154,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Morning walks here are magical. The butterfly garden section is the hidden gem.',
     googleMapsUrl: 'https://maps.google.com/?q=Semmozhi+Poonga+Chennai',
     imageKeyword: 'semmozhi-poonga',
-    photoUrl: 'https://source.unsplash.com/800x400/?semmozhi+poonga,chennai',
+    photoUrl: '/api/photo?q=Semmozhi+Poonga',
     googleSearchUrl: 'https://www.google.com/search?q=Semmozhi+Poonga+Chennai',
   },
   {
@@ -180,7 +180,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Start at Mint Street. Try the Chinese bhel and the famous jigarthanda at the corner shop.',
     googleMapsUrl: 'https://maps.google.com/?q=Sowcarpet+Chennai',
     imageKeyword: 'sowcarpet-food',
-    photoUrl: 'https://source.unsplash.com/800x400/?sowcarpet+food,chennai',
+    photoUrl: '/api/photo?q=Sowcarpet+Food+Walk',
     googleSearchUrl: 'https://www.google.com/search?q=Sowcarpet+Food+Walk+Chennai',
   },
   {
@@ -206,7 +206,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Best at golden hour (5-6 PM). Wear shoes you don\'t mind getting muddy.',
     googleMapsUrl: 'https://maps.google.com/?q=Broken+Bridge+Adyar+Chennai',
     imageKeyword: 'broken-bridge-adyar',
-    photoUrl: 'https://source.unsplash.com/800x400/?broken+bridge+adyar,chennai',
+    photoUrl: '/api/photo?q=Broken+Bridge',
     googleSearchUrl: 'https://www.google.com/search?q=Broken+Bridge+Chennai',
   },
   {
@@ -232,7 +232,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the "Haunted Asylum" room — it\'s the hardest but most fun. Go with 4+ people.',
     googleMapsUrl: 'https://maps.google.com/?q=Mystery+Rooms+Chennai',
     imageKeyword: 'mystery-rooms',
-    photoUrl: 'https://source.unsplash.com/800x400/?mystery+rooms,chennai',
+    photoUrl: '/api/photo?q=Mystery+Rooms',
     googleSearchUrl: 'https://www.google.com/search?q=Mystery+Rooms+Chennai',
   },
   {
@@ -258,7 +258,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Don\'t miss the pottery workshop. The traditional houses from Kerala section is incredible.',
     googleMapsUrl: 'https://maps.google.com/?q=Dakshinachitra+Chennai',
     imageKeyword: 'dakshinachitra',
-    photoUrl: 'https://source.unsplash.com/800x400/?dakshinachitra,chennai',
+    photoUrl: '/api/photo?q=Dakshinachitra',
     googleSearchUrl: 'https://www.google.com/search?q=Dakshinachitra+Chennai',
   },
   {
@@ -284,7 +284,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Try the cold brew flight — 3 different beans. The upstairs seating is quieter.',
     googleMapsUrl: 'https://maps.google.com/?q=The+Brew+Room+Mylapore+Chennai',
     imageKeyword: 'brew-room-mylapore',
-    photoUrl: 'https://source.unsplash.com/800x400/?brew+room+mylapore,chennai',
+    photoUrl: '/api/photo?q=The+Brew+Room',
     googleSearchUrl: 'https://www.google.com/search?q=The+Brew+Room+Chennai',
   },
   {
@@ -310,7 +310,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The garden courtyard is magical in the evening. Pair a croissant with their house blend.',
     googleMapsUrl: 'https://maps.google.com/?q=Chamiers+Cafe+Chennai',
     imageKeyword: 'chamiers-cafe',
-    photoUrl: 'https://source.unsplash.com/800x400/?chamiers+cafe,chennai',
+    photoUrl: '/api/photo?q=Chamiers+Cafe',
     googleSearchUrl: 'https://www.google.com/search?q=Chamiers+Cafe+Chennai',
   },
   {
@@ -336,7 +336,7 @@ export const PLACES: Place[] = [
     insiderTip: 'They host open mic nights on some Saturdays. Ask about the cycling meetups.',
     googleMapsUrl: 'https://maps.google.com/?q=Ciclo+Cafe+Chennai',
     imageKeyword: 'ciclo-cafe',
-    photoUrl: 'https://source.unsplash.com/800x400/?ciclo+cafe,chennai',
+    photoUrl: '/api/photo?q=Ciclo+Cafe',
     googleSearchUrl: 'https://www.google.com/search?q=Ciclo+Cafe+Chennai',
   },
   {
@@ -362,7 +362,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The chocolate truffle cake is life-changing. Go after dinner as a dessert stop.',
     googleMapsUrl: 'https://maps.google.com/?q=Sandys+Chocolate+Laboratory+Chennai',
     imageKeyword: 'sandys-chocolate',
-    photoUrl: 'https://source.unsplash.com/800x400/?sandys+chocolate,chennai',
+    photoUrl: '/api/photo?q=Sandys+Chocolate+Laboratory',
     googleSearchUrl: 'https://www.google.com/search?q=Sandy\+Chennai',
   },
   {
@@ -388,7 +388,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Grab the window seat with the reading lamp. Their filter coffee is surprisingly great.',
     googleMapsUrl: 'https://maps.google.com/?q=Writers+Cafe+T+Nagar+Chennai',
     imageKeyword: 'writers-cafe',
-    photoUrl: 'https://source.unsplash.com/800x400/?writers+cafe,chennai',
+    photoUrl: '/api/photo?q=Writers+Cafe',
     googleSearchUrl: 'https://www.google.com/search?q=Writer\+Chennai',
   },
   {
@@ -414,7 +414,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The crepe suzette is a must. Quiet on Sunday mornings — perfect for a date.',
     googleMapsUrl: 'https://maps.google.com/?q=Cafe+De+Paris+Nungambakkam+Chennai',
     imageKeyword: 'cafe-de-paris',
-    photoUrl: 'https://source.unsplash.com/800x400/?cafe+de+paris,chennai',
+    photoUrl: '/api/photo?q=Cafe+De+Paris',
     googleSearchUrl: 'https://www.google.com/search?q=Cafe+De+Paris+Chennai',
   },
   {
@@ -440,7 +440,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Try the Kashmiri Kahwa or the bubble tea. The loaded nachos are unreal.',
     googleMapsUrl: 'https://maps.google.com/?q=Tea+Villa+Cafe+T+Nagar+Chennai',
     imageKeyword: 'tea-villa-cafe',
-    photoUrl: 'https://source.unsplash.com/800x400/?tea+villa+cafe,chennai',
+    photoUrl: '/api/photo?q=Tea+Villa+Cafe',
     googleSearchUrl: 'https://www.google.com/search?q=Tea+Villa+Cafe+Chennai',
   },
   {
@@ -466,7 +466,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Go early morning for the cleanest water. The nearby shacks serve fresh fish fry.',
     googleMapsUrl: 'https://maps.google.com/?q=Kovalam+Beach+Chennai',
     imageKeyword: 'kovalam-beach',
-    photoUrl: 'https://source.unsplash.com/800x400/?kovalam+beach,chennai',
+    photoUrl: '/api/photo?q=Kovalam+Beach',
     googleSearchUrl: 'https://www.google.com/search?q=Kovalam+Beach+Chennai',
   },
   {
@@ -492,7 +492,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Visit the Children\'s Park section if with kids. Spot blackbucks near the lake area.',
     googleMapsUrl: 'https://maps.google.com/?q=Guindy+National+Park+Chennai',
     imageKeyword: 'guindy-national-park',
-    photoUrl: 'https://source.unsplash.com/800x400/?guindy+national+park,chennai',
+    photoUrl: '/api/photo?q=Guindy+National+Park',
     googleSearchUrl: 'https://www.google.com/search?q=Guindy+National+Park+Chennai',
   },
   {
@@ -518,7 +518,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Hit the food court on level 3 for variety. The PVR Gold screen is worth the splurge.',
     googleMapsUrl: 'https://maps.google.com/?q=Express+Avenue+Mall+Chennai',
     imageKeyword: 'express-avenue',
-    photoUrl: 'https://source.unsplash.com/800x400/?express+avenue,chennai',
+    photoUrl: '/api/photo?q=Express+Avenue',
     googleSearchUrl: 'https://www.google.com/search?q=Express+Avenue+Chennai',
   },
   {
@@ -544,7 +544,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The evening bajji-bonda stalls near the temple tank are legendary. Try the rose milk.',
     googleMapsUrl: 'https://maps.google.com/?q=Mylapore+Temple+Street+Food+Chennai',
     imageKeyword: 'mylapore-street-food',
-    photoUrl: 'https://source.unsplash.com/800x400/?mylapore+street+food,chennai',
+    photoUrl: '/api/photo?q=Mylapore+Temple+Street+Food',
     googleSearchUrl: 'https://www.google.com/search?q=Mylapore+Temple+Street+Food+Chennai',
   },
   {
@@ -570,7 +570,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Go on Saturday night for the live band. The chicken wings and nachos are elite.',
     googleMapsUrl: 'https://maps.google.com/?q=Illusions+The+Madras+Pub+Chennai',
     imageKeyword: 'illusions-pub',
-    photoUrl: 'https://source.unsplash.com/800x400/?illusions+pub,chennai',
+    photoUrl: '/api/photo?q=Illusions+-+The+Madras+Pub',
     googleSearchUrl: 'https://www.google.com/search?q=Illusions+-+The+Madras+Pub+Chennai',
   },
   {
@@ -596,7 +596,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The Sunday brunch is legendary. Book in advance — it fills up fast. Try the sushi counter.',
     googleMapsUrl: 'https://maps.google.com/?q=The+Flying+Elephant+Park+Hyatt+Chennai',
     imageKeyword: 'flying-elephant',
-    photoUrl: 'https://source.unsplash.com/800x400/?flying+elephant,chennai',
+    photoUrl: '/api/photo?q=The+Flying+Elephant',
     googleSearchUrl: 'https://www.google.com/search?q=The+Flying+Elephant+Chennai',
   },
   {
@@ -622,7 +622,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Grab the outdoor table at sunset. Their milkshakes are the real deal.',
     googleMapsUrl: 'https://maps.google.com/?q=Bay+146+Besant+Nagar+Chennai',
     imageKeyword: 'bay-146',
-    photoUrl: 'https://source.unsplash.com/800x400/?bay+146,chennai',
+    photoUrl: '/api/photo?q=Bay+146',
     googleSearchUrl: 'https://www.google.com/search?q=Bay+146+Chennai',
   },
   {
@@ -648,7 +648,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The ghee podi idli is non-negotiable. Go before 8 AM to avoid the queue.',
     googleMapsUrl: 'https://maps.google.com/?q=Murugan+Idli+Shop+T+Nagar+Chennai',
     imageKeyword: 'murugan-idli',
-    photoUrl: 'https://source.unsplash.com/800x400/?murugan+idli,chennai',
+    photoUrl: '/api/photo?q=Murugan+Idli+Shop',
     googleSearchUrl: 'https://www.google.com/search?q=Murugan+Idli+Shop+Chennai',
   },
   {
@@ -674,7 +674,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The Nandu (crab) Rasam is a must-try. Go for lunch — dinner queues are brutal.',
     googleMapsUrl: 'https://maps.google.com/?q=Junior+Kuppanna+Egmore+Chennai',
     imageKeyword: 'junior-kuppanna',
-    photoUrl: 'https://source.unsplash.com/800x400/?junior+kuppanna,chennai',
+    photoUrl: '/api/photo?q=Junior+Kuppanna',
     googleSearchUrl: 'https://www.google.com/search?q=Junior+Kuppanna+Chennai',
   },
   {
@@ -700,7 +700,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The rose milk and badam milk vendors near the lighthouse end are the best.',
     googleMapsUrl: 'https://maps.google.com/?q=Marina+Beach+Food+Stalls+Chennai',
     imageKeyword: 'marina-food-stalls',
-    photoUrl: 'https://source.unsplash.com/800x400/?marina+food+stalls,chennai',
+    photoUrl: '/api/photo?q=Marina+Beach+Food+Stalls',
     googleSearchUrl: 'https://www.google.com/search?q=Marina+Beach+Food+Stalls+Chennai',
   },
   {
@@ -726,7 +726,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The shawarma near the 2nd cross signal is the OG. Pair it with a thick shake from next door.',
     googleMapsUrl: 'https://maps.google.com/?q=Besant+Nagar+Food+Street+Chennai',
     imageKeyword: 'besant-nagar-food',
-    photoUrl: 'https://source.unsplash.com/800x400/?besant+nagar+food,chennai',
+    photoUrl: '/api/photo?q=Besant+Nagar+Food+Street',
     googleSearchUrl: 'https://www.google.com/search?q=Besant+Nagar+Food+Street+Chennai',
   },
   {
@@ -752,7 +752,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Try the avocado toast and the kombucha. Great for a healthy brunch.',
     googleMapsUrl: 'https://maps.google.com/?q=Naturally+Auroville+Adyar+Chennai',
     imageKeyword: 'naturally-auroville',
-    photoUrl: 'https://source.unsplash.com/800x400/?naturally+auroville,chennai',
+    photoUrl: '/api/photo?q=Naturally+Auroville',
     googleSearchUrl: 'https://www.google.com/search?q=Naturally+Auroville+Chennai',
   },
   {
@@ -778,7 +778,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Order the mutton biryani with a side of brinjal curry. Skip the starters — go straight for biryani.',
     googleMapsUrl: 'https://maps.google.com/?q=Thalappakatti+Biryani+T+Nagar+Chennai',
     imageKeyword: 'thalappakatti-biryani',
-    photoUrl: 'https://source.unsplash.com/800x400/?thalappakatti+biryani,chennai',
+    photoUrl: '/api/photo?q=Dindigul+Thalappakatti+Biryani',
     googleSearchUrl: 'https://www.google.com/search?q=Dindigul+Thalappakatti+Biryani+Chennai',
   },
   {
@@ -804,7 +804,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The fort museum has original letters from Clive and Cornwallis. Photography is free inside.',
     googleMapsUrl: 'https://maps.google.com/?q=Fort+St+George+Chennai',
     imageKeyword: 'fort-st-george',
-    photoUrl: 'https://source.unsplash.com/800x400/?fort+st+george,chennai',
+    photoUrl: '/api/photo?q=Fort+St.+George',
     googleSearchUrl: 'https://www.google.com/search?q=Fort+St.+George+Chennai',
   },
   {
@@ -830,7 +830,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The underground tomb chapel is hauntingly beautiful. Visit at sunset for the best light.',
     googleMapsUrl: 'https://maps.google.com/?q=San+Thome+Cathedral+Chennai',
     imageKeyword: 'san-thome-cathedral',
-    photoUrl: 'https://source.unsplash.com/800x400/?san+thome+cathedral,chennai',
+    photoUrl: '/api/photo?q=San+Thome+Cathedral',
     googleSearchUrl: 'https://www.google.com/search?q=San+Thome+Cathedral+Chennai',
   },
   {
@@ -856,7 +856,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The Chola bronze gallery is world-class — don\'t skip it. Allow 2 hours minimum.',
     googleMapsUrl: 'https://maps.google.com/?q=Government+Museum+Egmore+Chennai',
     imageKeyword: 'government-museum-egmore',
-    photoUrl: 'https://source.unsplash.com/800x400/?government+museum+egmore,chennai',
+    photoUrl: '/api/photo?q=Government+Museum+Egmore',
     googleSearchUrl: 'https://www.google.com/search?q=Government+Museum+Egmore+Chennai',
   },
   {
@@ -882,7 +882,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The IMAX screen here is the best in Chennai. The rooftop restaurants have great views.',
     googleMapsUrl: 'https://maps.google.com/?q=VR+Chennai+Anna+Nagar',
     imageKeyword: 'vr-chennai',
-    photoUrl: 'https://source.unsplash.com/800x400/?vr+chennai,chennai',
+    photoUrl: '/api/photo?q=VR+Chennai',
     googleSearchUrl: 'https://www.google.com/search?q=VR+Chennai+Chennai',
   },
   {
@@ -908,7 +908,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Go early morning (before 10 AM) to avoid the insane crowds. Bargain hard at street stalls.',
     googleMapsUrl: 'https://maps.google.com/?q=Ranganathan+Street+T+Nagar+Chennai',
     imageKeyword: 'ranganathan-street',
-    photoUrl: 'https://source.unsplash.com/800x400/?ranganathan+street,chennai',
+    photoUrl: '/api/photo?q=T.+Nagar+Ranganathan+Street',
     googleSearchUrl: 'https://www.google.com/search?q=T.+Nagar+Ranganathan+Street+Chennai',
   },
   {
@@ -934,7 +934,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Talk to the resident artists — many are happy to show their studios. Buy art directly.',
     googleMapsUrl: 'https://maps.google.com/?q=Cholamandal+Artists+Village+Chennai',
     imageKeyword: 'cholamandal-village',
-    photoUrl: 'https://source.unsplash.com/800x400/?cholamandal+village,chennai',
+    photoUrl: '/api/photo?q=Cholamandal+Artists+Village',
     googleSearchUrl: 'https://www.google.com/search?q=Cholamandal+Artists\+Chennai',
   },
   {
@@ -960,7 +960,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Catch the 3:30 PM English show — it\'s the best one. Combine with Guindy Park next door.',
     googleMapsUrl: 'https://maps.google.com/?q=Birla+Planetarium+Chennai',
     imageKeyword: 'birla-planetarium',
-    photoUrl: 'https://source.unsplash.com/800x400/?birla+planetarium,chennai',
+    photoUrl: '/api/photo?q=Birla+Planetarium',
     googleSearchUrl: 'https://www.google.com/search?q=Birla+Planetarium+Chennai',
   },
   {
@@ -986,7 +986,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the 7 AM slot for the best waves and fewer people. They provide everything.',
     googleMapsUrl: 'https://maps.google.com/?q=Covelong+Point+Surf+School+Chennai',
     imageKeyword: 'covelong-surf',
-    photoUrl: 'https://source.unsplash.com/800x400/?covelong+surf,chennai',
+    photoUrl: '/api/photo?q=Covelong+Point+Surf+School',
     googleSearchUrl: 'https://www.google.com/search?q=Covelong+Point+Surf+School+Chennai',
   },
   {
@@ -1012,7 +1012,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Wear grip socks (they sell them there). Book the 2-hour package — 1 hour flies by.',
     googleMapsUrl: 'https://maps.google.com/?q=Dugout+Trampoline+Park+OMR+Chennai',
     imageKeyword: 'dugout-trampoline',
-    photoUrl: 'https://source.unsplash.com/800x400/?dugout+trampoline,chennai',
+    photoUrl: '/api/photo?q=Dugout+Trampoline+Park',
     googleSearchUrl: 'https://www.google.com/search?q=Dugout+Trampoline+Park+Chennai',
   },
   {
@@ -1038,7 +1038,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Visit at sunrise for an unforgettable experience. Combine with Elliot\'s Beach walk after.',
     googleMapsUrl: 'https://maps.google.com/?q=Ashtalakshmi+Temple+Chennai',
     imageKeyword: 'ashtalakshmi-temple',
-    photoUrl: 'https://source.unsplash.com/800x400/?ashtalakshmi+temple,chennai',
+    photoUrl: '/api/photo?q=Ashtalakshmi+Temple',
     googleSearchUrl: 'https://www.google.com/search?q=Ashtalakshmi+Temple+Chennai',
   },
   {
@@ -1064,7 +1064,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The temple tank area is peaceful. Visit early morning for the best darshan without crowds.',
     googleMapsUrl: 'https://maps.google.com/?q=Marundeeswarar+Temple+Thiruvanmiyur+Chennai',
     imageKeyword: 'marundeeswarar-temple',
-    photoUrl: 'https://source.unsplash.com/800x400/?marundeeswarar+temple,chennai',
+    photoUrl: '/api/photo?q=Marundeeswarar+Temple',
     googleSearchUrl: 'https://www.google.com/search?q=Marundeeswarar+Temple+Chennai',
   },
   {
@@ -1090,7 +1090,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Much less crowded than Elliot\'s. Best on weekday evenings but still calm on weekends.',
     googleMapsUrl: 'https://maps.google.com/?q=Thiruvalluvar+Nagar+Beach+Chennai',
     imageKeyword: 'thiruvalluvar-beach',
-    photoUrl: 'https://source.unsplash.com/800x400/?thiruvalluvar+beach,chennai',
+    photoUrl: '/api/photo?q=Thiruvalluvar+Nagar+Beach',
     googleSearchUrl: 'https://www.google.com/search?q=Thiruvalluvar+Nagar+Beach+Chennai',
   },
   {
@@ -1116,7 +1116,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Star Biryani and Pakoda Corner are the local favourites. Go for lunch — sells out by 2 PM.',
     googleMapsUrl: 'https://maps.google.com/?q=Triplicane+Biryani+Chennai',
     imageKeyword: 'triplicane-biryani',
-    photoUrl: 'https://source.unsplash.com/800x400/?triplicane+biryani,chennai',
+    photoUrl: '/api/photo?q=Triplicane+Biryani+Street',
     googleSearchUrl: 'https://www.google.com/search?q=Triplicane+Biryani+Street+Chennai',
   },
 
@@ -1144,7 +1144,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Saturday night is packed — reach by 8 PM to get a good table. Try the LIIT.',
     googleMapsUrl: 'https://maps.google.com/?q=10+Downing+Street+Nungambakkam+Chennai',
     imageKeyword: '10-downing-street',
-    photoUrl: 'https://source.unsplash.com/800x400/?10+downing+street,chennai',
+    photoUrl: '/api/photo?q=10+Downing+Street',
     googleSearchUrl: 'https://www.google.com/search?q=10+Downing+Street+Chennai',
   },
   {
@@ -1170,7 +1170,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Ask for the off-menu Old Fashioned. The cheese platter is solid.',
     googleMapsUrl: 'https://maps.google.com/?q=The+Vault+Bar+Nungambakkam+Chennai',
     imageKeyword: 'the-vault-bar',
-    photoUrl: 'https://source.unsplash.com/800x400/?the+vault+bar,chennai',
+    photoUrl: '/api/photo?q=The+Vault',
     googleSearchUrl: 'https://www.google.com/search?q=The+Vault+Chennai',
   },
   {
@@ -1196,7 +1196,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Friday/Saturday have live jazz. Dress smart — no shorts or flip-flops.',
     googleMapsUrl: 'https://maps.google.com/?q=The+Leather+Bar+Park+Hotel+Chennai',
     imageKeyword: 'leather-bar',
-    photoUrl: 'https://source.unsplash.com/800x400/?leather+bar,chennai',
+    photoUrl: '/api/photo?q=The+Leather+Bar',
     googleSearchUrl: 'https://www.google.com/search?q=The+Leather+Bar+Chennai',
   },
 
@@ -1224,7 +1224,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the 90-min Balinese massage. Weekend slots fill fast — book a day ahead.',
     googleMapsUrl: 'https://maps.google.com/?q=O2+Spa+Phoenix+Mall+Chennai',
     imageKeyword: 'o2-spa',
-    photoUrl: 'https://source.unsplash.com/800x400/?o2+spa,chennai',
+    photoUrl: '/api/photo?q=O2+Spa',
     googleSearchUrl: 'https://www.google.com/search?q=O2+Spa+Chennai',
   },
   {
@@ -1250,7 +1250,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The 7 AM Saturday Vinyasa class is transformative. Bring your own mat for comfort.',
     googleMapsUrl: 'https://maps.google.com/?q=Yoga+Studio+Mylapore+Chennai',
     imageKeyword: 'yoga-mylapore',
-    photoUrl: 'https://source.unsplash.com/800x400/?yoga+mylapore,chennai',
+    photoUrl: '/api/photo?q=Mudra+Yoga+Shala',
     googleSearchUrl: 'https://www.google.com/search?q=Mudra+Yoga+Shala+Chennai',
   },
   {
@@ -1276,7 +1276,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The couple spa package on weekends is great value. Book the 2 PM slot for fewer people.',
     googleMapsUrl: 'https://maps.google.com/?q=Spa+Anna+Nagar+Chennai',
     imageKeyword: 'spa-anna-nagar',
-    photoUrl: 'https://source.unsplash.com/800x400/?spa+anna+nagar,chennai',
+    photoUrl: '/api/photo?q=Spa+Fusion',
     googleSearchUrl: 'https://www.google.com/search?q=Spa+Fusion+Chennai',
   },
 
@@ -1304,7 +1304,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Day pass is ₹350. The quiet zone upstairs is perfect for deep work. Free coffee all day.',
     googleMapsUrl: 'https://maps.google.com/?q=Ikigai+Coworking+Chennai',
     imageKeyword: 'ikigai-cowork',
-    photoUrl: 'https://source.unsplash.com/800x400/?ikigai+cowork,chennai',
+    photoUrl: '/api/photo?q=Ikigai+Coworking',
     googleSearchUrl: 'https://www.google.com/search?q=Ikigai+Coworking+Chennai',
   },
   {
@@ -1330,7 +1330,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The reading room is air-conditioned and silent. Carry your own laptop charger.',
     googleMapsUrl: 'https://maps.google.com/?q=Connemara+Public+Library+Chennai',
     imageKeyword: 'connemara-library',
-    photoUrl: 'https://source.unsplash.com/800x400/?connemara+library,chennai',
+    photoUrl: '/api/photo?q=Connemara+Public+Library',
     googleSearchUrl: 'https://www.google.com/search?q=Connemara+Public+Library+Chennai',
   },
   {
@@ -1356,7 +1356,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Grab the upstairs window seat — ocean view while you work. Go early on weekends.',
     googleMapsUrl: 'https://maps.google.com/?q=Starbucks+ECR+Chennai',
     imageKeyword: 'starbucks-ecr',
-    photoUrl: 'https://source.unsplash.com/800x400/?starbucks+ecr,chennai',
+    photoUrl: '/api/photo?q=Starbucks+ECR+(Study+Spot)',
     googleSearchUrl: 'https://www.google.com/search?q=Starbucks+ECR+(Study+Spot)+Chennai',
   },
 
@@ -1384,7 +1384,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book Row H-K for the best view. The Subliminal cafe samosa and cold coffee is a ritual.',
     googleMapsUrl: 'https://maps.google.com/?q=Sathyam+Cinemas+Chennai',
     imageKeyword: 'sathyam-cinemas',
-    photoUrl: 'https://source.unsplash.com/800x400/?sathyam+cinemas,chennai',
+    photoUrl: '/api/photo?q=Sathyam+Cinemas',
     googleSearchUrl: 'https://www.google.com/search?q=Sathyam+Cinemas+Chennai',
   },
   {
@@ -1410,7 +1410,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The IMAX 3D screen is worth the ₹200 extra. Combine with dinner at the VR food court.',
     googleMapsUrl: 'https://maps.google.com/?q=PVR+IMAX+VR+Chennai',
     imageKeyword: 'pvr-imax-vr',
-    photoUrl: 'https://source.unsplash.com/800x400/?pvr+imax+vr,chennai',
+    photoUrl: '/api/photo?q=PVR+IMAX+-+VR+Chennai',
     googleSearchUrl: 'https://www.google.com/search?q=PVR+IMAX+-+VR+Chennai+Chennai',
   },
   {
@@ -1436,7 +1436,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The VR roller coaster is insane. Buy the combo pass — individual games cost more.',
     googleMapsUrl: 'https://maps.google.com/?q=Smaaash+Phoenix+Mall+Chennai',
     imageKeyword: 'smaaash-gaming',
-    photoUrl: 'https://source.unsplash.com/800x400/?smaaash+gaming,chennai',
+    photoUrl: '/api/photo?q=Smaaash+Gaming+Zone',
     googleSearchUrl: 'https://www.google.com/search?q=Smaaash+Gaming+Zone+Chennai',
   },
 
@@ -1464,7 +1464,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Go before 11 AM — the queue gets crazy by noon. Speed boat ride is worth the price.',
     googleMapsUrl: 'https://maps.google.com/?q=Muttukadu+Boat+House+Chennai',
     imageKeyword: 'muttukadu-boathouse',
-    photoUrl: 'https://source.unsplash.com/800x400/?muttukadu+boathouse,chennai',
+    photoUrl: '/api/photo?q=Muttukadu+Boat+House',
     googleSearchUrl: 'https://www.google.com/search?q=Muttukadu+Boat+House+Chennai',
   },
   {
@@ -1490,7 +1490,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Best between Nov-Feb for migratory birds. Carry binoculars. Early morning is magical.',
     googleMapsUrl: 'https://maps.google.com/?q=Vedanthangal+Bird+Sanctuary',
     imageKeyword: 'vedanthangal-birds',
-    photoUrl: 'https://source.unsplash.com/800x400/?vedanthangal+birds,chennai',
+    photoUrl: '/api/photo?q=Vedanthangal+Bird+Sanctuary',
     googleSearchUrl: 'https://www.google.com/search?q=Vedanthangal+Bird+Sanctuary+Chennai',
   },
   {
@@ -1516,7 +1516,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Go early to beat tourist crowds. The Shore Temple at sunrise is breathtaking. Eat at one of the beach shacks.',
     googleMapsUrl: 'https://maps.google.com/?q=Mahabalipuram+Tamil+Nadu',
     imageKeyword: 'mahabalipuram',
-    photoUrl: 'https://source.unsplash.com/800x400/?mahabalipuram,chennai',
+    photoUrl: '/api/photo?q=Mahabalipuram+(Day+Trip)',
     googleSearchUrl: 'https://www.google.com/search?q=Mahabalipuram+(Day+Trip)+Chennai',
   },
   {
@@ -1542,7 +1542,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The boardwalk through the mangroves is stunning. Carry mosquito repellent in the evening.',
     googleMapsUrl: 'https://maps.google.com/?q=Tholkappia+Poonga+Chennai',
     imageKeyword: 'tholkappia-poonga',
-    photoUrl: 'https://source.unsplash.com/800x400/?tholkappia+poonga,chennai',
+    photoUrl: '/api/photo?q=Tholkappia+Poonga+(Adyar+Eco+Park)',
     googleSearchUrl: 'https://www.google.com/search?q=Tholkappia+Poonga+(Adyar+Eco+Park)+Chennai',
   },
 
@@ -1570,7 +1570,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Check their website for weekend performances. The weaving centre sells beautiful handloom.',
     googleMapsUrl: 'https://maps.google.com/?q=Kalakshetra+Foundation+Chennai',
     imageKeyword: 'kalakshetra',
-    photoUrl: 'https://source.unsplash.com/800x400/?kalakshetra,chennai',
+    photoUrl: '/api/photo?q=Kalakshetra+Foundation',
     googleSearchUrl: 'https://www.google.com/search?q=Kalakshetra+Foundation+Chennai',
   },
   {
@@ -1596,7 +1596,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the 2-hour Saturday morning slot. Wear old clothes — it gets messy and fun.',
     googleMapsUrl: 'https://maps.google.com/?q=Pottery+Workshop+ECR+Chennai',
     imageKeyword: 'pottery-workshop',
-    photoUrl: 'https://source.unsplash.com/800x400/?pottery+workshop,chennai',
+    photoUrl: '/api/photo?q=The+Potters+Shed+(Pottery+Workshop)',
     googleSearchUrl: 'https://www.google.com/search?q=The+Potter\+Chennai',
   },
   {
@@ -1622,7 +1622,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The Saturday evening sip-and-paint is perfect for a date. No experience needed at all.',
     googleMapsUrl: 'https://maps.google.com/?q=Art+Painting+Class+Adyar+Chennai',
     imageKeyword: 'art-lounge-painting',
-    photoUrl: 'https://source.unsplash.com/800x400/?art+lounge+painting,chennai',
+    photoUrl: '/api/photo?q=The+Art+Lounge+(Painting+Sessions)',
     googleSearchUrl: 'https://www.google.com/search?q=The+Art+Lounge+(Painting+Sessions)+Chennai',
   },
   {
@@ -1648,7 +1648,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the Sunday morning session. You\'ll eat a massive meal of everything you cooked. Worth every rupee.',
     googleMapsUrl: 'https://maps.google.com/?q=Cooking+Class+Mylapore+Chennai',
     imageKeyword: 'cooking-class',
-    photoUrl: 'https://source.unsplash.com/800x400/?cooking+class,chennai',
+    photoUrl: '/api/photo?q=Authentic+Chennai+Cooking+Class',
     googleSearchUrl: 'https://www.google.com/search?q=Authentic+Chennai+Cooking+Class+Chennai',
   },
 
@@ -1676,7 +1676,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Best shot from the street opposite during golden hour. The temple tank reflection shot is fire.',
     googleMapsUrl: 'https://maps.google.com/?q=Kapaleeshwarar+Temple+Gopuram+Chennai',
     imageKeyword: 'kapaleeshwarar-gopuram',
-    photoUrl: 'https://source.unsplash.com/800x400/?kapaleeshwarar+gopuram,chennai',
+    photoUrl: '/api/photo?q=Kapaleeshwarar+Gopuram+Viewpoint',
     googleSearchUrl: 'https://www.google.com/search?q=Kapaleeshwarar+Gopuram+Viewpoint+Chennai',
   },
   {
@@ -1702,7 +1702,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Go around 4 PM for the best light. The view of Marina stretching north is incredible.',
     googleMapsUrl: 'https://maps.google.com/?q=Chennai+Lighthouse',
     imageKeyword: 'chennai-lighthouse',
-    photoUrl: 'https://source.unsplash.com/800x400/?chennai+lighthouse,chennai',
+    photoUrl: '/api/photo?q=Chennai+Lighthouse',
     googleSearchUrl: 'https://www.google.com/search?q=Chennai+Lighthouse+Chennai',
   },
 ];
