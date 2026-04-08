@@ -1,25 +1,16 @@
 'use client';
 import { ItineraryStop, CATEGORY_ICONS, TrafficSeverity } from '../types';
 
-const SEVERITY_COLORS: Record<TrafficSeverity, { border: string; bg: string; text: string }> = {
-  clear: { border: 'border-green-500', bg: 'bg-green-50', text: 'text-green-700' },
-  light: { border: 'border-yellow-400', bg: 'bg-yellow-50', text: 'text-yellow-700' },
-  moderate: { border: 'border-orange-400', bg: 'bg-orange-50', text: 'text-orange-700' },
-  heavy: { border: 'border-red-500', bg: 'bg-red-50', text: 'text-red-700' },
-  standstill: { border: 'border-red-700', bg: 'bg-red-100', text: 'text-red-800' },
-};
-
-const SEVERITY_EMOJI: Record<TrafficSeverity, string> = {
-  clear: '🟢', light: '🟡', moderate: '🟠', heavy: '🔴', standstill: '⛔',
-};
-
-const SEVERITY_LABEL: Record<TrafficSeverity, string> = {
-  clear: 'Smooth ride', light: 'Slightly slow', moderate: 'Moderate traffic',
-  heavy: 'Heavy traffic', standstill: 'Standstill',
+const SEVERITY_CONFIG: Record<TrafficSeverity, { border: string; bg: string; text: string; emoji: string; label: string }> = {
+  clear: { border: 'border-emerald-400', bg: 'bg-emerald-50', text: 'text-emerald-700', emoji: '🟢', label: 'Smooth ride' },
+  light: { border: 'border-yellow-400', bg: 'bg-yellow-50', text: 'text-yellow-700', emoji: '🟡', label: 'Slightly slow' },
+  moderate: { border: 'border-orange-400', bg: 'bg-orange-50', text: 'text-orange-700', emoji: '🟠', label: 'Moderate traffic' },
+  heavy: { border: 'border-red-500', bg: 'bg-red-50', text: 'text-red-700', emoji: '🔴', label: 'Heavy traffic' },
+  standstill: { border: 'border-red-700', bg: 'bg-red-100', text: 'text-red-800', emoji: '⛔', label: 'Standstill' },
 };
 
 const BUDGET_LABELS: Record<string, string> = {
-  free: 'Free', 'under-500': '₹ Under 500', 'under-2000': '₹ Under 2,000', 'no-limit': '₹₹₹',
+  free: 'Free', 'under-500': 'Under ₹500', 'under-2000': 'Under ₹2K', 'no-limit': '₹₹₹',
 };
 
 interface Props {
@@ -33,73 +24,44 @@ interface Props {
 export default function PlaceCard({ stop, isFirst, onSwap, onCheckTraffic, isCheckingTraffic }: Props) {
   const { place, trafficAlert } = stop;
   const severity = trafficAlert?.severity || 'clear';
-  const colors = SEVERITY_COLORS[severity];
-
-  const isOpen = () => {
-    const now = new Date();
-    const day = now.getDay() === 0 ? 'sunday' : 'saturday';
-    const hours = place.openHours[day];
-    if (!hours) return { status: 'Closed', color: 'text-red-500' };
-    const currentHour = now.getHours() * 60 + now.getMinutes();
-    const [oh, om] = hours.open.split(':').map(Number);
-    const [ch, cm] = hours.close.split(':').map(Number);
-    const openMin = oh * 60 + om;
-    const closeMin = ch * 60 + cm;
-    if (currentHour >= openMin && currentHour < closeMin) {
-      const remaining = closeMin - currentHour;
-      if (remaining <= 120) return { status: `Closes in ${Math.floor(remaining / 60)}h ${remaining % 60}m`, color: 'text-orange-500' };
-      return { status: 'Open now', color: 'text-green-600' };
-    }
-    return { status: 'Closed', color: 'text-red-500' };
-  };
-
-  const openStatus = isOpen();
+  const config = SEVERITY_CONFIG[severity];
 
   return (
-    <div className={`bg-white rounded-xl shadow-md overflow-hidden ${!isFirst && trafficAlert ? `border-l-4 ${colors.border}` : ''}`}>
-      {/* Traffic panel */}
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover animate-fade-in-up">
+      {/* Traffic alert between stops */}
       {!isFirst && trafficAlert && (
-        <div className={`px-4 py-3 ${colors.bg}`}>
+        <div className={`px-4 py-3 ${config.bg} border-l-4 ${config.border}`}>
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-lg">{SEVERITY_EMOJI[severity]}</span>
-              <span className={`font-semibold ${colors.text}`}>
-                {SEVERITY_LABEL[severity]} — {Math.round(trafficAlert.currentTravelTime)} min
+              <span className="text-base">{config.emoji}</span>
+              <span className={`font-semibold text-sm ${config.text}`}>
+                {config.label} — {Math.round(trafficAlert.currentTravelTime)} min
               </span>
               {trafficAlert.delayMinutes > 0 && (
-                <span className="text-sm text-gray-500">
-                  vs normally {Math.round(trafficAlert.normalTravelTime)} min (+{Math.round(trafficAlert.delayMinutes)} min)
+                <span className="text-xs text-gray-400">
+                  (normally {Math.round(trafficAlert.normalTravelTime)}m, +{Math.round(trafficAlert.delayMinutes)}m delay)
                 </span>
               )}
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-400">
-                {trafficAlert.isLive ? '📡 Live' : '📊 Estimated'}
+              <span className="text-[10px] text-gray-400 uppercase tracking-wide">
+                {trafficAlert.isLive ? 'Live' : 'Estimated'}
               </span>
               <button
                 onClick={() => onCheckTraffic?.(place.id)}
                 disabled={isCheckingTraffic}
-                className="text-xs px-2 py-1 bg-white rounded-full border hover:bg-gray-50 disabled:opacity-50"
+                className="text-xs px-2.5 py-1 bg-white rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-50 transition-colors"
               >
-                {isCheckingTraffic ? '⏳' : '🔄'} Check Now
+                {isCheckingTraffic ? '...' : 'Refresh'}
               </button>
             </div>
           </div>
-          {trafficAlert.alternative && (severity === 'heavy' || severity === 'standstill') && (
-            <div className="mt-2 p-2 bg-white/80 rounded-lg text-sm">
-              <span className="font-medium">💡 Consider {trafficAlert.alternative.placeName} instead</span>
-              <span className="text-gray-600"> — only {Math.round(trafficAlert.alternative.travelTime)} min away. {trafficAlert.alternative.reason}</span>
-            </div>
-          )}
-          {trafficAlert.bestDepartureWindow && (
-            <p className="mt-1 text-sm text-gray-600">⏰ {trafficAlert.bestDepartureWindow}</p>
-          )}
         </div>
       )}
 
-      {/* Place photo */}
-      {place.photoUrl && (
-        <div className="relative w-full h-40 bg-gray-100 overflow-hidden">
+      {/* Photo area */}
+      <div className="relative w-full h-44 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
+        {place.photoUrl ? (
           <img
             src={place.photoUrl}
             alt={place.name}
@@ -111,92 +73,96 @@ export default function PlaceCard({ stop, isFirst, onSwap, onCheckTraffic, isChe
               if (target.src !== fallback) target.src = fallback;
             }}
           />
-          <div className="absolute top-2 left-2">
-            <span className="w-8 h-8 bg-[#1B4965] text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
-              {stop.order}
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-[#1B4965] to-[#2d7da8] flex items-center justify-center">
+            <span className="text-5xl">{CATEGORY_ICONS[place.category]}</span>
+          </div>
+        )}
+        {/* Order badge */}
+        <div className="absolute top-3 left-3">
+          <span className="w-9 h-9 bg-[#1B4965] text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-lg">
+            {stop.order}
+          </span>
+        </div>
+        {/* Category pill */}
+        <div className="absolute top-3 right-3">
+          <span className="px-2.5 py-1 glass rounded-lg text-xs font-medium shadow-sm">
+            {CATEGORY_ICONS[place.category]} {place.category.replace(/-/g, ' ')}
+          </span>
+        </div>
+        {/* Time overlay */}
+        <div className="absolute bottom-3 left-3">
+          <span className="px-2.5 py-1 bg-black/60 backdrop-blur text-white rounded-lg text-xs font-medium">
+            {stop.arrivalTime} – {stop.departureTime}
+          </span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-5">
+        {/* Header */}
+        <div className="mb-3">
+          <a
+            href={place.googleSearchUrl || `https://www.google.com/search?q=${encodeURIComponent(place.name + ' Chennai')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lg font-bold text-[#1B4965] hover:text-[#2d7da8] transition-colors inline-flex items-center gap-1.5"
+          >
+            {place.name}
+            <svg className="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+          </a>
+          <div className="flex items-center gap-3 mt-1 text-sm">
+            <span className="text-gray-400">{place.area}</span>
+            <span className="flex items-center gap-1 text-yellow-500 font-medium">
+              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              {place.rating}
             </span>
-          </div>
-          <div className="absolute top-2 right-2">
-            <span className="px-2 py-1 bg-white/90 backdrop-blur rounded-full text-xs font-medium shadow">
-              {CATEGORY_ICONS[place.category]} {place.category.replace(/-/g, ' ')}
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* Place info */}
-      <div className="p-4">
-        <div className="flex items-start justify-between mb-2">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              {!place.photoUrl && (
-                <span className="w-7 h-7 bg-[#1B4965] text-white rounded-full flex items-center justify-center text-sm font-bold">
-                  {stop.order}
-                </span>
-              )}
-              <a
-                href={place.googleSearchUrl || `https://www.google.com/search?q=${encodeURIComponent(place.name + ' Chennai')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg font-bold text-[#1B4965] hover:underline"
-              >
-                {place.name} ↗
-              </a>
-            </div>
-            <div className="flex items-center gap-2 flex-wrap text-sm">
-              {!place.photoUrl && (
-                <span className="px-2 py-0.5 bg-[#FAF7F2] rounded-full text-xs font-medium">
-                  {CATEGORY_ICONS[place.category]} {place.category.replace(/-/g, ' ')}
-                </span>
-              )}
-              <span className="text-gray-500">{place.area}</span>
-              <span className="text-yellow-500">⭐ {place.rating}</span>
-              <span className="text-gray-400">({place.reviewCount.toLocaleString()})</span>
-            </div>
+            <span className="text-gray-300">({place.reviewCount.toLocaleString()})</span>
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 text-xs text-gray-600 mb-3">
-          <span className={openStatus.color + ' font-medium'}>{openStatus.status}</span>
-          <span>•</span>
-          <span>{BUDGET_LABELS[place.budget]}</span>
-          <span>•</span>
-          <span>{place.indoor && place.outdoor ? 'Indoor/Outdoor' : place.indoor ? 'Indoor' : 'Outdoor'}</span>
-          <span>•</span>
-          <span>⏱️ {place.avgTimeMinutes} min</span>
+        {/* Meta pills */}
+        <div className="flex flex-wrap gap-2 mb-3">
+          <span className="px-2.5 py-1 rounded-lg bg-gray-50 text-xs text-gray-500 font-medium">
+            {BUDGET_LABELS[place.budget]}
+          </span>
+          <span className="px-2.5 py-1 rounded-lg bg-gray-50 text-xs text-gray-500 font-medium">
+            {place.indoor && place.outdoor ? 'In/Outdoor' : place.indoor ? 'Indoor' : 'Outdoor'}
+          </span>
+          <span className="px-2.5 py-1 rounded-lg bg-gray-50 text-xs text-gray-500 font-medium">
+            ~{place.avgTimeMinutes} min
+          </span>
         </div>
 
-        <p className="text-sm text-gray-600 mb-2">{place.description}</p>
+        <p className="text-sm text-gray-600 leading-relaxed mb-2">{place.description}</p>
+        <p className="text-sm text-gray-400 italic mb-4">Tip: {place.insiderTip}</p>
 
-        <p className="text-sm italic text-gray-500 mb-3">💡 {place.insiderTip}</p>
-
-        <div className="flex items-center gap-2 text-sm">
-          <span className="text-gray-400">{stop.arrivalTime} - {stop.departureTime}</span>
-        </div>
-
-        <div className="flex flex-wrap gap-2 mt-3">
+        {/* Action buttons */}
+        <div className="flex flex-wrap gap-2">
           <a
             href={place.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 bg-[#1B4965] text-white rounded-full text-sm hover:bg-[#15384f]"
+            className="flex items-center gap-1.5 px-4 py-2 bg-[#1B4965] text-white rounded-xl text-sm font-medium hover:bg-[#15384f] transition-colors"
           >
-            🗺️ Navigate
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+            Navigate
           </a>
           <a
             href={place.googleSearchUrl || `https://www.google.com/search?q=${encodeURIComponent(place.name + ' Chennai')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 bg-[#FFB703] text-[#1B4965] rounded-full text-sm font-medium hover:bg-[#e5a503]"
+            className="flex items-center gap-1.5 px-4 py-2 bg-[#FFB703] text-[#1B4965] rounded-xl text-sm font-bold hover:bg-[#e5a503] transition-colors"
           >
-            🔍 View on Google
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            Google It
           </a>
           {onSwap && (
             <button
               onClick={() => onSwap(place.id)}
-              className="px-4 py-2 border border-[#1B4965] text-[#1B4965] rounded-full text-sm hover:bg-[#FAF7F2]"
+              className="flex items-center gap-1.5 px-4 py-2 border border-gray-200 text-gray-500 rounded-xl text-sm hover:bg-gray-50 transition-colors"
             >
-              🔄 Swap
+              Swap
             </button>
           )}
         </div>

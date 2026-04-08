@@ -123,9 +123,12 @@ export default function ItineraryPage() {
         <div className="lg:grid lg:grid-cols-5 lg:gap-6">
           {/* Itinerary Timeline */}
           <div className="lg:col-span-3 space-y-4">
-            <div className="flex items-center justify-between mb-4">
-              <h1 className="text-2xl font-bold text-[#1B4965]">Your Weekend Plan</h1>
-              <span className="text-sm text-gray-500">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#1B4965]">Your Weekend Plan</h1>
+                <p className="text-sm text-gray-400 mt-1">{itinerary.stops.length} stops, traffic-optimized</p>
+              </div>
+              <span className="text-sm text-gray-400 bg-gray-50 px-3 py-1.5 rounded-lg">
                 {new Date(itinerary.createdAt).toLocaleDateString('en-IN', { weekday: 'long', month: 'short', day: 'numeric' })}
               </span>
             </div>
@@ -138,18 +141,18 @@ export default function ItineraryPage() {
               />
             ))}
 
-            <div className="flex gap-3 pt-4">
+            <div className="flex gap-3 pt-6">
               <Link
                 href="/plan"
-                className="flex-1 text-center py-3 bg-[#1B4965] text-white rounded-full font-semibold hover:bg-[#15384f]"
+                className="flex-1 text-center py-3.5 bg-gradient-to-r from-[#1B4965] to-[#2d7da8] text-white rounded-2xl font-semibold hover:shadow-lg transition-all btn-shine"
               >
-                🔄 Regenerate Plan
+                Regenerate Plan
               </Link>
               <Link
                 href="/plan"
-                className="flex-1 text-center py-3 border-2 border-[#1B4965] text-[#1B4965] rounded-full font-semibold hover:bg-[#FAF7F2]"
+                className="flex-1 text-center py-3.5 border-2 border-[#1B4965] text-[#1B4965] rounded-2xl font-semibold hover:bg-[#1B4965] hover:text-white transition-all"
               >
-                ✏️ Edit Preferences
+                Edit Preferences
               </Link>
             </div>
           </div>

@@ -13,22 +13,22 @@ interface Props {
 function Chip({ label, selected, onClick, variant = 'single' }: {
   label: string; selected: boolean; onClick: () => void; variant?: 'single' | 'multi';
 }) {
-  const base = 'px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer border select-none';
+  const base = 'px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer border select-none';
   const styles = selected
     ? variant === 'multi'
-      ? `${base} bg-[#FFB703] text-[#1B4965] border-[#FFB703] shadow-sm`
-      : `${base} bg-[#1B4965] text-white border-[#1B4965] shadow-sm`
-    : `${base} bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:scale-105`;
+      ? `${base} bg-[#FFB703] text-[#1B4965] border-[#FFB703] shadow-md scale-[1.02]`
+      : `${base} bg-[#1B4965] text-white border-[#1B4965] shadow-md scale-[1.02]`
+    : `${base} bg-white text-gray-500 border-gray-200 hover:border-[#1B4965]/30 hover:shadow-sm`;
   return <button type="button" className={styles} onClick={onClick}>{label}</button>;
 }
 
 function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <div className="mb-6">
-      <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wide mb-1">{title}</h3>
+    <div className="mb-8">
+      <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wider mb-1">{title}</h3>
       {subtitle && <p className="text-xs text-gray-400 mb-3">{subtitle}</p>}
       {!subtitle && <div className="mb-3" />}
-      <div className="flex flex-wrap gap-2">{children}</div>
+      <div className="flex flex-wrap gap-2.5">{children}</div>
     </div>
   );
 }
@@ -350,15 +350,23 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
       </div>
 
       {vibes.length === 0 && categories.length === 0 && (
-        <p className="text-sm text-orange-500 mb-4">💡 Pick at least one mood or category for best results</p>
+        <div className="flex items-center gap-2 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl mb-6">
+          <span className="text-amber-500 text-lg">💡</span>
+          <p className="text-sm text-amber-700">Pick at least one mood or category for best results</p>
+        </div>
       )}
 
       <button
         onClick={handleGenerate}
         disabled={isGenerating}
-        className="w-full py-4 bg-[#1B4965] text-white text-lg font-bold rounded-full hover:bg-[#15384f] transition-all disabled:opacity-50 shadow-lg"
+        className="w-full py-4 bg-gradient-to-r from-[#1B4965] to-[#2d7da8] text-white text-lg font-bold rounded-2xl hover:shadow-xl transition-all disabled:opacity-50 shadow-lg btn-shine"
       >
-        {isGenerating ? '⏳ Generating your plan...' : 'Generate My Plan ✨'}
+        {isGenerating ? (
+          <span className="flex items-center justify-center gap-2">
+            <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+            Building your plan...
+          </span>
+        ) : 'Generate My Plan'}
       </button>
     </div>
   );
