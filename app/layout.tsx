@@ -35,9 +35,9 @@ export default function RootLayout({
           crossOrigin=""
         />
       </head>
-      <body className="font-sans antialiased bg-[#FAF7F2] text-gray-900">
+      <body className="font-sans antialiased bg-sand text-gray-900 min-h-screen flex flex-col">
         <Nav />
-        <main className="pt-16">
+        <main className="flex-1">
           {children}
         </main>
         <Footer />

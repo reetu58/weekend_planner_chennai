@@ -27,7 +27,6 @@ export default function TrafficMap({ stops, center, startLocation }: Props) {
     const initMap = async () => {
       const L = (await import('leaflet')).default;
 
-      // Cleanup previous
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
         mapInstanceRef.current = null;
@@ -46,13 +45,12 @@ export default function TrafficMap({ stops, center, startLocation }: Props) {
 
       const points: [number, number][] = [];
 
-      // Add start location marker
       if (startLocation) {
         const startIcon = L.divIcon({
-          html: `<div style="background:#22c55e;color:white;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:12px;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.4)">📍</div>`,
+          html: `<div style="background:linear-gradient(135deg,#22c55e,#16a34a);color:white;width:34px;height:34px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;border:2px solid white;box-shadow:0 4px 12px rgba(0,0,0,0.2)">📍</div>`,
           className: '',
-          iconSize: [32, 32],
-          iconAnchor: [16, 16],
+          iconSize: [34, 34],
+          iconAnchor: [17, 17],
         });
 
         L.marker([startLocation.lat, startLocation.lng], { icon: startIcon })
@@ -64,10 +62,10 @@ export default function TrafficMap({ stops, center, startLocation }: Props) {
 
       stops.forEach((stop) => {
         const icon = L.divIcon({
-          html: `<div style="background:#1B4965;color:white;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;border:2px solid white;box-shadow:0 2px 4px rgba(0,0,0,0.3)">${stop.order}</div>`,
+          html: `<div style="background:linear-gradient(135deg,#1B4965,#2d7da8);color:white;width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;border:2px solid white;box-shadow:0 4px 12px rgba(0,0,0,0.2)">${stop.order}</div>`,
           className: '',
-          iconSize: [28, 28],
-          iconAnchor: [14, 14],
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
         });
 
         L.marker([stop.lat, stop.lng], { icon })
@@ -78,11 +76,11 @@ export default function TrafficMap({ stops, center, startLocation }: Props) {
       });
 
       if (points.length > 1) {
-        L.polyline(points, { color: '#1B4965', weight: 3, opacity: 0.7, dashArray: '8, 8' }).addTo(map);
+        L.polyline(points, { color: '#1B4965', weight: 3, opacity: 0.6, dashArray: '10, 8' }).addTo(map);
       }
 
       if (points.length > 0) {
-        map.fitBounds(L.latLngBounds(points), { padding: [40, 40] });
+        map.fitBounds(L.latLngBounds(points), { padding: [50, 50] });
       }
 
       mapInstanceRef.current = map;
@@ -99,8 +97,8 @@ export default function TrafficMap({ stops, center, startLocation }: Props) {
   }, [mounted, stops, center, startLocation]);
 
   if (!mounted) {
-    return <div className="w-full h-[400px] bg-gray-100 animate-pulse rounded-xl" />;
+    return <div className="w-full h-[400px] bg-gray-50 rounded-xl shimmer-bg" />;
   }
 
-  return <div ref={mapRef} className="w-full h-[400px] rounded-xl overflow-hidden shadow-lg" />;
+  return <div ref={mapRef} className="w-full h-[400px] rounded-xl overflow-hidden" />;
 }

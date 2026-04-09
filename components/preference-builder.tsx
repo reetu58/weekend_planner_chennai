@@ -13,12 +13,12 @@ interface Props {
 function Chip({ label, selected, onClick, variant = 'single' }: {
   label: string; selected: boolean; onClick: () => void; variant?: 'single' | 'multi';
 }) {
-  const base = 'px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer border select-none';
+  const base = 'px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer border select-none chip-press';
   const styles = selected
     ? variant === 'multi'
-      ? `${base} bg-[#FFB703] text-[#1B4965] border-[#FFB703] shadow-md scale-[1.02]`
-      : `${base} bg-[#1B4965] text-white border-[#1B4965] shadow-md scale-[1.02]`
-    : `${base} bg-white text-gray-500 border-gray-200 hover:border-[#1B4965]/30 hover:shadow-sm`;
+      ? `${base} bg-[#FFB703] text-[#1B4965] border-[#FFB703] shadow-glow-accent/30 scale-[1.02]`
+      : `${base} bg-[#1B4965] text-white border-[#1B4965] shadow-glow-primary/30 scale-[1.02]`
+    : `${base} bg-white text-gray-500 border-gray-200 hover:border-[#1B4965]/30 hover:bg-gray-50 hover:shadow-soft`;
   return <button type="button" className={styles} onClick={onClick}>{label}</button>;
 }
 
@@ -63,7 +63,7 @@ function getDayFromDate(dateStr: string): DayChoice {
   const day = d.getDay();
   if (day === 0) return 'sunday';
   if (day === 6) return 'saturday';
-  return 'saturday'; // weekdays default to saturday hours
+  return 'saturday';
 }
 
 function LocationSearch({ onSelect }: {
@@ -80,7 +80,6 @@ function LocationSearch({ onSelect }: {
     if (q.length < 2) { setResults([]); return; }
     setIsSearching(true);
     try {
-      // Use Nominatim (OpenStreetMap) geocoding — free, no key needed
       const res = await fetch(
         `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q + ', Chennai, India')}&format=json&limit=5&addressdetails=1`,
         { headers: { 'Accept': 'application/json' } }
@@ -95,7 +94,6 @@ function LocationSearch({ onSelect }: {
         setShowResults(true);
       }
     } catch {
-      // Fallback: filter known areas
       const filtered = AREAS
         .filter(a => a.toLowerCase().includes(q.toLowerCase()))
         .map(a => ({ name: a, lat: AREA_COORDINATES[a].lat, lng: AREA_COORDINATES[a].lng }));
@@ -128,9 +126,7 @@ function LocationSearch({ onSelect }: {
         setQuery(label);
         onSelect('My Location', pos.coords.latitude, pos.coords.longitude);
       },
-      () => {
-        // Denied or error — ignore
-      }
+      () => {}
     );
   };
 
@@ -144,41 +140,44 @@ function LocationSearch({ onSelect }: {
             onChange={(e) => handleInput(e.target.value)}
             onFocus={() => query.length >= 2 && results.length > 0 && setShowResults(true)}
             placeholder="Search any area, street, or landmark in Chennai..."
-            className="w-full px-4 py-3 border rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965] pr-10"
+            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965]/20 focus:border-[#1B4965] pr-10 bg-white transition-all input-focus"
           />
           {isSearching && (
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 animate-spin text-gray-400">⏳</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2">
+              <span className="w-4 h-4 border-2 border-gray-300 border-t-[#1B4965] rounded-full animate-spin block" />
+            </span>
           )}
           {selectedLabel && !isSearching && (
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500">✓</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+              <svg className="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+            </span>
           )}
         </div>
         <button
           type="button"
           onClick={handleUseMyLocation}
-          className="px-4 py-3 bg-[#1B4965] text-white rounded-xl text-sm font-medium hover:bg-[#15384f] whitespace-nowrap"
+          className="px-4 py-3 bg-[#1B4965] text-white rounded-xl text-sm font-medium hover:bg-primary-dark whitespace-nowrap transition-colors btn-ripple chip-press"
         >
           📍 Use My Location
         </button>
       </div>
 
       {showResults && results.length > 0 && (
-        <div className="absolute z-50 w-full mt-1 bg-white border rounded-xl shadow-lg max-h-48 overflow-y-auto">
+        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-100 rounded-2xl shadow-elevated max-h-52 overflow-y-auto animate-scale-in">
           {results.map((r, i) => (
             <button
               key={i}
               type="button"
               onClick={() => handleSelect(r)}
-              className="w-full text-left px-4 py-3 text-sm hover:bg-[#FAF7F2] border-b last:border-b-0 transition-colors"
+              className="w-full text-left px-4 py-3 text-sm hover:bg-sand border-b border-gray-50 last:border-b-0 transition-colors flex items-center gap-2"
             >
-              <span className="text-gray-400 mr-2">📍</span>
-              {r.name}
+              <span className="w-7 h-7 bg-gray-100 rounded-lg flex items-center justify-center text-xs">📍</span>
+              <span className="text-gray-600">{r.name}</span>
             </button>
           ))}
         </div>
       )}
 
-      {/* Quick area chips as fallback */}
       <div className="flex flex-wrap gap-2 mt-3">
         <p className="w-full text-xs text-gray-400 mb-1">Or pick a popular area:</p>
         {AREAS.map(a => (
@@ -186,10 +185,10 @@ function LocationSearch({ onSelect }: {
             key={a}
             type="button"
             onClick={() => handleSelect({ name: a, lat: AREA_COORDINATES[a].lat, lng: AREA_COORDINATES[a].lng })}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer chip-press ${
               selectedLabel === a
-                ? 'bg-[#1B4965] text-white border-[#1B4965]'
-                : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400'
+                ? 'bg-[#1B4965] text-white border-[#1B4965] shadow-sm'
+                : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
             }`}
           >
             {a}
@@ -203,7 +202,6 @@ function LocationSearch({ onSelect }: {
 export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
   const [selectedDate, setSelectedDate] = useState(() => {
     const today = new Date();
-    // Default to next Saturday
     const daysUntilSat = (6 - today.getDay() + 7) % 7 || 7;
     const nextSat = new Date(today);
     nextSat.setDate(today.getDate() + daysUntilSat);
@@ -251,122 +249,132 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
     });
   };
 
-  // Get day label for selected date
   const selectedDayLabel = (() => {
     const d = new Date(selectedDate + 'T00:00:00');
     return d.toLocaleDateString('en-IN', { weekday: 'long', month: 'short', day: 'numeric' });
   })();
 
-  // Get min date (today)
   const minDate = new Date().toISOString().split('T')[0];
 
   return (
     <div className="max-w-3xl mx-auto">
-      {/* Date Picker */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wide mb-1">
+      {/* Date Picker - Card style */}
+      <div className="mb-8 p-6 bg-white rounded-2xl border border-gray-100 shadow-soft">
+        <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wider mb-1">
           Pick a Date
         </h3>
-        <p className="text-xs text-gray-400 mb-3">When do you want to go out?</p>
-        <div className="flex items-center gap-4">
+        <p className="text-xs text-gray-400 mb-4">When do you want to go out?</p>
+        <div className="flex items-center gap-4 flex-wrap">
           <input
             type="date"
             value={selectedDate}
             min={minDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="px-4 py-3 border rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965] text-lg"
+            className="px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965]/20 focus:border-[#1B4965] text-lg bg-white input-focus"
           />
-          <span className="text-sm text-gray-500 bg-[#FAF7F2] px-3 py-2 rounded-lg">
+          <span className="inline-flex items-center gap-2 text-sm text-[#1B4965] bg-blue-50 px-4 py-2.5 rounded-xl font-medium border border-blue-100">
             📅 {selectedDayLabel}
           </span>
         </div>
       </div>
 
-      {/* Duration */}
-      <Section title="How Long" subtitle="How much time do you have?">
-        {(Object.keys(DURATION_LABELS) as string[]).map(d => (
-          <Chip key={d} label={DURATION_LABELS[d]} selected={duration === Number(d)} onClick={() => setDuration(Number(d) as Duration)} />
-        ))}
-      </Section>
+      {/* Sections in grouped cards */}
+      <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-soft mb-8">
+        <Section title="How Long" subtitle="How much time do you have?">
+          {(Object.keys(DURATION_LABELS) as string[]).map(d => (
+            <Chip key={d} label={DURATION_LABELS[d]} selected={duration === Number(d)} onClick={() => setDuration(Number(d) as Duration)} />
+          ))}
+        </Section>
 
-      <Section title="Time Slot" subtitle="What part of the day?">
-        {(Object.keys(SLOT_LABELS) as TimeSlot[]).map(s => (
-          <Chip key={s} label={SLOT_LABELS[s]} selected={timeSlot === s} onClick={() => setTimeSlot(s)} />
-        ))}
-      </Section>
+        <Section title="Time Slot" subtitle="What part of the day?">
+          {(Object.keys(SLOT_LABELS) as TimeSlot[]).map(s => (
+            <Chip key={s} label={SLOT_LABELS[s]} selected={timeSlot === s} onClick={() => setTimeSlot(s)} />
+          ))}
+        </Section>
 
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wide mb-1">
-          Departure Time
-        </h3>
-        <p className="text-xs text-gray-400 mb-3">When are you heading out? (triggers live traffic check)</p>
-        <input
-          type="time"
-          value={departureTime}
-          onChange={(e) => setDepartureTime(e.target.value)}
-          className="px-4 py-3 border rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965]"
-        />
+        <div className="mb-8">
+          <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wider mb-1">
+            Departure Time
+          </h3>
+          <p className="text-xs text-gray-400 mb-3">When are you heading out? (triggers live traffic check)</p>
+          <input
+            type="time"
+            value={departureTime}
+            onChange={(e) => setDepartureTime(e.target.value)}
+            className="px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965]/20 focus:border-[#1B4965] bg-white input-focus"
+          />
+        </div>
       </div>
 
-      <Section title="Who's Coming">
-        {(Object.keys(GROUP_LABELS) as GroupType[]).map(g => (
-          <Chip key={g} label={GROUP_LABELS[g]} selected={groupType === g} onClick={() => setGroupType(g)} />
-        ))}
-      </Section>
+      <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-soft mb-8">
+        <Section title="Who's Coming">
+          {(Object.keys(GROUP_LABELS) as GroupType[]).map(g => (
+            <Chip key={g} label={GROUP_LABELS[g]} selected={groupType === g} onClick={() => setGroupType(g)} />
+          ))}
+        </Section>
 
-      <Section title="Budget">
-        {(Object.keys(BUDGET_LABELS) as BudgetRange[]).map(b => (
-          <Chip key={b} label={BUDGET_LABELS[b]} selected={budget === b} onClick={() => setBudget(b)} />
-        ))}
-      </Section>
+        <Section title="Budget">
+          {(Object.keys(BUDGET_LABELS) as BudgetRange[]).map(b => (
+            <Chip key={b} label={BUDGET_LABELS[b]} selected={budget === b} onClick={() => setBudget(b)} />
+          ))}
+        </Section>
+      </div>
 
-      <Section title="Mood" subtitle="Pick as many as you like">
-        {(Object.keys(VIBE_LABELS) as Vibe[]).map(v => (
-          <Chip key={v} label={VIBE_LABELS[v]} selected={vibes.includes(v)} onClick={() => toggleVibe(v)} variant="multi" />
-        ))}
-      </Section>
+      <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-soft mb-8">
+        <Section title="Mood" subtitle="Pick as many as you like">
+          {(Object.keys(VIBE_LABELS) as Vibe[]).map(v => (
+            <Chip key={v} label={VIBE_LABELS[v]} selected={vibes.includes(v)} onClick={() => toggleVibe(v)} variant="multi" />
+          ))}
+        </Section>
 
-      <Section title="Distance Limit" subtitle="How far are you willing to travel?">
-        <Chip label="📍 Within 10 km" selected={distanceLimit === 10} onClick={() => setDistanceLimit(10)} />
-        <Chip label="🚗 Within 30 km" selected={distanceLimit === 30} onClick={() => setDistanceLimit(30)} />
-        <Chip label="🌍 No Limit" selected={distanceLimit === 0} onClick={() => setDistanceLimit(0)} />
-      </Section>
+        <Section title="Categories" subtitle="What kind of places?">
+          {(Object.keys(CATEGORY_LABELS) as PlaceCategory[]).map(c => (
+            <Chip key={c} label={CATEGORY_LABELS[c]} selected={categories.includes(c)} onClick={() => toggleCategory(c)} variant="multi" />
+          ))}
+        </Section>
+      </div>
 
-      <Section title="Categories" subtitle="What kind of places?">
-        {(Object.keys(CATEGORY_LABELS) as PlaceCategory[]).map(c => (
-          <Chip key={c} label={CATEGORY_LABELS[c]} selected={categories.includes(c)} onClick={() => toggleCategory(c)} variant="multi" />
-        ))}
-      </Section>
+      <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-soft mb-8">
+        <Section title="Distance Limit" subtitle="How far are you willing to travel?">
+          <Chip label="📍 Within 10 km" selected={distanceLimit === 10} onClick={() => setDistanceLimit(10)} />
+          <Chip label="🚗 Within 30 km" selected={distanceLimit === 30} onClick={() => setDistanceLimit(30)} />
+          <Chip label="🌍 No Limit" selected={distanceLimit === 0} onClick={() => setDistanceLimit(0)} />
+        </Section>
 
-      {/* Location Search */}
-      <div className="mb-6">
-        <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wide mb-1">
-          Starting Location
-        </h3>
-        <p className="text-xs text-gray-400 mb-3">
-          Where are you starting from? Search any area, street, or use your live location for exact distances.
-        </p>
-        <LocationSearch onSelect={handleLocationSelect} />
+        <div className="mb-2">
+          <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wider mb-1">
+            Starting Location
+          </h3>
+          <p className="text-xs text-gray-400 mb-3">
+            Where are you starting from? Search any area, street, or use your live location.
+          </p>
+          <LocationSearch onSelect={handleLocationSelect} />
+        </div>
       </div>
 
       {vibes.length === 0 && categories.length === 0 && (
-        <div className="flex items-center gap-2 px-4 py-3 bg-amber-50 border border-amber-200 rounded-xl mb-6">
-          <span className="text-amber-500 text-lg">💡</span>
-          <p className="text-sm text-amber-700">Pick at least one mood or category for best results</p>
+        <div className="flex items-center gap-3 px-5 py-4 bg-amber-50 border border-amber-200/80 rounded-2xl mb-6 animate-fade-in">
+          <span className="text-xl">💡</span>
+          <p className="text-sm text-amber-700 font-medium">Pick at least one mood or category for best results</p>
         </div>
       )}
 
       <button
         onClick={handleGenerate}
         disabled={isGenerating}
-        className="w-full py-4 bg-gradient-to-r from-[#1B4965] to-[#2d7da8] text-white text-lg font-bold rounded-2xl hover:shadow-xl transition-all disabled:opacity-50 shadow-lg btn-shine"
+        className="w-full py-4.5 bg-gradient-to-r from-[#1B4965] to-[#2d7da8] text-white text-lg font-bold rounded-2xl hover:shadow-elevated transition-all duration-300 disabled:opacity-50 shadow-card btn-shine chip-press"
       >
         {isGenerating ? (
-          <span className="flex items-center justify-center gap-2">
+          <span className="flex items-center justify-center gap-3">
             <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
             Building your plan...
           </span>
-        ) : 'Generate My Plan'}
+        ) : (
+          <span className="flex items-center justify-center gap-2">
+            Generate My Plan
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+          </span>
+        )}
       </button>
     </div>
   );
