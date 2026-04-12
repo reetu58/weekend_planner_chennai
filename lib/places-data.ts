@@ -102,7 +102,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Grab a garden table and try the cold brew. Weekend brunch gets packed — go before 10 AM.',
     googleMapsUrl: 'https://maps.google.com/?q=Amethyst+Cafe+Chennai',
     imageKeyword: 'amethyst-cafe',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/28704256/pexels-photo-28704256.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Amethyst+Chennai',
   },
   {
@@ -180,7 +180,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Start at Mint Street. Try the Chinese bhel and the famous jigarthanda at the corner shop.',
     googleMapsUrl: 'https://maps.google.com/?q=Sowcarpet+Chennai',
     imageKeyword: 'sowcarpet-food',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/28926431/pexels-photo-28926431.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Sowcarpet+Food+Walk+Chennai',
   },
   {
@@ -232,7 +232,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the "Haunted Asylum" room — it\'s the hardest but most fun. Go with 4+ people.',
     googleMapsUrl: 'https://maps.google.com/?q=Mystery+Rooms+Chennai',
     imageKeyword: 'mystery-rooms',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/28471425/pexels-photo-28471425.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Mystery+Rooms+Chennai',
   },
   {
@@ -284,7 +284,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Try the cold brew flight — 3 different beans. The upstairs seating is quieter.',
     googleMapsUrl: 'https://maps.google.com/?q=The+Brew+Room+Mylapore+Chennai',
     imageKeyword: 'brew-room-mylapore',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/14823758/pexels-photo-14823758.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=The+Brew+Room+Chennai',
   },
   {
@@ -310,7 +310,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The garden courtyard is magical in the evening. Pair a croissant with their house blend.',
     googleMapsUrl: 'https://maps.google.com/?q=Chamiers+Cafe+Chennai',
     imageKeyword: 'chamiers-cafe',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/30403595/pexels-photo-30403595.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Chamiers+Cafe+Chennai',
   },
   {
@@ -336,7 +336,7 @@ export const PLACES: Place[] = [
     insiderTip: 'They host open mic nights on some Saturdays. Ask about the cycling meetups.',
     googleMapsUrl: 'https://maps.google.com/?q=Ciclo+Cafe+Chennai',
     imageKeyword: 'ciclo-cafe',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/29976667/pexels-photo-29976667.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Ciclo+Cafe+Chennai',
   },
   {
@@ -362,7 +362,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The chocolate truffle cake is life-changing. Go after dinner as a dessert stop.',
     googleMapsUrl: 'https://maps.google.com/?q=Sandys+Chocolate+Laboratory+Chennai',
     imageKeyword: 'sandys-chocolate',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/2223247/pexels-photo-2223247.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Sandy\+Chennai',
   },
   {
@@ -388,7 +388,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Grab the window seat with the reading lamp. Their filter coffee is surprisingly great.',
     googleMapsUrl: 'https://maps.google.com/?q=Writers+Cafe+T+Nagar+Chennai',
     imageKeyword: 'writers-cafe',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/29784882/pexels-photo-29784882.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Writer\+Chennai',
   },
   {
@@ -414,7 +414,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The crepe suzette is a must. Quiet on Sunday mornings — perfect for a date.',
     googleMapsUrl: 'https://maps.google.com/?q=Cafe+De+Paris+Nungambakkam+Chennai',
     imageKeyword: 'cafe-de-paris',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/35134952/pexels-photo-35134952.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Cafe+De+Paris+Chennai',
   },
   {
@@ -440,7 +440,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Try the Kashmiri Kahwa or the bubble tea. The loaded nachos are unreal.',
     googleMapsUrl: 'https://maps.google.com/?q=Tea+Villa+Cafe+T+Nagar+Chennai',
     imageKeyword: 'tea-villa-cafe',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/702251/pexels-photo-702251.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Tea+Villa+Cafe+Chennai',
   },
   {
@@ -570,7 +570,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Go on Saturday night for the live band. The chicken wings and nachos are elite.',
     googleMapsUrl: 'https://maps.google.com/?q=Illusions+The+Madras+Pub+Chennai',
     imageKeyword: 'illusions-pub',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/2209519/pexels-photo-2209519.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Illusions+-+The+Madras+Pub+Chennai',
   },
   {
@@ -622,7 +622,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Grab the outdoor table at sunset. Their milkshakes are the real deal.',
     googleMapsUrl: 'https://maps.google.com/?q=Bay+146+Besant+Nagar+Chennai',
     imageKeyword: 'bay-146',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/6126940/pexels-photo-6126940.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Bay+146+Chennai',
   },
   {
@@ -674,7 +674,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The Nandu (crab) Rasam is a must-try. Go for lunch — dinner queues are brutal.',
     googleMapsUrl: 'https://maps.google.com/?q=Junior+Kuppanna+Egmore+Chennai',
     imageKeyword: 'junior-kuppanna',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/3531700/pexels-photo-3531700.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Junior+Kuppanna+Chennai',
   },
   {
@@ -856,7 +856,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The IMAX screen here is the best in Chennai. The rooftop restaurants have great views.',
     googleMapsUrl: 'https://maps.google.com/?q=VR+Chennai+Anna+Nagar',
     imageKeyword: 'vr-chennai',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/14230221/pexels-photo-14230221.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=VR+Chennai+Chennai',
   },
   {
@@ -986,7 +986,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Wear grip socks (they sell them there). Book the 2-hour package — 1 hour flies by.',
     googleMapsUrl: 'https://maps.google.com/?q=Dugout+Trampoline+Park+OMR+Chennai',
     imageKeyword: 'dugout-trampoline',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Dugout+Trampoline+Park+Chennai',
   },
   {
@@ -1064,7 +1064,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Much less crowded than Elliot\'s. Best on weekday evenings but still calm on weekends.',
     googleMapsUrl: 'https://maps.google.com/?q=Thiruvalluvar+Nagar+Beach+Chennai',
     imageKeyword: 'thiruvalluvar-beach',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/35919338/pexels-photo-35919338.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Thiruvalluvar+Nagar+Beach+Chennai',
   },
   {
@@ -1118,7 +1118,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Saturday night is packed — reach by 8 PM to get a good table. Try the LIIT.',
     googleMapsUrl: 'https://maps.google.com/?q=10+Downing+Street+Nungambakkam+Chennai',
     imageKeyword: '10-downing-street',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/234547/pexels-photo-234547.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=10+Downing+Street+Chennai',
   },
   {
@@ -1144,7 +1144,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Ask for the off-menu Old Fashioned. The cheese platter is solid.',
     googleMapsUrl: 'https://maps.google.com/?q=The+Vault+Bar+Nungambakkam+Chennai',
     imageKeyword: 'the-vault-bar',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/6126940/pexels-photo-6126940.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=The+Vault+Chennai',
   },
   {
@@ -1170,7 +1170,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Friday/Saturday have live jazz. Dress smart — no shorts or flip-flops.',
     googleMapsUrl: 'https://maps.google.com/?q=The+Leather+Bar+Park+Hotel+Chennai',
     imageKeyword: 'leather-bar',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/2209519/pexels-photo-2209519.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=The+Leather+Bar+Chennai',
   },
 
@@ -1198,7 +1198,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the 90-min Balinese massage. Weekend slots fill fast — book a day ahead.',
     googleMapsUrl: 'https://maps.google.com/?q=O2+Spa+Phoenix+Mall+Chennai',
     imageKeyword: 'o2-spa',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/3865570/pexels-photo-3865570.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=O2+Spa+Chennai',
   },
   {
@@ -1224,7 +1224,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The 7 AM Saturday Vinyasa class is transformative. Bring your own mat for comfort.',
     googleMapsUrl: 'https://maps.google.com/?q=Yoga+Studio+Mylapore+Chennai',
     imageKeyword: 'yoga-mylapore',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/3822169/pexels-photo-3822169.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Mudra+Yoga+Shala+Chennai',
   },
   {
@@ -1250,7 +1250,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The couple spa package on weekends is great value. Book the 2 PM slot for fewer people.',
     googleMapsUrl: 'https://maps.google.com/?q=Spa+Anna+Nagar+Chennai',
     imageKeyword: 'spa-anna-nagar',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/7700/pexels-photo-7700.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Spa+Fusion+Chennai',
   },
 
@@ -1278,7 +1278,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Day pass is ₹350. The quiet zone upstairs is perfect for deep work. Free coffee all day.',
     googleMapsUrl: 'https://maps.google.com/?q=Ikigai+Coworking+Chennai',
     imageKeyword: 'ikigai-cowork',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/3831879/pexels-photo-3831879.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Ikigai+Coworking+Chennai',
   },
   {
@@ -1330,7 +1330,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Grab the upstairs window seat — ocean view while you work. Go early on weekends.',
     googleMapsUrl: 'https://maps.google.com/?q=Starbucks+ECR+Chennai',
     imageKeyword: 'starbucks-ecr',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/6779226/pexels-photo-6779226.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Starbucks+ECR+(Study+Spot)+Chennai',
   },
 
@@ -1410,7 +1410,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The VR roller coaster is insane. Buy the combo pass — individual games cost more.',
     googleMapsUrl: 'https://maps.google.com/?q=Smaaash+Phoenix+Mall+Chennai',
     imageKeyword: 'smaaash-gaming',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/28471425/pexels-photo-28471425.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Smaaash+Gaming+Zone+Chennai',
   },
 
@@ -1570,7 +1570,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the 2-hour Saturday morning slot. Wear old clothes — it gets messy and fun.',
     googleMapsUrl: 'https://maps.google.com/?q=Pottery+Workshop+ECR+Chennai',
     imageKeyword: 'pottery-workshop',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/6611312/pexels-photo-6611312.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=The+Potter\+Chennai',
   },
   {
@@ -1596,7 +1596,7 @@ export const PLACES: Place[] = [
     insiderTip: 'The Saturday evening sip-and-paint is perfect for a date. No experience needed at all.',
     googleMapsUrl: 'https://maps.google.com/?q=Art+Painting+Class+Adyar+Chennai',
     imageKeyword: 'art-lounge-painting',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/357428/pexels-photo-357428.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=The+Art+Lounge+(Painting+Sessions)+Chennai',
   },
   {
@@ -1622,7 +1622,7 @@ export const PLACES: Place[] = [
     insiderTip: 'Book the Sunday morning session. You\'ll eat a massive meal of everything you cooked. Worth every rupee.',
     googleMapsUrl: 'https://maps.google.com/?q=Cooking+Class+Mylapore+Chennai',
     imageKeyword: 'cooking-class',
-    photoUrl: '',
+    photoUrl: 'https://images.pexels.com/photos/3531700/pexels-photo-3531700.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
     googleSearchUrl: 'https://www.google.com/search?q=Authentic+Chennai+Cooking+Class+Chennai',
   },
 
