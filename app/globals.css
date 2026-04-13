@@ -259,6 +259,45 @@ html { scroll-behavior: smooth; }
 /* ===== LEAFLET FIXES ===== */
 .leaflet-container { z-index: 1; }
 
+/* ===== MARQUEE ANIMATION ===== */
+
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+.marquee-track {
+  display: flex;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== EXTRA SHADOWS & UTILITIES ===== */
+
+.shadow-card {
+  box-shadow:
+    0 1px 3px rgba(27, 73, 101, 0.06),
+    0 4px 12px rgba(27, 73, 101, 0.08);
+}
+.shadow-elevated {
+  box-shadow:
+    0 8px 30px rgba(27, 73, 101, 0.12),
+    0 2px 8px rgba(27, 73, 101, 0.06);
+}
+.shadow-glow-accent {
+  box-shadow: 0 4px 20px rgba(255, 183, 3, 0.35);
+}
+
+.bg-sand { background: var(--bg); }
+.bg-accent-light { background: var(--accent-hover); }
+
 /* ===== RESPONSIVE HELPERS ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
