@@ -5,40 +5,45 @@ import { useState, useEffect } from 'react';
 import { TrafficSummary } from '../types';
 
 const TEMPLATES = [
-  { title: 'Beach Day', emoji: '🏖️', desc: 'Sun, sand & seafood', vibes: 'chill,nature', categories: 'beaches,street-food', color: 'from-cyan-400 to-blue-600', iconBg: 'bg-cyan-100' },
-  { title: 'Cafe Hopping', emoji: '☕', desc: 'Best brews in Chennai', vibes: 'chill,artsy', categories: 'cafes', color: 'from-amber-500 to-orange-600', iconBg: 'bg-amber-100' },
-  { title: 'Heritage Walk', emoji: '🛕', desc: 'Temples, history & culture', vibes: 'cultural', categories: 'temples-heritage,art-museums', color: 'from-orange-400 to-red-600', iconBg: 'bg-orange-100' },
-  { title: 'Adventure Day', emoji: '🏄', desc: 'Thrills & excitement', vibes: 'adventure,social', categories: 'sports-fun', color: 'from-emerald-400 to-teal-600', iconBg: 'bg-emerald-100' },
-  { title: 'Foodie Trail', emoji: '🍜', desc: 'Eat your way through Chennai', vibes: 'foodie', categories: 'street-food,cafes', color: 'from-red-400 to-pink-600', iconBg: 'bg-red-100' },
-  { title: 'Photo Walk', emoji: '📸', desc: 'Capture Chennai\'s beauty', vibes: 'artsy,nature', categories: 'photography,temples-heritage', color: 'from-violet-400 to-purple-600', iconBg: 'bg-violet-100' },
+  { title: 'Beach Day', emoji: '🏖️', desc: 'Sun, sand & seafood', vibes: 'chill,nature', categories: 'beaches,street-food', photo: 'https://images.pexels.com/photos/982673/pexels-photo-982673.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Cafe Hopping', emoji: '☕', desc: 'Best brews in Chennai', vibes: 'chill,artsy', categories: 'cafes', photo: 'https://images.pexels.com/photos/30403595/pexels-photo-30403595.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Heritage Walk', emoji: '🛕', desc: 'Temples, forts & culture', vibes: 'cultural', categories: 'temples-heritage,art-museums', photo: 'https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Adventure Day', emoji: '🏄', desc: 'Thrills & excitement', vibes: 'adventure,social', categories: 'sports-fun', photo: 'https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Foodie Trail', emoji: '🍜', desc: 'Eat your way through Chennai', vibes: 'foodie', categories: 'street-food,cafes', photo: 'https://images.pexels.com/photos/2223247/pexels-photo-2223247.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Photo Walk', emoji: '📸', desc: "Capture Chennai's beauty", vibes: 'artsy,nature', categories: 'photography,temples-heritage', photo: 'https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
 ];
 
 const SEVERITY_EMOJI: Record<string, string> = {
   clear: '🟢', light: '🟡', moderate: '🟠', heavy: '🔴', standstill: '⛔',
 };
 
-const STATS = [
-  { value: '65+', label: 'Places', icon: '📍' },
-  { value: '15', label: 'Categories', icon: '🏷️' },
-  { value: '100%', label: 'Free', icon: '✨' },
-  { value: 'Live', label: 'Traffic Data', icon: '🚦' },
+// Photo marquee images — a mix of Chennai landmarks
+const MARQUEE_PHOTOS = [
+  { src: '/api/photo?q=Marina+Beach+Chennai', label: 'Marina Beach' },
+  { src: '/api/photo?q=Kapaleeshwarar+Temple', label: 'Kapaleeshwarar Temple' },
+  { src: '/api/photo?q=Fort+St+George+Chennai', label: 'Fort St. George' },
+  { src: '/api/photo?q=San+Thome+Cathedral', label: 'San Thome Cathedral' },
+  { src: '/api/photo?q=Mahabalipuram+Shore+Temple', label: 'Mahabalipuram' },
+  { src: '/api/photo?q=Birla+Planetarium+Chennai', label: 'Birla Planetarium' },
+  { src: '/api/photo?q=Semmozhi+Poonga', label: 'Semmozhi Poonga' },
+  { src: '/api/photo?q=Chennai+Lighthouse', label: 'Chennai Lighthouse' },
 ];
 
 const STEPS = [
   {
-    step: '01', icon: '🎯', title: 'Set your preferences',
-    desc: 'Pick your mood, budget, group size, starting location and date. We handle the rest.',
-    accent: 'bg-blue-50 border-blue-100',
+    step: '01', icon: '🎯', title: 'Set your vibe',
+    desc: 'Pick your mood, budget, group size & starting area. Takes 30 seconds.',
+    color: 'from-blue-500 to-cyan-400',
   },
   {
-    step: '02', icon: '🚦', title: 'Get a traffic-smart plan',
-    desc: 'Our engine checks real-time traffic, optimizes your route, and schedules every stop.',
-    accent: 'bg-amber-50 border-amber-100',
+    step: '02', icon: '🚦', title: 'We dodge traffic',
+    desc: 'Real-time traffic data optimizes your route. No more jams.',
+    color: 'from-amber-500 to-orange-400',
   },
   {
     step: '03', icon: '🎉', title: 'Enjoy your weekend',
-    desc: 'Navigate stop by stop with Google Maps integration. Share your plan with friends.',
-    accent: 'bg-emerald-50 border-emerald-100',
+    desc: 'Navigate with Google Maps. Share with friends. Have fun!',
+    color: 'from-emerald-500 to-green-400',
   },
 ];
 
@@ -54,44 +59,49 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-sand">
-      {/* ===== HERO ===== */}
-      <section className="relative bg-gradient-hero text-white overflow-hidden">
-        <div className="hero-pattern absolute inset-0" />
-        <div className="hero-dots absolute inset-0" />
+      {/* ===== HERO WITH CHENNAI PHOTO ===== */}
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+        {/* Background photo */}
+        <img
+          src="https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+          alt="Chennai Temple"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1B4965]/70 via-[#1B4965]/50 to-[#0a1a2a]/90" />
+        {/* Dot pattern */}
+        <div className="hero-dots absolute inset-0 opacity-30" />
 
-        {/* Decorative floating orbs */}
-        <div className="absolute top-20 left-[10%] w-72 h-72 bg-[#FFB703]/10 rounded-full blur-[100px] animate-breathe" />
-        <div className="absolute bottom-20 right-[15%] w-56 h-56 bg-[#2d7da8]/20 rounded-full blur-[80px] animate-breathe" style={{ animationDelay: '1.5s' }} />
-
-        <div className="relative max-w-5xl mx-auto px-4 pt-32 pb-28 md:pt-40 md:pb-36">
-          <div className="text-center">
+        <div className="relative max-w-5xl mx-auto px-4 pt-24 pb-20 w-full">
+          <div className="max-w-3xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/10 text-sm text-white/70 mb-8 animate-fade-in-down backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-sm text-white/80 mb-8 animate-fade-in-down backdrop-blur-md">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFB703] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FFB703]" />
               </span>
-              Free weekend planner for Chennai
+              Your free Chennai weekend planner
             </div>
 
             {/* Heading */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 animate-fade-in-up leading-[1.05] tracking-tight">
-              Plan your weekend.
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 animate-fade-in-up leading-[1.02] tracking-tight text-white">
+              Your weekend.
               <br />
-              <span className="gradient-text">Dodge the traffic.</span>
+              <span className="gradient-text">Zero traffic.</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg md:text-xl text-white/50 mb-12 max-w-2xl mx-auto animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.1s' }}>
-              65+ curated places, real-time traffic intelligence, and smart routing.
-              Built for people who actually live in Chennai.
+            <p className="text-lg md:text-xl text-white/60 mb-10 max-w-xl animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.1s' }}>
+              64 handpicked spots, real-time traffic smarts, and routes that actually work.
+              Made by Chennaiites, for Chennaiites.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+            <div className="flex flex-col sm:flex-row items-start gap-4 mb-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <Link
                 href="/plan"
-                className="group px-8 py-4 bg-[#FFB703] text-[#1B4965] text-lg font-bold rounded-2xl hover:bg-accent-light transition-all duration-300 shadow-glow-accent hover:shadow-lg hover:scale-[1.03] animate-pulse-glow btn-shine chip-press"
+                className="group px-8 py-4 bg-[#FFB703] text-[#1B4965] text-lg font-bold rounded-2xl hover:bg-accent-light transition-all duration-300 shadow-glow-accent hover:shadow-lg hover:scale-[1.03] btn-shine chip-press"
               >
                 <span className="flex items-center gap-2">
                   Plan My Weekend
@@ -100,36 +110,63 @@ export default function Home() {
               </Link>
               <Link
                 href="/explore"
-                className="px-8 py-4 bg-white/8 text-white text-lg font-medium rounded-2xl hover:bg-white/15 transition-all duration-300 border border-white/15 backdrop-blur-sm chip-press"
+                className="px-8 py-4 bg-white/10 text-white text-lg font-medium rounded-2xl hover:bg-white/20 transition-all duration-300 border border-white/20 backdrop-blur-md chip-press"
               >
-                Explore Places
+                Explore 64 Places
               </Link>
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-              {STATS.map(s => (
-                <div key={s.label} className="text-center p-3 rounded-2xl bg-white/5 border border-white/8 backdrop-blur-sm">
-                  <p className="text-xs mb-1">{s.icon}</p>
-                  <p className="text-2xl md:text-3xl font-bold text-[#FFB703]">{s.value}</p>
-                  <p className="text-[11px] text-white/35 mt-0.5 uppercase tracking-wider font-medium">{s.label}</p>
+            {/* Quick stats row */}
+            <div className="flex flex-wrap gap-6 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
+              {[
+                { val: '64+', label: 'Curated places' },
+                { val: 'Live', label: 'Traffic data' },
+                { val: 'Free', label: 'No sign-up' },
+              ].map(s => (
+                <div key={s.label} className="flex items-center gap-3">
+                  <span className="text-2xl font-black text-[#FFB703]">{s.val}</span>
+                  <span className="text-xs text-white/40 uppercase tracking-wider font-medium">{s.label}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Wave divider */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 80h1440V40c-240 30-480 45-720 30S240 20 0 50v30z" fill="#FAF7F2"/>
-          </svg>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce-subtle">
+          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2">
+            <div className="w-1 h-2.5 bg-white/40 rounded-full animate-bounce" />
+          </div>
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto px-4 space-y-16 pb-20">
-        {/* ===== WEATHER + TRAFFIC ROW ===== */}
-        <div className="grid md:grid-cols-2 gap-5 -mt-6">
+      {/* ===== PHOTO MARQUEE ===== */}
+      <section className="py-6 bg-white/50 border-y border-gray-100/50 overflow-hidden">
+        <div className="marquee-container">
+          <div className="marquee-track">
+            {[...MARQUEE_PHOTOS, ...MARQUEE_PHOTOS].map((p, i) => (
+              <div key={i} className="flex-shrink-0 w-52 h-32 rounded-xl overflow-hidden shadow-card mx-2 group relative">
+                <img
+                  src={p.src}
+                  alt={p.label}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                  onError={(e) => {
+                    const t = e.target as HTMLImageElement;
+                    t.src = `https://placehold.co/400x250/1B4965/FFB703?text=${encodeURIComponent(p.label)}`;
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <span className="absolute bottom-2 left-3 text-white text-xs font-semibold drop-shadow-lg">{p.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-5xl mx-auto px-4 space-y-20 py-16">
+        {/* ===== WEATHER + TRAFFIC ===== */}
+        <div className="grid md:grid-cols-2 gap-5">
           <WeatherWidget />
           {trafficSummary && (
             <div className="bg-white rounded-2xl shadow-card border border-gray-100/80 p-6 card-lift">
@@ -154,16 +191,16 @@ export default function Home() {
           )}
         </div>
 
-        {/* ===== QUICK TEMPLATES ===== */}
+        {/* ===== QUICK TEMPLATES WITH PHOTOS ===== */}
         <section>
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs font-semibold text-[#FFB703] uppercase tracking-wider mb-1">Quick Start</p>
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1B4965]">Pick a Theme</h2>
-              <p className="text-gray-400 text-sm mt-1.5">One tap, instant itinerary tailored to your mood</p>
+              <p className="text-xs font-bold text-[#FFB703] uppercase tracking-widest mb-2">Quick Start</p>
+              <h2 className="text-3xl md:text-4xl font-black text-[#1B4965]">Pick a vibe</h2>
+              <p className="text-gray-400 text-sm mt-2">One tap. Instant plan. Let&apos;s go.</p>
             </div>
-            <Link href="/explore" className="text-sm text-[#1B4965] font-medium hover:text-[#2d7da8] transition-colors group flex items-center gap-1">
-              View all
+            <Link href="/explore" className="text-sm text-[#1B4965] font-semibold hover:text-[#2d7da8] transition-colors group flex items-center gap-1">
+              All places
               <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
           </div>
@@ -172,20 +209,25 @@ export default function Home() {
               <Link
                 key={t.title}
                 href={`/plan?vibes=${t.vibes}&categories=${t.categories}`}
-                className="group relative bg-white rounded-2xl overflow-hidden shadow-card border border-gray-100/80 card-hover"
+                className="group relative rounded-2xl overflow-hidden shadow-card card-hover aspect-[4/3]"
               >
-                <div className={`relative h-28 bg-gradient-to-br ${t.color} flex items-center justify-center overflow-hidden`}>
-                  {/* Decorative circles */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/10 rounded-full" />
-                  <div className="absolute -bottom-6 -left-6 w-16 h-16 bg-white/8 rounded-full" />
-                  <span className="text-5xl group-hover:scale-125 transition-transform duration-500 animate-float relative z-10 drop-shadow-lg">{t.emoji}</span>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-[#1B4965] text-base group-hover:text-[#2d7da8] transition-colors">{t.title}</h3>
-                  <p className="text-sm text-gray-400 mt-1">{t.desc}</p>
-                  <div className="mt-3 flex items-center text-xs font-medium text-[#1B4965]/50 group-hover:text-[#FFB703] transition-colors">
+                {/* Photo background */}
+                <img
+                  src={t.photo}
+                  alt={t.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-5">
+                  <span className="text-3xl mb-2 drop-shadow-lg group-hover:scale-110 transition-transform origin-left">{t.emoji}</span>
+                  <h3 className="font-bold text-white text-lg drop-shadow-lg">{t.title}</h3>
+                  <p className="text-sm text-white/70 mt-0.5">{t.desc}</p>
+                  <div className="mt-2 flex items-center text-xs font-semibold text-[#FFB703] group-hover:gap-2 transition-all">
                     Plan now
-                    <svg className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                    <svg className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
                   </div>
                 </div>
               </Link>
@@ -195,43 +237,53 @@ export default function Home() {
 
         {/* ===== HOW IT WORKS ===== */}
         <section>
-          <div className="text-center mb-10">
-            <p className="text-xs font-semibold text-[#FFB703] uppercase tracking-wider mb-1">Simple & Smart</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-[#1B4965]">How it works</h2>
-            <p className="text-gray-400 text-sm mt-2">Three steps. Zero cost. No sign-up required.</p>
+          <div className="text-center mb-12">
+            <p className="text-xs font-bold text-[#FFB703] uppercase tracking-widest mb-2">Dead Simple</p>
+            <h2 className="text-3xl md:text-4xl font-black text-[#1B4965]">How it works</h2>
+            <p className="text-gray-400 text-sm mt-2">Three steps. Zero cost. No sign-up.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 stagger-children">
             {STEPS.map((s) => (
-              <div key={s.step} className={`relative bg-white rounded-2xl p-7 shadow-card border ${s.accent} card-hover overflow-hidden`}>
+              <div key={s.step} className="relative bg-white rounded-2xl p-8 shadow-card border border-gray-100/80 card-hover overflow-hidden group">
                 {/* Step number watermark */}
-                <span className="absolute -top-2 -right-1 text-7xl font-black text-gray-50 select-none">{s.step}</span>
-                {/* Icon with accent bg */}
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1B4965] to-[#2d7da8] flex items-center justify-center mb-5 shadow-md">
-                  <span className="text-2xl">{s.icon}</span>
+                <span className="absolute -top-3 -right-2 text-8xl font-black text-gray-50 select-none group-hover:text-gray-100 transition-colors">{s.step}</span>
+                {/* Colored icon */}
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
+                  <span className="text-3xl">{s.icon}</span>
                 </div>
-                <h3 className="font-bold text-[#1B4965] text-lg mb-2 relative">{s.title}</h3>
+                <h3 className="font-bold text-[#1B4965] text-xl mb-2 relative">{s.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed relative">{s.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ===== CTA ===== */}
-        <section className="relative text-center bg-gradient-to-br from-[#1B4965] via-[#1B4965] to-[#2d7da8] rounded-3xl p-14 md:p-16 shadow-elevated overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FFB703]/8 rounded-full blur-[80px]" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#2d7da8]/20 rounded-full blur-[60px]" />
-          <div className="hero-dots absolute inset-0 opacity-50" />
+        {/* ===== BOTTOM CTA WITH PHOTO ===== */}
+        <section className="relative rounded-3xl overflow-hidden shadow-elevated">
+          {/* Background photo */}
+          <img
+            src="https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
+            alt="Chennai sunset"
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1B4965]/90 to-[#1B4965]/70" />
+          <div className="hero-dots absolute inset-0 opacity-30" />
 
-          <div className="relative">
-            <p className="text-xs font-semibold text-[#FFB703] uppercase tracking-wider mb-3">Let&apos;s Go</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to plan your weekend?</h2>
-            <p className="text-white/50 mb-10 max-w-md mx-auto">No sign-up. No cost. Just great weekends in Chennai with traffic-smart routing.</p>
+          <div className="relative p-14 md:p-16 max-w-xl">
+            <p className="text-xs font-bold text-[#FFB703] uppercase tracking-widest mb-3">Let&apos;s Go</p>
+            <h2 className="text-3xl md:text-4xl font-black text-white mb-4 leading-tight">
+              This weekend is going to be different.
+            </h2>
+            <p className="text-white/50 mb-8 leading-relaxed">
+              No more &quot;where should we go?&quot; No more sitting in traffic.
+              Just good places, smart routes, and great weekends.
+            </p>
             <Link
               href="/plan"
               className="inline-flex items-center gap-2 px-10 py-5 bg-[#FFB703] text-[#1B4965] text-lg font-bold rounded-2xl hover:bg-accent-light transition-all duration-300 shadow-glow-accent hover:scale-[1.03] btn-shine chip-press"
             >
-              Get Started
+              Start Planning
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
             </Link>
           </div>
