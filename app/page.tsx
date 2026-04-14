@@ -5,12 +5,12 @@ import { useState, useEffect } from 'react';
 import { TrafficSummary } from '../types';
 
 const TEMPLATES = [
-  { title: 'Beach Day', emoji: '🏖️', desc: 'Sun, sand & seafood', vibes: 'chill,nature', categories: 'beaches,street-food', photo: 'https://images.pexels.com/photos/982673/pexels-photo-982673.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
-  { title: 'Cafe Hopping', emoji: '☕', desc: 'Best brews in Chennai', vibes: 'chill,artsy', categories: 'cafes', photo: 'https://images.pexels.com/photos/30403595/pexels-photo-30403595.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
-  { title: 'Heritage Walk', emoji: '🛕', desc: 'Temples, forts & culture', vibes: 'cultural', categories: 'temples-heritage,art-museums', photo: 'https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
-  { title: 'Adventure Day', emoji: '🏄', desc: 'Thrills & excitement', vibes: 'adventure,social', categories: 'sports-fun', photo: 'https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
-  { title: 'Foodie Trail', emoji: '🍜', desc: 'Eat your way through Chennai', vibes: 'foodie', categories: 'street-food,cafes', photo: 'https://images.pexels.com/photos/2223247/pexels-photo-2223247.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
-  { title: 'Photo Walk', emoji: '📸', desc: "Capture Chennai's beauty", vibes: 'artsy,nature', categories: 'photography,temples-heritage', photo: 'https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Beach Day', emoji: '🏖️', desc: 'Sun, sand & seafood', vibes: 'chill,nature', categories: 'beaches,food', photo: 'https://images.pexels.com/photos/982673/pexels-photo-982673.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Food Trail', emoji: '🍜', desc: 'Eat your way through Chennai', vibes: 'foodie,social', categories: 'food', photo: 'https://images.pexels.com/photos/2223247/pexels-photo-2223247.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Heritage Walk', emoji: '🛕', desc: 'Temples, forts & culture', vibes: 'cultural', categories: 'culture', photo: 'https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Adventure Day', emoji: '🏄', desc: 'Thrills & excitement', vibes: 'adventure,social', categories: 'entertainment', photo: 'https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Nature Escape', emoji: '🌿', desc: 'Parks, gardens & fresh air', vibes: 'nature,chill', categories: 'nature', photo: 'https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
+  { title: 'Date Night', emoji: '💕', desc: 'Romantic spots for two', vibes: 'romantic,chill', categories: 'food,nightlife', photo: 'https://images.pexels.com/photos/30403595/pexels-photo-30403595.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop' },
 ];
 
 const SEVERITY_EMOJI: Record<string, string> = {

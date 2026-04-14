@@ -35,10 +35,8 @@ function Section({ title, subtitle, children }: { title: string; subtitle?: stri
 
 const VIBE_LABELS: Record<Vibe, string> = {
   chill: '😌 Chill', adventure: '🏄 Adventure', romantic: '💕 Romantic',
-  cultural: '🏛️ Cultural', social: '🎉 Social', artsy: '🎨 Artsy',
-  family: '👨‍👩‍👧‍👦 Family', foodie: '🍜 Foodie', nature: '🌿 Nature',
-  productive: '💻 Productive', wellness: '🧘 Wellness',
-  nightout: '🌙 Night Out', learning: '🎓 Learn Something',
+  cultural: '🏛️ Cultural', social: '🎉 Social', family: '👨‍👩‍👧‍👦 Family',
+  foodie: '🍜 Foodie', nature: '🌿 Nature',
 };
 
 const GROUP_LABELS: Record<GroupType, string> = {

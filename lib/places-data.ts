@@ -56,7 +56,7 @@ export const PLACES: Place[] = [
   {
     id: 'kapaleeshwarar-temple',
     name: 'Kapaleeshwarar Temple',
-    category: 'temples-heritage',
+    category: 'culture',
     area: 'Mylapore',
     lat: 13.0337,
     lng: 80.2695,
@@ -82,7 +82,7 @@ export const PLACES: Place[] = [
   {
     id: 'amethyst',
     name: 'Amethyst',
-    category: 'cafes',
+    category: 'food',
     area: 'Nungambakkam',
     lat: 13.0610,
     lng: 80.2460,
@@ -92,7 +92,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 90,
     indoor: true,
     outdoor: true,
-    vibes: ['romantic', 'artsy', 'chill'],
+    vibes: ['romantic', 'cultural', 'chill'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '09:00', close: '23:00' },
@@ -134,7 +134,7 @@ export const PLACES: Place[] = [
   {
     id: 'semmozhi-poonga',
     name: 'Semmozhi Poonga',
-    category: 'parks',
+    category: 'nature',
     area: 'Nungambakkam',
     lat: 13.0590,
     lng: 80.2510,
@@ -160,7 +160,7 @@ export const PLACES: Place[] = [
   {
     id: 'sowcarpet-food-walk',
     name: 'Sowcarpet Food Walk',
-    category: 'street-food',
+    category: 'food',
     area: 'Egmore',
     lat: 13.0930,
     lng: 80.2810,
@@ -186,7 +186,7 @@ export const PLACES: Place[] = [
   {
     id: 'broken-bridge',
     name: 'Broken Bridge',
-    category: 'photography',
+    category: 'culture',
     area: 'Adyar',
     lat: 13.0040,
     lng: 80.2710,
@@ -196,7 +196,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 60,
     indoor: false,
     outdoor: true,
-    vibes: ['nature', 'romantic', 'artsy'],
+    vibes: ['nature', 'romantic', 'cultural'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '05:00', close: '19:00' },
@@ -212,7 +212,7 @@ export const PLACES: Place[] = [
   {
     id: 'mystery-rooms',
     name: 'Mystery Rooms',
-    category: 'sports-fun',
+    category: 'entertainment',
     area: 'Nungambakkam',
     lat: 13.0580,
     lng: 80.2380,
@@ -238,7 +238,7 @@ export const PLACES: Place[] = [
   {
     id: 'dakshinachitra',
     name: 'Dakshinachitra',
-    category: 'art-museums',
+    category: 'culture',
     area: 'OMR',
     lat: 12.8150,
     lng: 80.2470,
@@ -248,7 +248,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 150,
     indoor: true,
     outdoor: true,
-    vibes: ['cultural', 'artsy', 'family'],
+    vibes: ['cultural', 'family'],
     groupTypes: ['solo', 'couple', 'friends', 'family', 'large-group'],
     openHours: {
       saturday: { open: '10:00', close: '18:00' },
@@ -264,7 +264,7 @@ export const PLACES: Place[] = [
   {
     id: 'brew-room',
     name: 'The Brew Room',
-    category: 'cafes',
+    category: 'food',
     area: 'Mylapore',
     lat: 13.0340,
     lng: 80.2690,
@@ -274,7 +274,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 90,
     indoor: true,
     outdoor: false,
-    vibes: ['chill', 'social', 'artsy'],
+    vibes: ['chill', 'social', 'cultural'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '08:00', close: '23:00' },
@@ -290,7 +290,7 @@ export const PLACES: Place[] = [
   {
     id: 'chamiers-cafe',
     name: 'Chamiers Cafe',
-    category: 'cafes',
+    category: 'food',
     area: 'Adyar',
     lat: 13.0068,
     lng: 80.2530,
@@ -300,7 +300,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 75,
     indoor: true,
     outdoor: true,
-    vibes: ['chill', 'romantic', 'artsy'],
+    vibes: ['chill', 'romantic', 'cultural'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '09:00', close: '22:00' },
@@ -316,7 +316,7 @@ export const PLACES: Place[] = [
   {
     id: 'ciclo-cafe',
     name: 'Ciclo Cafe',
-    category: 'cafes',
+    category: 'food',
     area: 'Adyar',
     lat: 13.0110,
     lng: 80.2490,
@@ -326,7 +326,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 90,
     indoor: true,
     outdoor: true,
-    vibes: ['social', 'artsy', 'chill'],
+    vibes: ['social', 'cultural', 'chill'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '08:00', close: '23:00' },
@@ -342,7 +342,7 @@ export const PLACES: Place[] = [
   {
     id: 'sandys-chocolate',
     name: 'Sandy\'s Chocolate Laboratory',
-    category: 'cafes',
+    category: 'food',
     area: 'Adyar',
     lat: 13.0058,
     lng: 80.2546,
@@ -368,7 +368,7 @@ export const PLACES: Place[] = [
   {
     id: 'writers-cafe',
     name: 'Writer\'s Cafe',
-    category: 'cafes',
+    category: 'food',
     area: 'T. Nagar',
     lat: 13.0410,
     lng: 80.2280,
@@ -378,7 +378,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 75,
     indoor: true,
     outdoor: false,
-    vibes: ['chill', 'artsy'],
+    vibes: ['chill', 'cultural'],
     groupTypes: ['solo', 'couple'],
     openHours: {
       saturday: { open: '09:00', close: '22:00' },
@@ -394,7 +394,7 @@ export const PLACES: Place[] = [
   {
     id: 'cafe-de-paris',
     name: 'Cafe De Paris',
-    category: 'cafes',
+    category: 'food',
     area: 'Nungambakkam',
     lat: 13.0550,
     lng: 80.2400,
@@ -420,7 +420,7 @@ export const PLACES: Place[] = [
   {
     id: 'tea-villa-cafe',
     name: 'Tea Villa Cafe',
-    category: 'cafes',
+    category: 'food',
     area: 'T. Nagar',
     lat: 13.0395,
     lng: 80.2310,
@@ -472,7 +472,7 @@ export const PLACES: Place[] = [
   {
     id: 'guindy-national-park',
     name: 'Guindy National Park',
-    category: 'parks',
+    category: 'nature',
     area: 'Guindy',
     lat: 13.0040,
     lng: 80.2310,
@@ -524,7 +524,7 @@ export const PLACES: Place[] = [
   {
     id: 'mylapore-street-food',
     name: 'Mylapore Temple Street Food',
-    category: 'street-food',
+    category: 'food',
     area: 'Mylapore',
     lat: 13.0350,
     lng: 80.2700,
@@ -550,7 +550,7 @@ export const PLACES: Place[] = [
   {
     id: 'illusions-the-madras-pub',
     name: 'Illusions - The Madras Pub',
-    category: 'cafes',
+    category: 'food',
     area: 'Velachery',
     lat: 12.9790,
     lng: 80.2200,
@@ -576,7 +576,7 @@ export const PLACES: Place[] = [
   {
     id: 'the-flying-elephant',
     name: 'The Flying Elephant',
-    category: 'cafes',
+    category: 'food',
     area: 'Guindy',
     lat: 13.0100,
     lng: 80.2230,
@@ -602,7 +602,7 @@ export const PLACES: Place[] = [
   {
     id: 'bay-146',
     name: 'Bay 146',
-    category: 'cafes',
+    category: 'food',
     area: 'Besant Nagar',
     lat: 13.0005,
     lng: 80.2700,
@@ -628,7 +628,7 @@ export const PLACES: Place[] = [
   {
     id: 'murugan-idli-shop',
     name: 'Murugan Idli Shop',
-    category: 'street-food',
+    category: 'food',
     area: 'T. Nagar',
     lat: 13.0425,
     lng: 80.2345,
@@ -654,7 +654,7 @@ export const PLACES: Place[] = [
   {
     id: 'junior-kuppanna',
     name: 'Junior Kuppanna',
-    category: 'street-food',
+    category: 'food',
     area: 'Egmore',
     lat: 13.0720,
     lng: 80.2600,
@@ -680,7 +680,7 @@ export const PLACES: Place[] = [
   {
     id: 'marina-food-stalls',
     name: 'Marina Beach Food Stalls',
-    category: 'street-food',
+    category: 'food',
     area: 'Mylapore',
     lat: 13.0490,
     lng: 80.2810,
@@ -706,7 +706,7 @@ export const PLACES: Place[] = [
   {
     id: 'besant-nagar-food-street',
     name: 'Besant Nagar Food Street',
-    category: 'street-food',
+    category: 'food',
     area: 'Besant Nagar',
     lat: 13.0010,
     lng: 80.2690,
@@ -732,7 +732,7 @@ export const PLACES: Place[] = [
   {
     id: 'thalapakattu-biryani',
     name: 'Dindigul Thalappakatti Biryani',
-    category: 'street-food',
+    category: 'food',
     area: 'T. Nagar',
     lat: 13.0430,
     lng: 80.2350,
@@ -758,7 +758,7 @@ export const PLACES: Place[] = [
   {
     id: 'fort-st-george',
     name: 'Fort St. George',
-    category: 'temples-heritage',
+    category: 'culture',
     area: 'Egmore',
     lat: 13.0800,
     lng: 80.2878,
@@ -768,7 +768,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 90,
     indoor: false,
     outdoor: true,
-    vibes: ['cultural', 'artsy'],
+    vibes: ['cultural'],
     groupTypes: ['solo', 'couple', 'friends', 'family'],
     openHours: {
       saturday: { open: '09:00', close: '17:00' },
@@ -784,7 +784,7 @@ export const PLACES: Place[] = [
   {
     id: 'san-thome-cathedral',
     name: 'San Thome Cathedral',
-    category: 'temples-heritage',
+    category: 'culture',
     area: 'Mylapore',
     lat: 13.0326,
     lng: 80.2778,
@@ -810,7 +810,7 @@ export const PLACES: Place[] = [
   {
     id: 'government-museum',
     name: 'Government Museum Egmore',
-    category: 'art-museums',
+    category: 'culture',
     area: 'Egmore',
     lat: 13.0694,
     lng: 80.2570,
@@ -820,7 +820,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 120,
     indoor: true,
     outdoor: false,
-    vibes: ['cultural', 'artsy'],
+    vibes: ['cultural'],
     groupTypes: ['solo', 'couple', 'friends', 'family', 'large-group'],
     openHours: {
       saturday: { open: '09:30', close: '17:00' },
@@ -888,7 +888,7 @@ export const PLACES: Place[] = [
   {
     id: 'cholamandal-artists',
     name: 'Cholamandal Artists\' Village',
-    category: 'art-museums',
+    category: 'culture',
     area: 'Thiruvanmiyur',
     lat: 12.9540,
     lng: 80.2540,
@@ -898,7 +898,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 120,
     indoor: true,
     outdoor: true,
-    vibes: ['artsy', 'cultural'],
+    vibes: ['cultural'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '09:30', close: '18:00' },
@@ -914,7 +914,7 @@ export const PLACES: Place[] = [
   {
     id: 'birla-planetarium',
     name: 'Birla Planetarium',
-    category: 'art-museums',
+    category: 'culture',
     area: 'Guindy',
     lat: 13.0130,
     lng: 80.2340,
@@ -940,7 +940,7 @@ export const PLACES: Place[] = [
   {
     id: 'covelong-surf',
     name: 'Covelong Point Surf School',
-    category: 'sports-fun',
+    category: 'entertainment',
     area: 'OMR',
     lat: 12.7830,
     lng: 80.2560,
@@ -966,7 +966,7 @@ export const PLACES: Place[] = [
   {
     id: 'dugout-trampoline',
     name: 'Dugout Trampoline Park',
-    category: 'sports-fun',
+    category: 'entertainment',
     area: 'OMR',
     lat: 12.9350,
     lng: 80.2290,
@@ -992,7 +992,7 @@ export const PLACES: Place[] = [
   {
     id: 'ashtalakshmi-temple',
     name: 'Ashtalakshmi Temple',
-    category: 'temples-heritage',
+    category: 'culture',
     area: 'Besant Nagar',
     lat: 13.0005,
     lng: 80.2720,
@@ -1018,7 +1018,7 @@ export const PLACES: Place[] = [
   {
     id: 'marundeeswarar-temple',
     name: 'Marundeeswarar Temple',
-    category: 'temples-heritage',
+    category: 'culture',
     area: 'Thiruvanmiyur',
     lat: 12.9842,
     lng: 80.2597,
@@ -1070,7 +1070,7 @@ export const PLACES: Place[] = [
   {
     id: 'triplicane-biryani',
     name: 'Triplicane Biryani Street',
-    category: 'street-food',
+    category: 'food',
     area: 'Egmore',
     lat: 13.0570,
     lng: 80.2760,
@@ -1108,7 +1108,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 150,
     indoor: true,
     outdoor: false,
-    vibes: ['nightout', 'social'],
+    vibes: ['social'],
     groupTypes: ['friends', 'couple'],
     openHours: {
       saturday: { open: '17:00', close: '23:30' },
@@ -1134,7 +1134,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 120,
     indoor: true,
     outdoor: false,
-    vibes: ['nightout', 'social', 'chill'],
+    vibes: ['social', 'chill'],
     groupTypes: ['friends', 'couple'],
     openHours: {
       saturday: { open: '18:00', close: '23:30' },
@@ -1160,7 +1160,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 120,
     indoor: true,
     outdoor: false,
-    vibes: ['nightout', 'romantic', 'chill'],
+    vibes: ['social', 'romantic', 'chill'],
     groupTypes: ['couple', 'friends'],
     openHours: {
       saturday: { open: '17:00', close: '23:30' },
@@ -1188,7 +1188,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 90,
     indoor: true,
     outdoor: false,
-    vibes: ['wellness', 'chill'],
+    vibes: ['chill'],
     groupTypes: ['solo', 'couple'],
     openHours: {
       saturday: { open: '09:00', close: '21:00' },
@@ -1214,7 +1214,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 90,
     indoor: true,
     outdoor: false,
-    vibes: ['wellness', 'chill', 'nature'],
+    vibes: ['chill', 'nature'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '06:00', close: '19:00' },
@@ -1240,7 +1240,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 120,
     indoor: true,
     outdoor: false,
-    vibes: ['wellness', 'chill', 'romantic'],
+    vibes: ['chill', 'romantic'],
     groupTypes: ['solo', 'couple'],
     openHours: {
       saturday: { open: '10:00', close: '21:00' },
@@ -1258,7 +1258,7 @@ export const PLACES: Place[] = [
   {
     id: 'ikigai-cowork',
     name: 'Ikigai Coworking',
-    category: 'coworking-study',
+    category: 'food',
     area: 'Nungambakkam',
     lat: 13.0575,
     lng: 80.2420,
@@ -1268,7 +1268,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 180,
     indoor: true,
     outdoor: false,
-    vibes: ['productive', 'social', 'chill'],
+    vibes: ['social', 'chill'],
     groupTypes: ['solo', 'friends'],
     openHours: {
       saturday: { open: '08:00', close: '22:00' },
@@ -1284,7 +1284,7 @@ export const PLACES: Place[] = [
   {
     id: 'connemara-library',
     name: 'Connemara Public Library',
-    category: 'coworking-study',
+    category: 'food',
     area: 'Egmore',
     lat: 13.0700,
     lng: 80.2580,
@@ -1294,7 +1294,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 180,
     indoor: true,
     outdoor: false,
-    vibes: ['productive', 'chill', 'cultural'],
+    vibes: ['chill', 'cultural'],
     groupTypes: ['solo'],
     openHours: {
       saturday: { open: '09:30', close: '18:00' },
@@ -1310,7 +1310,7 @@ export const PLACES: Place[] = [
   {
     id: 'starbucks-ecr',
     name: 'Starbucks ECR (Study Spot)',
-    category: 'coworking-study',
+    category: 'food',
     area: 'Besant Nagar',
     lat: 13.0010,
     lng: 80.2650,
@@ -1320,7 +1320,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 150,
     indoor: true,
     outdoor: true,
-    vibes: ['productive', 'chill', 'social'],
+    vibes: ['chill', 'social'],
     groupTypes: ['solo', 'friends'],
     openHours: {
       saturday: { open: '07:00', close: '23:00' },
@@ -1338,7 +1338,7 @@ export const PLACES: Place[] = [
   {
     id: 'sathyam-cinemas',
     name: 'Sathyam Cinemas',
-    category: 'movies-entertainment',
+    category: 'entertainment',
     area: 'Egmore',
     lat: 13.0600,
     lng: 80.2520,
@@ -1364,7 +1364,7 @@ export const PLACES: Place[] = [
   {
     id: 'pvr-vr-chennai',
     name: 'PVR IMAX - VR Chennai',
-    category: 'movies-entertainment',
+    category: 'entertainment',
     area: 'Anna Nagar',
     lat: 13.0920,
     lng: 80.2125,
@@ -1390,7 +1390,7 @@ export const PLACES: Place[] = [
   {
     id: 'smaaash',
     name: 'Smaaash Gaming Zone',
-    category: 'movies-entertainment',
+    category: 'entertainment',
     area: 'Velachery',
     lat: 12.9930,
     lng: 80.2170,
@@ -1400,7 +1400,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 120,
     indoor: true,
     outdoor: false,
-    vibes: ['social', 'adventure', 'nightout'],
+    vibes: ['social', 'adventure'],
     groupTypes: ['friends', 'couple', 'large-group'],
     openHours: {
       saturday: { open: '11:00', close: '22:00' },
@@ -1418,7 +1418,7 @@ export const PLACES: Place[] = [
   {
     id: 'muttukadu-boathouse',
     name: 'Muttukadu Boat House',
-    category: 'nature-getaways',
+    category: 'nature',
     area: 'OMR',
     lat: 12.8150,
     lng: 80.2420,
@@ -1444,7 +1444,7 @@ export const PLACES: Place[] = [
   {
     id: 'vedanthangal-bird-sanctuary',
     name: 'Vedanthangal Bird Sanctuary',
-    category: 'nature-getaways',
+    category: 'nature',
     area: 'Tambaram',
     lat: 12.5460,
     lng: 79.8580,
@@ -1470,7 +1470,7 @@ export const PLACES: Place[] = [
   {
     id: 'mahabalipuram',
     name: 'Mahabalipuram (Day Trip)',
-    category: 'nature-getaways',
+    category: 'nature',
     area: 'OMR',
     lat: 12.6172,
     lng: 80.1927,
@@ -1480,7 +1480,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 300,
     indoor: false,
     outdoor: true,
-    vibes: ['cultural', 'nature', 'adventure', 'artsy'],
+    vibes: ['cultural', 'nature', 'adventure'],
     groupTypes: ['solo', 'couple', 'friends', 'family', 'large-group'],
     openHours: {
       saturday: { open: '06:00', close: '18:00' },
@@ -1496,7 +1496,7 @@ export const PLACES: Place[] = [
   {
     id: 'tholkappia-poonga',
     name: 'Tholkappia Poonga (Adyar Eco Park)',
-    category: 'nature-getaways',
+    category: 'nature',
     area: 'Adyar',
     lat: 13.0040,
     lng: 80.2620,
@@ -1524,7 +1524,7 @@ export const PLACES: Place[] = [
   {
     id: 'kalakshetra',
     name: 'Kalakshetra Foundation',
-    category: 'workshops-classes',
+    category: 'workshops',
     area: 'Thiruvanmiyur',
     lat: 12.9820,
     lng: 80.2580,
@@ -1534,7 +1534,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 120,
     indoor: true,
     outdoor: true,
-    vibes: ['cultural', 'artsy', 'learning'],
+    vibes: ['cultural'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '08:30', close: '17:30' },
@@ -1550,7 +1550,7 @@ export const PLACES: Place[] = [
   {
     id: 'pottery-workshop-ecr',
     name: 'The Potter\'s Shed (Pottery Workshop)',
-    category: 'workshops-classes',
+    category: 'workshops',
     area: 'OMR',
     lat: 12.8900,
     lng: 80.2450,
@@ -1560,7 +1560,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 150,
     indoor: true,
     outdoor: false,
-    vibes: ['artsy', 'learning', 'chill'],
+    vibes: ['cultural', 'chill'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '10:00', close: '18:00' },
@@ -1576,7 +1576,7 @@ export const PLACES: Place[] = [
   {
     id: 'the-art-lounge',
     name: 'The Art Lounge (Painting Sessions)',
-    category: 'workshops-classes',
+    category: 'workshops',
     area: 'Adyar',
     lat: 13.0055,
     lng: 80.2550,
@@ -1586,7 +1586,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 150,
     indoor: true,
     outdoor: false,
-    vibes: ['artsy', 'learning', 'chill', 'romantic'],
+    vibes: ['cultural', 'chill', 'romantic'],
     groupTypes: ['solo', 'couple', 'friends'],
     openHours: {
       saturday: { open: '10:00', close: '20:00' },
@@ -1602,7 +1602,7 @@ export const PLACES: Place[] = [
   {
     id: 'cooking-class-mylapore',
     name: 'Authentic Chennai Cooking Class',
-    category: 'workshops-classes',
+    category: 'workshops',
     area: 'Mylapore',
     lat: 13.0360,
     lng: 80.2680,
@@ -1612,7 +1612,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 180,
     indoor: true,
     outdoor: false,
-    vibes: ['foodie', 'learning', 'cultural'],
+    vibes: ['foodie', 'cultural'],
     groupTypes: ['solo', 'couple', 'friends', 'family'],
     openHours: {
       saturday: { open: '09:00', close: '17:00' },
@@ -1630,7 +1630,7 @@ export const PLACES: Place[] = [
   {
     id: 'kapaleeshwarar-gopuram',
     name: 'Kapaleeshwarar Gopuram Viewpoint',
-    category: 'photography',
+    category: 'culture',
     area: 'Mylapore',
     lat: 13.0340,
     lng: 80.2695,
@@ -1640,7 +1640,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 30,
     indoor: false,
     outdoor: true,
-    vibes: ['cultural', 'artsy'],
+    vibes: ['cultural'],
     groupTypes: ['solo', 'couple'],
     openHours: {
       saturday: { open: '06:00', close: '20:00' },
@@ -1656,7 +1656,7 @@ export const PLACES: Place[] = [
   {
     id: 'light-house',
     name: 'Chennai Lighthouse',
-    category: 'photography',
+    category: 'culture',
     area: 'Mylapore',
     lat: 13.0400,
     lng: 80.2800,
@@ -1666,7 +1666,7 @@ export const PLACES: Place[] = [
     avgTimeMinutes: 45,
     indoor: false,
     outdoor: true,
-    vibes: ['adventure', 'artsy'],
+    vibes: ['adventure', 'cultural'],
     groupTypes: ['solo', 'couple', 'friends', 'family'],
     openHours: {
       saturday: { open: '10:00', close: '17:00' },

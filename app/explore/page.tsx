@@ -4,8 +4,8 @@ import { PLACES } from '../../lib/places-data';
 import { PlaceCategory, CATEGORY_LABELS, CATEGORY_ICONS, Place } from '../../types';
 
 const ALL_CATEGORIES: ('all' | PlaceCategory)[] = [
-  'all', 'beaches', 'cafes', 'parks', 'sports-fun', 'temples-heritage',
-  'shopping', 'art-museums', 'street-food', 'photography',
+  'all', 'beaches', 'food', 'culture', 'nature', 'entertainment',
+  'shopping', 'nightlife', 'wellness', 'workshops',
 ];
 
 const BUDGET_LABELS: Record<string, string> = {

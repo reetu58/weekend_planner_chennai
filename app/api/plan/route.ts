@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     // Select with category diversity
     const selected: typeof scored = [];
     const catCount: Record<string, number> = {};
-    const hasMovieCategory = prefs.categories.includes('movies-entertainment');
+    const hasEntertainment = prefs.categories.includes('entertainment');
 
     for (const s of scored) {
       if (selected.length >= maxStops) break;
@@ -51,30 +51,26 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Movie + food pairing: if movies selected, ensure at least one food place nearby
-    if (hasMovieCategory) {
-      const hasFood = selected.some(s =>
-        s.place.category === 'cafes' || s.place.category === 'street-food'
-      );
+    // Entertainment + food pairing: if entertainment selected, ensure at least one food place nearby
+    if (hasEntertainment) {
+      const hasFood = selected.some(s => s.place.category === 'food');
       if (!hasFood && selected.length > 0) {
-        const movieStop = selected.find(s => s.place.category === 'movies-entertainment');
-        if (movieStop) {
-          // Find nearest food place to the movie hall
+        const funStop = selected.find(s => s.place.category === 'entertainment');
+        if (funStop) {
           const foodPlaces = PLACES
-            .filter(p => (p.category === 'cafes' || p.category === 'street-food'))
+            .filter(p => p.category === 'food')
             .map(p => ({
               place: p,
               score: 50,
               dist: Math.sqrt(
-                Math.pow(p.lat - movieStop.place.lat, 2) +
-                Math.pow(p.lng - movieStop.place.lng, 2)
+                Math.pow(p.lat - funStop.place.lat, 2) +
+                Math.pow(p.lng - funStop.place.lng, 2)
               ),
             }))
             .sort((a, b) => a.dist - b.dist);
 
           if (foodPlaces.length > 0) {
-            // Replace last non-movie stop with nearby food
-            const replaceIdx = selected.findIndex(s => s.place.category !== 'movies-entertainment');
+            const replaceIdx = selected.findIndex(s => s.place.category !== 'entertainment');
             if (replaceIdx >= 0 && selected.length >= maxStops) {
               selected[replaceIdx] = { place: foodPlaces[0].place, score: foodPlaces[0].score };
             } else if (selected.length < maxStops) {

@@ -12,10 +12,6 @@ export function scorePlace(place: Place, prefs: UserPrefs): number {
   let score = 0;
 
   // Category match (highest weight)
-  // Exclude movies-entertainment unless explicitly selected
-  if (place.category === 'movies-entertainment' && !prefs.categories.includes('movies-entertainment')) {
-    return 0;
-  }
   if (prefs.categories.length === 0 || prefs.categories.includes(place.category)) {
     score += 30;
   } else {

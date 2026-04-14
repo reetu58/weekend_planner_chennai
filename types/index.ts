@@ -29,20 +29,14 @@ export type DistanceLimit = 10 | 30 | 0; // 0 = no limit
 
 export type PlaceCategory =
   | 'beaches'
-  | 'cafes'
-  | 'parks'
-  | 'sports-fun'
-  | 'temples-heritage'
+  | 'food'
+  | 'culture'
+  | 'nature'
+  | 'entertainment'
   | 'shopping'
-  | 'art-museums'
-  | 'street-food'
-  | 'photography'
   | 'nightlife'
   | 'wellness'
-  | 'coworking-study'
-  | 'movies-entertainment'
-  | 'nature-getaways'
-  | 'workshops-classes';
+  | 'workshops';
 
 export type Vibe =
   | 'chill'
@@ -50,14 +44,9 @@ export type Vibe =
   | 'romantic'
   | 'cultural'
   | 'social'
-  | 'artsy'
   | 'family'
   | 'foodie'
-  | 'nature'
-  | 'productive'
-  | 'wellness'
-  | 'nightout'
-  | 'learning';
+  | 'nature';
 
 export type GroupType = 'solo' | 'couple' | 'friends' | 'family' | 'large-group';
 
@@ -153,38 +142,26 @@ export interface TrafficSummary {
 
 export const CATEGORY_LABELS: Record<PlaceCategory, string> = {
   beaches: '🏖️ Beaches',
-  cafes: '☕ Cafes & Restaurants',
-  parks: '🌳 Parks & Gardens',
-  'sports-fun': '🎯 Sports & Fun',
-  'temples-heritage': '🛕 Temples & Heritage',
+  food: '🍜 Food & Drinks',
+  culture: '🛕 Culture & Heritage',
+  nature: '🌿 Parks & Nature',
+  entertainment: '🎯 Fun & Entertainment',
   shopping: '🛍️ Shopping',
-  'art-museums': '🎨 Art & Museums',
-  'street-food': '🍜 Street Food',
-  photography: '📸 Photography Spots',
-  nightlife: '🌙 Nightlife & Pubs',
+  nightlife: '🌙 Nightlife',
   wellness: '🧘 Wellness & Spa',
-  'coworking-study': '💻 Coworking & Study',
-  'movies-entertainment': '🎬 Movies & Entertainment',
-  'nature-getaways': '🌿 Nature Getaways',
-  'workshops-classes': '🎓 Workshops & Classes',
+  workshops: '🎓 Workshops',
 };
 
 export const CATEGORY_ICONS: Record<PlaceCategory, string> = {
   beaches: '🏖️',
-  cafes: '☕',
-  parks: '🌳',
-  'sports-fun': '🎯',
-  'temples-heritage': '🛕',
+  food: '🍜',
+  culture: '🛕',
+  nature: '🌿',
+  entertainment: '🎯',
   shopping: '🛍️',
-  'art-museums': '🎨',
-  'street-food': '🍜',
-  photography: '📸',
   nightlife: '🌙',
   wellness: '🧘',
-  'coworking-study': '💻',
-  'movies-entertainment': '🎬',
-  'nature-getaways': '🌿',
-  'workshops-classes': '🎓',
+  workshops: '🎓',
 };
 
 export const AREAS = [
