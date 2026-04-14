@@ -33,13 +33,18 @@ export default function PlanPage() {
 
   return (
     <div className="min-h-screen bg-sand">
-      {/* Header */}
-      <div className="relative bg-gradient-hero text-white overflow-hidden">
-        <div className="hero-pattern absolute inset-0" />
-        <div className="hero-dots absolute inset-0" />
-
-        {/* Decorative orbs */}
-        <div className="absolute top-10 right-[20%] w-40 h-40 bg-[#FFB703]/10 rounded-full blur-[60px]" />
+      {/* Header with Chennai photo */}
+      <div className="relative text-white overflow-hidden">
+        {/* Background photo — Marina Beach */}
+        <img
+          src="https://images.pexels.com/photos/982673/pexels-photo-982673.jpeg?auto=compress&cs=tinysrgb&w=1920&h=600&fit=crop"
+          alt="Chennai Beach"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1B4965]/75 via-[#1B4965]/60 to-[#0a1a2a]/90" />
+        <div className="hero-dots absolute inset-0 opacity-30" />
 
         <div className="relative max-w-3xl mx-auto text-center px-4 pt-28 pb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/10 text-xs text-white/60 mb-5 animate-fade-in-down backdrop-blur-sm">
