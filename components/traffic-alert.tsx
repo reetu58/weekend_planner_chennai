@@ -64,7 +64,7 @@ export default function TrafficAlertCard({ alert }: Props) {
           <span className="text-gray-400 text-xs line-through">{normalTravelTime}m normally</span>
         </div>
         {alternative && (
-          <p className="mt-2 text-xs text-[#1B4965] bg-blue-50 rounded-lg px-3 py-2 border border-blue-100">
+          <p className="mt-2 text-xs text-[#0F172A] bg-blue-50 rounded-lg px-3 py-2 border border-blue-100">
             💡 Consider {alternative.placeName} instead — only {alternative.travelTime} min away. {alternative.reason}
           </p>
         )}
@@ -95,7 +95,7 @@ export default function TrafficAlertCard({ alert }: Props) {
           Consider waiting a bit — traffic may ease soon.
         </p>
         {alternative && (
-          <p className="mt-2 text-xs text-[#1B4965] bg-blue-50 rounded-lg px-3 py-2 border border-blue-100">
+          <p className="mt-2 text-xs text-[#0F172A] bg-blue-50 rounded-lg px-3 py-2 border border-blue-100">
             💡 Consider {alternative.placeName} instead — only {alternative.travelTime} min away. {alternative.reason}
           </p>
         )}
@@ -130,8 +130,8 @@ export default function TrafficAlertCard({ alert }: Props) {
           </div>
         )}
         {alternative && (
-          <div className="mt-3 bg-white border border-[#1B4965]/20 rounded-xl px-4 py-3">
-            <p className="text-xs text-[#1B4965] font-semibold">
+          <div className="mt-3 bg-white border border-[#0F172A]/20 rounded-xl px-4 py-3">
+            <p className="text-xs text-[#0F172A] font-semibold">
               💡 Consider {alternative.placeName} instead — only {alternative.travelTime} min away.
             </p>
             <p className="text-xs text-gray-500 mt-0.5">{alternative.reason}</p>
@@ -170,7 +170,7 @@ export default function TrafficAlertCard({ alert }: Props) {
         </div>
       )}
       {alternative && (
-        <div className="mt-3 bg-white text-[#1B4965] rounded-xl px-4 py-3">
+        <div className="mt-3 bg-white text-[#0F172A] rounded-xl px-4 py-3">
           <p className="text-xs font-bold">
             💡 Consider {alternative.placeName} instead — only {alternative.travelTime} min away.
           </p>

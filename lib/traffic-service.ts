@@ -124,7 +124,7 @@ export function getSeverityColor(severity: TrafficSeverity): string {
   switch (severity) {
     case 'clear': return '#2D6A4F';
     case 'light': return '#EF9F27';
-    case 'moderate': return '#FB8500';
+    case 'moderate': return '#E11D48';
     case 'heavy': return '#E24B4A';
     case 'standstill': return '#E24B4A';
   }

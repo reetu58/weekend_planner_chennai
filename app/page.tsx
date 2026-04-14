@@ -69,7 +69,7 @@ export default function Home() {
           loading="eager"
         />
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1B4965]/70 via-[#1B4965]/50 to-[#0a1a2a]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/70 via-[#0F172A]/50 to-[#030712]/90" />
         {/* Dot pattern */}
         <div className="hero-dots absolute inset-0 opacity-30" />
 
@@ -78,8 +78,8 @@ export default function Home() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 text-sm text-white/80 mb-8 animate-fade-in-down backdrop-blur-md">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFB703] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FFB703]" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
               </span>
               Your free Chennai weekend planner
             </div>
@@ -101,7 +101,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-start gap-4 mb-16 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <Link
                 href="/plan"
-                className="group px-8 py-4 bg-[#FFB703] text-[#1B4965] text-lg font-bold rounded-2xl hover:bg-accent-light transition-all duration-300 shadow-glow-accent hover:shadow-lg hover:scale-[1.03] btn-shine chip-press"
+                className="group px-8 py-4 bg-[#F43F5E] text-white text-lg font-bold rounded-2xl hover:bg-accent-light transition-all duration-300 shadow-glow-accent hover:shadow-lg hover:scale-[1.03] btn-shine chip-press"
               >
                 <span className="flex items-center gap-2">
                   Plan My Weekend
@@ -124,7 +124,7 @@ export default function Home() {
                 { val: 'Free', label: 'No sign-up' },
               ].map(s => (
                 <div key={s.label} className="flex items-center gap-3">
-                  <span className="text-2xl font-black text-[#FFB703]">{s.val}</span>
+                  <span className="text-2xl font-black text-[#F43F5E]">{s.val}</span>
                   <span className="text-xs text-white/40 uppercase tracking-wider font-medium">{s.label}</span>
                 </div>
               ))}
@@ -153,7 +153,7 @@ export default function Home() {
                   loading="lazy"
                   onError={(e) => {
                     const t = e.target as HTMLImageElement;
-                    t.src = `https://placehold.co/400x250/1B4965/FFB703?text=${encodeURIComponent(p.label)}`;
+                    t.src = `https://placehold.co/400x250/0F172A/F43F5E?text=${encodeURIComponent(p.label)}`;
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -195,11 +195,11 @@ export default function Home() {
         <section>
           <div className="flex items-end justify-between mb-8">
             <div>
-              <p className="text-xs font-bold text-[#FFB703] uppercase tracking-widest mb-2">Quick Start</p>
-              <h2 className="text-3xl md:text-4xl font-black text-[#1B4965]">Pick a vibe</h2>
+              <p className="text-xs font-bold text-[#F43F5E] uppercase tracking-widest mb-2">Quick Start</p>
+              <h2 className="text-3xl md:text-4xl font-black text-[#0F172A]">Pick a vibe</h2>
               <p className="text-gray-400 text-sm mt-2">One tap. Instant plan. Let&apos;s go.</p>
             </div>
-            <Link href="/explore" className="text-sm text-[#1B4965] font-semibold hover:text-[#2d7da8] transition-colors group flex items-center gap-1">
+            <Link href="/explore" className="text-sm text-[#0F172A] font-semibold hover:text-[#334155] transition-colors group flex items-center gap-1">
               All places
               <svg className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
             </Link>
@@ -225,7 +225,7 @@ export default function Home() {
                   <span className="text-3xl mb-2 drop-shadow-lg group-hover:scale-110 transition-transform origin-left">{t.emoji}</span>
                   <h3 className="font-bold text-white text-lg drop-shadow-lg">{t.title}</h3>
                   <p className="text-sm text-white/70 mt-0.5">{t.desc}</p>
-                  <div className="mt-2 flex items-center text-xs font-semibold text-[#FFB703] group-hover:gap-2 transition-all">
+                  <div className="mt-2 flex items-center text-xs font-semibold text-[#F43F5E] group-hover:gap-2 transition-all">
                     Plan now
                     <svg className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
                   </div>
@@ -238,8 +238,8 @@ export default function Home() {
         {/* ===== HOW IT WORKS ===== */}
         <section>
           <div className="text-center mb-12">
-            <p className="text-xs font-bold text-[#FFB703] uppercase tracking-widest mb-2">Dead Simple</p>
-            <h2 className="text-3xl md:text-4xl font-black text-[#1B4965]">How it works</h2>
+            <p className="text-xs font-bold text-[#F43F5E] uppercase tracking-widest mb-2">Dead Simple</p>
+            <h2 className="text-3xl md:text-4xl font-black text-[#0F172A]">How it works</h2>
             <p className="text-gray-400 text-sm mt-2">Three steps. Zero cost. No sign-up.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 stagger-children">
@@ -251,7 +251,7 @@ export default function Home() {
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
                   <span className="text-3xl">{s.icon}</span>
                 </div>
-                <h3 className="font-bold text-[#1B4965] text-xl mb-2 relative">{s.title}</h3>
+                <h3 className="font-bold text-[#0F172A] text-xl mb-2 relative">{s.title}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed relative">{s.desc}</p>
               </div>
             ))}
@@ -267,11 +267,11 @@ export default function Home() {
             className="absolute inset-0 w-full h-full object-cover"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1B4965]/90 to-[#1B4965]/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/90 to-[#0F172A]/70" />
           <div className="hero-dots absolute inset-0 opacity-30" />
 
           <div className="relative p-14 md:p-16 max-w-xl">
-            <p className="text-xs font-bold text-[#FFB703] uppercase tracking-widest mb-3">Let&apos;s Go</p>
+            <p className="text-xs font-bold text-[#F43F5E] uppercase tracking-widest mb-3">Let&apos;s Go</p>
             <h2 className="text-3xl md:text-4xl font-black text-white mb-4 leading-tight">
               This weekend is going to be different.
             </h2>
@@ -281,7 +281,7 @@ export default function Home() {
             </p>
             <Link
               href="/plan"
-              className="inline-flex items-center gap-2 px-10 py-5 bg-[#FFB703] text-[#1B4965] text-lg font-bold rounded-2xl hover:bg-accent-light transition-all duration-300 shadow-glow-accent hover:scale-[1.03] btn-shine chip-press"
+              className="inline-flex items-center gap-2 px-10 py-5 bg-[#F43F5E] text-white text-lg font-bold rounded-2xl hover:bg-accent-light transition-all duration-300 shadow-glow-accent hover:scale-[1.03] btn-shine chip-press"
             >
               Start Planning
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>

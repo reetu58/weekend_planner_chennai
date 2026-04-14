@@ -31,8 +31,8 @@ export default function Nav() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-9 h-9 rounded-xl bg-[#FFB703] flex items-center justify-center shadow-md group-hover:shadow-glow-accent transition-all duration-300 group-hover:scale-105">
-              <span className="text-[#1B4965] font-black text-lg">W</span>
+            <div className="relative w-9 h-9 rounded-xl bg-[#F43F5E] flex items-center justify-center shadow-md group-hover:shadow-glow-accent transition-all duration-300 group-hover:scale-105">
+              <span className="text-[#0F172A] font-black text-lg">W</span>
             </div>
             <div className="flex flex-col leading-tight">
               <span className="text-white text-lg font-bold tracking-tight">Weekendaa</span>
@@ -54,13 +54,13 @@ export default function Nav() {
               >
                 {link.label}
                 {pathname === link.href && (
-                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-[#FFB703]" />
+                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-[#F43F5E]" />
                 )}
               </Link>
             ))}
             <Link
               href="/plan"
-              className="ml-4 px-5 py-2 bg-[#FFB703] text-[#1B4965] rounded-xl text-sm font-bold hover:bg-accent-light hover:shadow-glow-accent transition-all duration-300 btn-shine chip-press"
+              className="ml-4 px-5 py-2 bg-[#F43F5E] text-white rounded-xl text-sm font-bold hover:bg-accent-light hover:shadow-glow-accent transition-all duration-300 btn-shine chip-press"
             >
               Plan Now
             </Link>
@@ -101,7 +101,7 @@ export default function Nav() {
             ))}
             <Link
               href="/plan"
-              className="mt-2 text-center py-3 bg-[#FFB703] text-[#1B4965] rounded-xl text-sm font-bold hover:bg-accent-light transition-colors"
+              className="mt-2 text-center py-3 bg-[#F43F5E] text-white rounded-xl text-sm font-bold hover:bg-accent-light transition-colors"
               onClick={() => setMenuOpen(false)}
             >
               Plan Now

@@ -43,14 +43,14 @@ export default function PlanPage() {
           loading="eager"
         />
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1B4965]/75 via-[#1B4965]/60 to-[#0a1a2a]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/75 via-[#0F172A]/60 to-[#030712]/90" />
         <div className="hero-dots absolute inset-0 opacity-30" />
 
         <div className="relative max-w-3xl mx-auto text-center px-4 pt-28 pb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/8 border border-white/10 text-xs text-white/60 mb-5 animate-fade-in-down backdrop-blur-sm">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFB703] opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#FFB703]" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#F43F5E]" />
             </span>
             Step 1 of 2
           </div>
@@ -60,7 +60,7 @@ export default function PlanPage() {
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 40" fill="none"><path d="M0 40h1440V20c-240 15-480 22-720 15S240 10 0 25v15z" fill="#FAF7F2"/></svg>
+          <svg viewBox="0 0 1440 40" fill="none"><path d="M0 40h1440V20c-240 15-480 22-720 15S240 10 0 25v15z" fill="#FAFAF9"/></svg>
         </div>
       </div>
 

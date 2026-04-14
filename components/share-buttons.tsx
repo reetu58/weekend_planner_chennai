@@ -131,7 +131,7 @@ export default function ShareButtons({
         <button
           onClick={handleDownload}
           disabled={downloading}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-[#1B4965] text-sm font-bold transition-all duration-200 hover:shadow-glow-accent hover:opacity-90 chip-press disabled:opacity-60 disabled:cursor-not-allowed bg-[#FFB703]"
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-[#0F172A] text-sm font-bold transition-all duration-200 hover:shadow-glow-accent hover:opacity-90 chip-press disabled:opacity-60 disabled:cursor-not-allowed bg-[#F43F5E]"
           aria-label="Download as image"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true">

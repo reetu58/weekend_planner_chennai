@@ -72,19 +72,19 @@ export default function PlaceCard({ stop, isFirst, onSwap, onCheckTraffic, isChe
             loading="lazy"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              const fallback = `https://placehold.co/800x400/1B4965/FFB703?text=${encodeURIComponent(place.name)}`;
+              const fallback = `https://placehold.co/800x400/0F172A/F43F5E?text=${encodeURIComponent(place.name)}`;
               if (target.src !== fallback) target.src = fallback;
             }}
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-[#1B4965] to-[#2d7da8] flex items-center justify-center">
+          <div className="w-full h-full bg-gradient-to-br from-[#0F172A] to-[#334155] flex items-center justify-center">
             <span className="text-5xl drop-shadow-lg">{CATEGORY_ICONS[place.category]}</span>
           </div>
         )}
 
         {/* Order badge */}
         <div className="absolute top-3 left-3">
-          <span className="w-10 h-10 bg-[#1B4965] text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-elevated border-2 border-white/20">
+          <span className="w-10 h-10 bg-[#0F172A] text-white rounded-xl flex items-center justify-center text-sm font-bold shadow-elevated border-2 border-white/20">
             {stop.order}
           </span>
         </div>
@@ -113,7 +113,7 @@ export default function PlaceCard({ stop, isFirst, onSwap, onCheckTraffic, isChe
             href={place.googleSearchUrl || `https://www.google.com/search?q=${encodeURIComponent(place.name + ' Chennai')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg font-bold text-[#1B4965] hover:text-[#2d7da8] transition-colors inline-flex items-center gap-1.5 group"
+            className="text-lg font-bold text-[#0F172A] hover:text-[#334155] transition-colors inline-flex items-center gap-1.5 group"
           >
             {place.name}
             <svg className="w-4 h-4 opacity-30 group-hover:opacity-60 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -155,7 +155,7 @@ export default function PlaceCard({ stop, isFirst, onSwap, onCheckTraffic, isChe
             href={place.googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1B4965] text-white rounded-xl text-sm font-medium hover:bg-primary-dark transition-colors btn-ripple chip-press"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#0F172A] text-white rounded-xl text-sm font-medium hover:bg-primary-dark transition-colors btn-ripple chip-press"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
             Navigate
@@ -164,7 +164,7 @@ export default function PlaceCard({ stop, isFirst, onSwap, onCheckTraffic, isChe
             href={place.googleSearchUrl || `https://www.google.com/search?q=${encodeURIComponent(place.name + ' Chennai')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#FFB703] text-[#1B4965] rounded-xl text-sm font-bold hover:bg-accent-light transition-colors btn-shine chip-press"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-[#F43F5E] text-white rounded-xl text-sm font-bold hover:bg-accent-light transition-colors btn-shine chip-press"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             Google It

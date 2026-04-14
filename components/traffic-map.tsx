@@ -62,7 +62,7 @@ export default function TrafficMap({ stops, center, startLocation }: Props) {
 
       stops.forEach((stop) => {
         const icon = L.divIcon({
-          html: `<div style="background:linear-gradient(135deg,#1B4965,#2d7da8);color:white;width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;border:2px solid white;box-shadow:0 4px 12px rgba(0,0,0,0.2)">${stop.order}</div>`,
+          html: `<div style="background:linear-gradient(135deg,#0F172A,#334155);color:white;width:30px;height:30px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:14px;border:2px solid white;box-shadow:0 4px 12px rgba(0,0,0,0.2)">${stop.order}</div>`,
           className: '',
           iconSize: [30, 30],
           iconAnchor: [15, 15],
@@ -76,7 +76,7 @@ export default function TrafficMap({ stops, center, startLocation }: Props) {
       });
 
       if (points.length > 1) {
-        L.polyline(points, { color: '#1B4965', weight: 3, opacity: 0.6, dashArray: '10, 8' }).addTo(map);
+        L.polyline(points, { color: '#0F172A', weight: 3, opacity: 0.6, dashArray: '10, 8' }).addTo(map);
       }
 
       if (points.length > 0) {

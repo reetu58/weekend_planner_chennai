@@ -52,7 +52,7 @@ export default function WeatherWidget() {
 
         <div className="flex-1 min-w-[120px]">
           <div className="flex items-baseline gap-1">
-            <p className="text-4xl font-bold text-[#1B4965]">{weather.temperature}</p>
+            <p className="text-4xl font-bold text-[#0F172A]">{weather.temperature}</p>
             <span className="text-lg text-gray-300 font-light">°C</span>
           </div>
           <p className="text-gray-500 text-sm font-medium">{weather.condition}</p>

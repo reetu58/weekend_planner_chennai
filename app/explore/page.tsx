@@ -47,7 +47,7 @@ export default function ExplorePage() {
       <div className="relative bg-gradient-hero text-white overflow-hidden">
         <div className="hero-pattern absolute inset-0" />
         <div className="hero-dots absolute inset-0" />
-        <div className="absolute top-10 left-[15%] w-48 h-48 bg-[#FFB703]/8 rounded-full blur-[80px]" />
+        <div className="absolute top-10 left-[15%] w-48 h-48 bg-[#F43F5E]/8 rounded-full blur-[80px]" />
 
         <div className="relative max-w-5xl mx-auto text-center px-4 pt-28 pb-14">
           <h1 className="text-3xl md:text-5xl font-bold mb-3 animate-fade-in-up tracking-tight">Explore Chennai</h1>
@@ -56,7 +56,7 @@ export default function ExplorePage() {
           </p>
         </div>
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 40" fill="none"><path d="M0 40h1440V20c-240 15-480 22-720 15S240 10 0 25v15z" fill="#FAF7F2"/></svg>
+          <svg viewBox="0 0 1440 40" fill="none"><path d="M0 40h1440V20c-240 15-480 22-720 15S240 10 0 25v15z" fill="#FAFAF9"/></svg>
         </div>
       </div>
 
@@ -69,7 +69,7 @@ export default function ExplorePage() {
               onClick={() => setSelectedCategory(c)}
               className={`px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200 chip-press ${
                 selectedCategory === c
-                  ? 'bg-[#1B4965] text-white shadow-glow-primary/20'
+                  ? 'bg-[#0F172A] text-white shadow-glow-primary/20'
                   : 'bg-white text-gray-500 border border-gray-200 hover:border-gray-300 hover:bg-gray-50'
               }`}
             >
@@ -84,24 +84,24 @@ export default function ExplorePage() {
           <div className="w-px h-5 bg-gray-200" />
           <label className="flex items-center gap-2 text-sm cursor-pointer group">
             <input type="checkbox" checked={filterOpenNow} onChange={() => setFilterOpenNow(!filterOpenNow)}
-              className="rounded border-gray-300 text-[#1B4965] focus:ring-[#1B4965]/20" />
+              className="rounded border-gray-300 text-[#0F172A] focus:ring-[#0F172A]/20" />
             <span className="text-gray-600 group-hover:text-gray-900 transition-colors">Open now</span>
           </label>
           <label className="flex items-center gap-2 text-sm cursor-pointer group">
             <input type="checkbox" checked={filterFree} onChange={() => setFilterFree(!filterFree)}
-              className="rounded border-gray-300 text-[#1B4965] focus:ring-[#1B4965]/20" />
+              className="rounded border-gray-300 text-[#0F172A] focus:ring-[#0F172A]/20" />
             <span className="text-gray-600 group-hover:text-gray-900 transition-colors">Free entry</span>
           </label>
           <label className="flex items-center gap-2 text-sm cursor-pointer group">
             <input type="checkbox" checked={filterIndoor} onChange={() => setFilterIndoor(!filterIndoor)}
-              className="rounded border-gray-300 text-[#1B4965] focus:ring-[#1B4965]/20" />
+              className="rounded border-gray-300 text-[#0F172A] focus:ring-[#0F172A]/20" />
             <span className="text-gray-600 group-hover:text-gray-900 transition-colors">Indoor</span>
           </label>
           <div className="ml-auto">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="text-sm border border-gray-200 rounded-xl px-3 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#1B4965]/20 focus:border-[#1B4965] bg-white"
+              className="text-sm border border-gray-200 rounded-xl px-3 py-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#0F172A]/20 focus:border-[#0F172A] bg-white"
             >
               <option value="rating">Sort: Rating</option>
               <option value="name">Sort: Name</option>
@@ -128,12 +128,12 @@ export default function ExplorePage() {
                     loading="lazy"
                     onError={(e) => {
                       const t = e.target as HTMLImageElement;
-                      const fb = `https://placehold.co/800x400/1B4965/FFB703?text=${encodeURIComponent(place.name)}`;
+                      const fb = `https://placehold.co/800x400/0F172A/F43F5E?text=${encodeURIComponent(place.name)}`;
                       if (t.src !== fb) t.src = fb;
                     }}
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-[#1B4965] to-[#2d7da8] flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-[#0F172A] to-[#334155] flex items-center justify-center">
                     <span className="text-4xl">{CATEGORY_ICONS[place.category]}</span>
                   </div>
                 )}
@@ -161,7 +161,7 @@ export default function ExplorePage() {
                       href={place.googleSearchUrl || `https://www.google.com/search?q=${encodeURIComponent(place.name + ' Chennai')}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-bold text-[#1B4965] hover:text-[#2d7da8] transition-colors truncate block text-base"
+                      className="font-bold text-[#0F172A] hover:text-[#334155] transition-colors truncate block text-base"
                     >
                       {place.name}
                     </a>
@@ -191,7 +191,7 @@ export default function ExplorePage() {
                     href={place.googleMapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-2 bg-[#1B4965] text-white rounded-xl text-xs font-medium hover:bg-primary-dark transition-colors chip-press"
+                    className="flex items-center gap-1.5 px-3 py-2 bg-[#0F172A] text-white rounded-xl text-xs font-medium hover:bg-primary-dark transition-colors chip-press"
                   >
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                     Navigate
@@ -200,7 +200,7 @@ export default function ExplorePage() {
                     href={place.googleSearchUrl || `https://www.google.com/search?q=${encodeURIComponent(place.name + ' Chennai')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-2 bg-[#FFB703] text-[#1B4965] rounded-xl text-xs font-bold hover:bg-accent-light transition-colors chip-press"
+                    className="flex items-center gap-1.5 px-3 py-2 bg-[#F43F5E] text-white rounded-xl text-xs font-bold hover:bg-accent-light transition-colors chip-press"
                   >
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     Google It

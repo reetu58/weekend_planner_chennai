@@ -48,8 +48,8 @@ export default function TrafficSummaryBar({
         <div className="flex items-center gap-3 flex-wrap">
           <div className="flex items-center gap-4 text-sm">
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#1B4965]" />
-              <span className="font-bold text-[#1B4965]">{formatDuration(totalDuration)}</span>
+              <span className="w-2 h-2 rounded-full bg-[#0F172A]" />
+              <span className="font-bold text-[#0F172A]">{formatDuration(totalDuration)}</span>
               <span className="text-gray-400 text-xs">total</span>
             </span>
             <span className="w-px h-4 bg-gray-200" />
@@ -76,7 +76,7 @@ export default function TrafficSummaryBar({
             <button
               onClick={onRefresh}
               disabled={isRefreshing}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#1B4965] text-white rounded-xl text-xs font-medium hover:bg-primary-dark disabled:opacity-50 transition-colors chip-press"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#0F172A] text-white rounded-xl text-xs font-medium hover:bg-primary-dark disabled:opacity-50 transition-colors chip-press"
             >
               {isRefreshing ? (
                 <>
@@ -92,7 +92,7 @@ export default function TrafficSummaryBar({
             </button>
             <button
               onClick={onShare}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#FFB703] text-[#1B4965] rounded-xl text-xs font-bold hover:bg-accent-light transition-colors chip-press"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F43F5E] text-white rounded-xl text-xs font-bold hover:bg-accent-light transition-colors chip-press"
             >
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>
               Share

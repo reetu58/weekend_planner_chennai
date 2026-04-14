@@ -124,7 +124,7 @@ async function getImageUrl(query: string): Promise<string> {
 
   // 3. Skip Wikipedia search for known local businesses (returns wrong images)
   if (SKIP_SEARCH.has(normalizedQuery)) {
-    const fallback = `https://placehold.co/800x400/1B4965/FFB703?text=${encodeURIComponent(query.replace(/\+/g, ' '))}`;
+    const fallback = `https://placehold.co/800x400/0F172A/F43F5E?text=${encodeURIComponent(query.replace(/\+/g, ' '))}`;
     imageCache.set(query, { url: fallback, fetched: Date.now() });
     return fallback;
   }
@@ -158,7 +158,7 @@ async function getImageUrl(query: string): Promise<string> {
   }
 
   // 5. Fallback: styled placeholder
-  const fallback = `https://placehold.co/800x400/1B4965/FFB703?text=${encodeURIComponent(query.replace(/\+/g, ' '))}`;
+  const fallback = `https://placehold.co/800x400/0F172A/F43F5E?text=${encodeURIComponent(query.replace(/\+/g, ' '))}`;
   imageCache.set(query, { url: fallback, fetched: Date.now() });
   return fallback;
 }

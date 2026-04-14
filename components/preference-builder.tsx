@@ -16,16 +16,16 @@ function Chip({ label, selected, onClick, variant = 'single' }: {
   const base = 'px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer border select-none chip-press';
   const styles = selected
     ? variant === 'multi'
-      ? `${base} bg-[#FFB703] text-[#1B4965] border-[#FFB703] shadow-glow-accent/30 scale-[1.02]`
-      : `${base} bg-[#1B4965] text-white border-[#1B4965] shadow-glow-primary/30 scale-[1.02]`
-    : `${base} bg-white text-gray-500 border-gray-200 hover:border-[#1B4965]/30 hover:bg-gray-50 hover:shadow-soft`;
+      ? `${base} bg-[#F43F5E] text-white border-[#F43F5E] shadow-glow-accent/30 scale-[1.02]`
+      : `${base} bg-[#0F172A] text-white border-[#0F172A] shadow-glow-primary/30 scale-[1.02]`
+    : `${base} bg-white text-gray-500 border-gray-200 hover:border-[#0F172A]/30 hover:bg-gray-50 hover:shadow-soft`;
   return <button type="button" className={styles} onClick={onClick}>{label}</button>;
 }
 
 function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
     <div className="mb-8">
-      <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wider mb-1">{title}</h3>
+      <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-1">{title}</h3>
       {subtitle && <p className="text-xs text-gray-400 mb-3">{subtitle}</p>}
       {!subtitle && <div className="mb-3" />}
       <div className="flex flex-wrap gap-2.5">{children}</div>
@@ -138,11 +138,11 @@ function LocationSearch({ onSelect }: {
             onChange={(e) => handleInput(e.target.value)}
             onFocus={() => query.length >= 2 && results.length > 0 && setShowResults(true)}
             placeholder="Search any area, street, or landmark in Chennai..."
-            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965]/20 focus:border-[#1B4965] pr-10 bg-white transition-all input-focus"
+            className="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0F172A]/20 focus:border-[#0F172A] pr-10 bg-white transition-all input-focus"
           />
           {isSearching && (
             <span className="absolute right-3 top-1/2 -translate-y-1/2">
-              <span className="w-4 h-4 border-2 border-gray-300 border-t-[#1B4965] rounded-full animate-spin block" />
+              <span className="w-4 h-4 border-2 border-gray-300 border-t-[#0F172A] rounded-full animate-spin block" />
             </span>
           )}
           {selectedLabel && !isSearching && (
@@ -154,7 +154,7 @@ function LocationSearch({ onSelect }: {
         <button
           type="button"
           onClick={handleUseMyLocation}
-          className="px-4 py-3 bg-[#1B4965] text-white rounded-xl text-sm font-medium hover:bg-primary-dark whitespace-nowrap transition-colors btn-ripple chip-press"
+          className="px-4 py-3 bg-[#0F172A] text-white rounded-xl text-sm font-medium hover:bg-primary-dark whitespace-nowrap transition-colors btn-ripple chip-press"
         >
           📍 Use My Location
         </button>
@@ -185,7 +185,7 @@ function LocationSearch({ onSelect }: {
             onClick={() => handleSelect({ name: a, lat: AREA_COORDINATES[a].lat, lng: AREA_COORDINATES[a].lng })}
             className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer chip-press ${
               selectedLabel === a
-                ? 'bg-[#1B4965] text-white border-[#1B4965] shadow-sm'
+                ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-sm'
                 : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
             }`}
           >
@@ -258,7 +258,7 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
     <div className="max-w-3xl mx-auto">
       {/* Date Picker - Card style */}
       <div className="mb-8 p-6 bg-white rounded-2xl border border-gray-100 shadow-soft">
-        <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wider mb-1">
+        <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-1">
           Pick a Date
         </h3>
         <p className="text-xs text-gray-400 mb-4">When do you want to go out?</p>
@@ -268,9 +268,9 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
             value={selectedDate}
             min={minDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965]/20 focus:border-[#1B4965] text-lg bg-white input-focus"
+            className="px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0F172A]/20 focus:border-[#0F172A] text-lg bg-white input-focus"
           />
-          <span className="inline-flex items-center gap-2 text-sm text-[#1B4965] bg-blue-50 px-4 py-2.5 rounded-xl font-medium border border-blue-100">
+          <span className="inline-flex items-center gap-2 text-sm text-[#0F172A] bg-blue-50 px-4 py-2.5 rounded-xl font-medium border border-blue-100">
             📅 {selectedDayLabel}
           </span>
         </div>
@@ -291,7 +291,7 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
         </Section>
 
         <div className="mb-8">
-          <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wider mb-1">
+          <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-1">
             Departure Time
           </h3>
           <p className="text-xs text-gray-400 mb-3">When are you heading out? (triggers live traffic check)</p>
@@ -299,7 +299,7 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
             type="time"
             value={departureTime}
             onChange={(e) => setDepartureTime(e.target.value)}
-            className="px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1B4965]/20 focus:border-[#1B4965] bg-white input-focus"
+            className="px-4 py-3 border border-gray-200 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0F172A]/20 focus:border-[#0F172A] bg-white input-focus"
           />
         </div>
       </div>
@@ -340,7 +340,7 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
         </Section>
 
         <div className="mb-2">
-          <h3 className="text-sm font-semibold text-[#1B4965] uppercase tracking-wider mb-1">
+          <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-1">
             Starting Location
           </h3>
           <p className="text-xs text-gray-400 mb-3">
@@ -360,7 +360,7 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
       <button
         onClick={handleGenerate}
         disabled={isGenerating}
-        className="w-full py-4.5 bg-gradient-to-r from-[#1B4965] to-[#2d7da8] text-white text-lg font-bold rounded-2xl hover:shadow-elevated transition-all duration-300 disabled:opacity-50 shadow-card btn-shine chip-press"
+        className="w-full py-4.5 bg-gradient-to-r from-[#0F172A] to-[#334155] text-white text-lg font-bold rounded-2xl hover:shadow-elevated transition-all duration-300 disabled:opacity-50 shadow-card btn-shine chip-press"
       >
         {isGenerating ? (
           <span className="flex items-center justify-center gap-3">
