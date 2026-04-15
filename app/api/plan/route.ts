@@ -226,6 +226,29 @@ function buildSmartItinerary(prefs: UserPrefs) {
     if (isFood(pick.place)) foodCount++;
   }
 
+  // ── Guarantee: every plan MUST have at least 1 food place ──
+  // If no food was placed (e.g. user only picked non-food categories),
+  // swap the weakest non-food stop with the best nearby food place
+  if (foodCount === 0 && selected.length >= 2) {
+    const allFood = scoreAllPlaces(PLACES, { ...prefs, categories: [] })
+      .filter(s => isFood(s.place) && !usedIds.has(s.place.id));
+
+    if (allFood.length > 0) {
+      // Find the best swap position — prefer middle or later slots
+      // (don't replace the first activity, people expect to start with what they chose)
+      let swapIdx = selected.length >= 3 ? 1 : selected.length - 1;
+
+      // Pick food place closest to the stop BEFORE the swap position
+      const refLat = swapIdx === 0 ? startCoords.lat : selected[swapIdx - 1].lat;
+      const refLng = swapIdx === 0 ? startCoords.lng : selected[swapIdx - 1].lng;
+
+      const bestFood = pickBest(allFood, refLat, refLng, prefs, selected, null);
+      if (bestFood) {
+        selected[swapIdx] = bestFood.place;
+      }
+    }
+  }
+
   return { selected, startCoords, departureTime };
 }
 
