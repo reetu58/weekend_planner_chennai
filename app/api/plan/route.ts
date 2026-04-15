@@ -236,7 +236,7 @@ function buildSmartItinerary(prefs: UserPrefs) {
     if (allFood.length > 0) {
       // Find the best swap position — prefer middle or later slots
       // (don't replace the first activity, people expect to start with what they chose)
-      let swapIdx = selected.length >= 3 ? 1 : selected.length - 1;
+      const swapIdx = selected.length >= 3 ? 1 : selected.length - 1;
 
       // Pick food place closest to the stop BEFORE the swap position
       const refLat = swapIdx === 0 ? startCoords.lat : selected[swapIdx - 1].lat;
