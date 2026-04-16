@@ -350,12 +350,33 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
         </div>
       </div>
 
-      {vibes.length === 0 && categories.length === 0 && (
-        <div className="flex items-center gap-3 px-5 py-4 bg-amber-50 border border-amber-200/80 rounded-2xl mb-6 animate-fade-in">
-          <span className="text-xl">💡</span>
-          <p className="text-sm text-amber-700 font-medium">Pick at least one mood or category for best results</p>
-        </div>
-      )}
+      {(() => {
+        if (categories.includes('nightlife') && (timeSlot === 'morning' || timeSlot === 'afternoon')) {
+          return (
+            <div className="flex items-start gap-3 px-5 py-4 bg-red-50 border border-red-200 rounded-2xl mb-6 animate-fade-in">
+              <span className="text-xl mt-0.5">🚫</span>
+              <p className="text-sm text-red-700 font-medium">Nightlife venues only open from 5 PM — switch to &quot;Evening&quot; or remove Nightlife.</p>
+            </div>
+          );
+        }
+        if (categories.includes('nightlife') && categories.includes('nature')) {
+          return (
+            <div className="flex items-start gap-3 px-5 py-4 bg-red-50 border border-red-200 rounded-2xl mb-6 animate-fade-in">
+              <span className="text-xl mt-0.5">🚫</span>
+              <p className="text-sm text-red-700 font-medium">Nightlife and nature parks run on opposite schedules — pick one or the other.</p>
+            </div>
+          );
+        }
+        if (vibes.length === 0 && categories.length === 0) {
+          return (
+            <div className="flex items-center gap-3 px-5 py-4 bg-amber-50 border border-amber-200/80 rounded-2xl mb-6 animate-fade-in">
+              <span className="text-xl">💡</span>
+              <p className="text-sm text-amber-700 font-medium">Pick at least one mood or category for best results</p>
+            </div>
+          );
+        }
+        return null;
+      })()}
 
       <button
         onClick={handleGenerate}

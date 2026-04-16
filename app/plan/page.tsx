@@ -6,10 +6,12 @@ import { UserPrefs } from '../../types';
 
 export default function PlanPage() {
   const [isGenerating, setIsGenerating] = useState(false);
+  const [planError, setPlanError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleGenerate = async (prefs: UserPrefs) => {
     setIsGenerating(true);
+    setPlanError(null);
     try {
       const res = await fetch('/api/plan', {
         method: 'POST',
@@ -20,12 +22,11 @@ export default function PlanPage() {
         const { id } = await res.json();
         router.push(`/itinerary/${id}`);
       } else {
-        const encoded = btoa(JSON.stringify(prefs));
-        router.push(`/itinerary/${encoded}`);
+        const data = await res.json().catch(() => ({}));
+        setPlanError(data.error || 'Something went wrong. Try adjusting your preferences.');
       }
     } catch {
-      const encoded = btoa(JSON.stringify(prefs));
-      router.push(`/itinerary/${encoded}`);
+      setPlanError('Could not connect to the server. Please try again.');
     } finally {
       setIsGenerating(false);
     }
@@ -65,6 +66,15 @@ export default function PlanPage() {
       </div>
 
       <div className="max-w-3xl mx-auto px-4 py-10">
+        {planError && (
+          <div className="flex items-start gap-3 px-5 py-4 bg-red-50 border border-red-200 rounded-2xl mb-6 animate-fade-in">
+            <span className="text-xl mt-0.5">🚫</span>
+            <div>
+              <p className="text-sm font-semibold text-red-700 mb-0.5">Can&apos;t build this plan</p>
+              <p className="text-sm text-red-600">{planError}</p>
+            </div>
+          </div>
+        )}
         <PreferenceBuilder onGenerate={handleGenerate} isGenerating={isGenerating} />
       </div>
     </div>

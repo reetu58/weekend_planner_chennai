@@ -37,6 +37,41 @@ function timeToMinutes(t: string): number {
   return h * 60 + m;
 }
 
+const FOOD_CATEGORY = 'food';
+
+function isFood(place: Place): boolean {
+  return place.category === FOOD_CATEGORY;
+}
+
+// Returns true if a place is open at the given fractional hour (e.g. 13.5 = 1:30 PM)
+function isOpenAtHour(place: Place, day: 'saturday' | 'sunday', hour: number): boolean {
+  const hours = place.openHours[day];
+  if (!hours) return false;
+  const [openH, openM] = hours.open.split(':').map(Number);
+  const [closeH, closeM] = hours.close.split(':').map(Number);
+  const openMin = openH * 60 + openM;
+  const closeMin = closeH * 60 + closeM;
+  const visitMin = Math.floor(hour) * 60 + Math.round((hour % 1) * 60);
+  return visitMin >= openMin && visitMin < closeMin;
+}
+
+// Detect impossible category + time combinations before planning
+function checkIncompatibility(prefs: UserPrefs): string | null {
+  const { categories, timeSlot } = prefs;
+
+  // Nightlife + morning/afternoon — clubs don't open until evening
+  if (categories.includes('nightlife') && (timeSlot === 'morning' || timeSlot === 'afternoon')) {
+    return 'Nightlife venues only open from 5 PM — switch to "Evening" time slot, or remove Nightlife from your categories.';
+  }
+
+  // Nightlife + nature — parks close exactly when nightlife opens
+  if (categories.includes('nightlife') && categories.includes('nature')) {
+    return 'Nightlife and nature parks run on opposite schedules — parks close when clubs open. Try picking one or adding different categories.';
+  }
+
+  return null;
+}
+
 // ─── Smart Itinerary Builder ────────────────────────────────────
 // Thinks like a real travel planner:
 // 1. Places food at meal times (breakfast / lunch / snack / dinner)
@@ -44,12 +79,7 @@ function timeToMinutes(t: string): number {
 // 3. Picks food near the previous activity
 // 4. Matches food type to group (family → restaurant, couple → romantic)
 // 5. Alternates: activity → food → activity → food
-
-const FOOD_CATEGORY = 'food';
-
-function isFood(place: Place): boolean {
-  return place.category === FOOD_CATEGORY;
-}
+// 6. Filters every slot to places actually open at arrival time
 
 // What meal window does this hour fall into?
 function getMealType(hour: number): 'breakfast' | 'lunch' | 'snack' | 'dinner' | null {
@@ -128,6 +158,7 @@ function pickBest(
 
 function buildSmartItinerary(prefs: UserPrefs) {
   const allScored = scoreAllPlaces(PLACES, prefs);
+  const day = prefs.day === 'both' ? 'saturday' : prefs.day;
 
   // Separate into food and activity pools
   const foodPool = allScored.filter(s => isFood(s.place));
@@ -166,6 +197,14 @@ function buildSmartItinerary(prefs: UserPrefs) {
 
     const prevWasFood = i > 0 && isFood(selected[i - 1]);
 
+    // ── Filter each pool to places actually open at this slot's hour ──
+    const openFoodPool = foodPool.filter(
+      s => !usedIds.has(s.place.id) && isOpenAtHour(s.place, day, slotHour)
+    );
+    const openActivityPool = activityPool.filter(
+      s => !usedIds.has(s.place.id) && isOpenAtHour(s.place, day, slotHour)
+    );
+
     // ── Decide if this slot should be food ──
     let shouldBeFood = false;
 
@@ -177,11 +216,11 @@ function buildSmartItinerary(prefs: UserPrefs) {
         mealType !== null &&
         foodCount < maxFoodStops &&
         !prevWasFood &&
-        foodPool.length > 0
+        openFoodPool.length > 0
       );
 
       // Rule: morning start → begin with breakfast if early enough
-      if (i === 0 && mealType === 'breakfast' && foodPool.length > 0) {
+      if (i === 0 && mealType === 'breakfast' && openFoodPool.length > 0) {
         shouldBeFood = true;
       }
 
@@ -192,32 +231,28 @@ function buildSmartItinerary(prefs: UserPrefs) {
       }
 
       // Rule: last slot near dinner time → end with food
-      if (i === maxStops - 1 && mealType === 'dinner' && foodCount < maxFoodStops && foodPool.length > 0) {
+      if (i === maxStops - 1 && mealType === 'dinner' && foodCount < maxFoodStops && openFoodPool.length > 0) {
         shouldBeFood = true;
       }
 
       // Rule: second slot is a good food slot for evening outings (eat after first activity)
-      if (i === 1 && prefs.timeSlot === 'evening' && foodCount === 0 && foodPool.length > 0 && !prevWasFood) {
+      if (i === 1 && prefs.timeSlot === 'evening' && foodCount === 0 && openFoodPool.length > 0 && !prevWasFood) {
         shouldBeFood = true;
       }
     }
 
-    // ── Pick from the right pool ──
-    const primaryPool = shouldBeFood ? foodPool : activityPool;
-    const fallbackPool = shouldBeFood ? activityPool : foodPool;
+    // ── Pick from the right pool (already filtered for open hours) ──
+    const primaryPool = shouldBeFood ? openFoodPool : openActivityPool;
+    const fallbackPool = shouldBeFood ? openActivityPool : openFoodPool;
 
-    // Filter out already-used places
-    const available = primaryPool.filter(s => !usedIds.has(s.place.id));
-    const fallbackAvailable = fallbackPool.filter(s => !usedIds.has(s.place.id));
-
-    let pick = pickBest(available, prevLat, prevLng, prefs, selected, mealType);
+    let pick = pickBest(primaryPool, prevLat, prevLng, prefs, selected, mealType);
 
     // Fall back to other pool if primary is empty
-    if (!pick && fallbackAvailable.length > 0) {
-      pick = pickBest(fallbackAvailable, prevLat, prevLng, prefs, selected, mealType);
+    if (!pick && fallbackPool.length > 0) {
+      pick = pickBest(fallbackPool, prevLat, prevLng, prefs, selected, mealType);
     }
 
-    if (!pick) break; // No more places available
+    if (!pick) break; // No more open places available for this slot
 
     selected.push(pick.place);
     usedIds.add(pick.place.id);
@@ -235,14 +270,18 @@ function buildSmartItinerary(prefs: UserPrefs) {
 
     if (allFood.length > 0) {
       // Find the best swap position — prefer middle or later slots
-      // (don't replace the first activity, people expect to start with what they chose)
       const swapIdx = selected.length >= 3 ? 1 : selected.length - 1;
+      const swapSlotMin = startMinutes + swapIdx * avgSlotMinutes;
+      const swapHour = swapSlotMin / 60;
 
-      // Pick food place closest to the stop BEFORE the swap position
+      // Prefer food places open at the swap slot; fall back to any food place
+      const openFood = allFood.filter(s => isOpenAtHour(s.place, day, swapHour));
+      const foodCandidates = openFood.length > 0 ? openFood : allFood;
+
       const refLat = swapIdx === 0 ? startCoords.lat : selected[swapIdx - 1].lat;
       const refLng = swapIdx === 0 ? startCoords.lng : selected[swapIdx - 1].lng;
 
-      const bestFood = pickBest(allFood, refLat, refLng, prefs, selected, null);
+      const bestFood = pickBest(foodCandidates, refLat, refLng, prefs, selected, null);
       if (bestFood) {
         selected[swapIdx] = bestFood.place;
       }
@@ -255,6 +294,12 @@ function buildSmartItinerary(prefs: UserPrefs) {
 export async function POST(request: NextRequest) {
   try {
     const prefs: UserPrefs = await request.json();
+
+    // Reject impossible category + time-slot combinations upfront
+    const incompatError = checkIncompatibility(prefs);
+    if (incompatError) {
+      return NextResponse.json({ error: incompatError }, { status: 400 });
+    }
 
     const { selected, startCoords, departureTime } = buildSmartItinerary(prefs);
 
@@ -319,8 +364,9 @@ export async function POST(request: NextRequest) {
     planStore.set(id, itinerary);
 
     return NextResponse.json(itinerary);
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message || 'Failed to generate' }, { status: 500 });
+  } catch (e: unknown) {
+    const message = e instanceof Error ? e.message : 'Failed to generate';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
