@@ -36,8 +36,8 @@ const STEPS = [
     color: 'from-blue-500 to-cyan-400',
   },
   {
-    step: '02', icon: '🚦', title: 'We dodge traffic',
-    desc: 'Real-time traffic data optimizes your route. No more jams.',
+    step: '02', icon: '🚦', title: 'We plan around traffic',
+    desc: 'Tell us when you\'re leaving. We order your stops to avoid Chennai\'s busiest corridors at the worst times.',
     color: 'from-amber-500 to-orange-400',
   },
   {
@@ -93,7 +93,7 @@ export default function Home() {
 
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-white/60 mb-10 max-w-xl animate-fade-in-up leading-relaxed" style={{ animationDelay: '0.1s' }}>
-              64 handpicked spots, real-time traffic smarts, and routes that actually work.
+              64 handpicked spots, departure-time aware routing, and itineraries that actually work for Chennai.
               Made by Chennaiites, for Chennaiites.
             </p>
 
@@ -120,7 +120,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-6 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
               {[
                 { val: '64+', label: 'Curated places' },
-                { val: 'Live', label: 'Traffic data' },
+                { val: 'Smart', label: 'Traffic routing' },
                 { val: 'Free', label: 'No sign-up' },
               ].map(s => (
                 <div key={s.label} className="flex items-center gap-3">
@@ -232,6 +232,139 @@ export default function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+        </section>
+
+        {/* ===== SAMPLE PLAN PREVIEW ===== */}
+        <section>
+          <div className="text-center mb-10">
+            <p className="text-xs font-bold text-[#F43F5E] uppercase tracking-widest mb-2">What You Get</p>
+            <h2 className="text-3xl md:text-4xl font-black text-[#0F172A]">A real plan, not a list</h2>
+            <p className="text-gray-400 text-sm mt-2">Time-blocked stops, travel gaps, and meal timing — all figured out for you.</p>
+          </div>
+
+          <div className="bg-white rounded-3xl shadow-elevated border border-gray-100/80 overflow-hidden max-w-2xl mx-auto">
+            {/* Plan header */}
+            <div className="bg-gradient-to-r from-[#0F172A] to-[#1E293B] px-6 py-5 flex items-center justify-between">
+              <div>
+                <p className="text-white/50 text-xs font-medium uppercase tracking-wider mb-1">Sample Plan</p>
+                <h3 className="text-white font-bold text-lg">Morning Beach Day · Couple</h3>
+              </div>
+              <div className="text-right">
+                <div className="text-[#F43F5E] font-black text-xl">4h</div>
+                <div className="text-white/40 text-xs">Sat · 08:00 start</div>
+              </div>
+            </div>
+
+            {/* Stops */}
+            <div className="px-6 py-5 space-y-0 divide-y divide-gray-50">
+
+              {/* Stop 1 */}
+              <div className="py-4 flex gap-4 items-start">
+                <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#F43F5E] text-white font-black text-sm flex items-center justify-center shadow-sm">1</div>
+                  <div className="w-0.5 h-10 bg-gray-100" />
+                </div>
+                <div className="flex-1 min-w-0 pt-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <p className="font-bold text-[#0F172A] text-sm">Murugan Idli Shop</p>
+                      <p className="text-gray-400 text-xs mt-0.5">Mylapore · 🍜 Breakfast</p>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-xs font-semibold text-[#0F172A]">08:00 – 08:45</p>
+                      <p className="text-gray-400 text-xs">45 min</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <span className="px-2 py-0.5 bg-yellow-50 border border-yellow-100 rounded-full text-xs text-yellow-700 font-medium">⭐ 4.5</span>
+                    <span className="px-2 py-0.5 bg-green-50 border border-green-100 rounded-full text-xs text-green-700 font-medium">Free parking</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Travel badge 1→2 */}
+              <div className="py-2 flex gap-4 items-center">
+                <div className="w-9 flex-shrink-0 flex justify-center">
+                  <div className="w-0.5 h-full bg-gray-100" />
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-100 rounded-xl text-xs text-amber-700 font-medium">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  12 min drive · Light traffic
+                </div>
+              </div>
+
+              {/* Stop 2 */}
+              <div className="py-4 flex gap-4 items-start">
+                <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#0F172A] text-white font-black text-sm flex items-center justify-center shadow-sm">2</div>
+                  <div className="w-0.5 h-10 bg-gray-100" />
+                </div>
+                <div className="flex-1 min-w-0 pt-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <p className="font-bold text-[#0F172A] text-sm">Kapaleeshwarar Temple</p>
+                      <p className="text-gray-400 text-xs mt-0.5">Mylapore · 🛕 Culture</p>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-xs font-semibold text-[#0F172A]">09:05 – 10:15</p>
+                      <p className="text-gray-400 text-xs">70 min</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <span className="px-2 py-0.5 bg-yellow-50 border border-yellow-100 rounded-full text-xs text-yellow-700 font-medium">⭐ 4.7</span>
+                    <span className="px-2 py-0.5 bg-gray-50 border border-gray-100 rounded-full text-xs text-gray-600 font-medium">Free entry</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Travel badge 2→3 */}
+              <div className="py-2 flex gap-4 items-center">
+                <div className="w-9 flex-shrink-0 flex justify-center">
+                  <div className="w-0.5 h-full bg-gray-100" />
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 border border-green-100 rounded-xl text-xs text-green-700 font-medium">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  18 min drive · Clear roads
+                </div>
+              </div>
+
+              {/* Stop 3 */}
+              <div className="py-4 flex gap-4 items-start">
+                <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-[#0F172A] text-white font-black text-sm flex items-center justify-center shadow-sm">3</div>
+                </div>
+                <div className="flex-1 min-w-0 pt-1">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <p className="font-bold text-[#0F172A] text-sm">Besant Nagar Beach</p>
+                      <p className="text-gray-400 text-xs mt-0.5">Besant Nagar · 🏖️ Beach</p>
+                    </div>
+                    <div className="text-right flex-shrink-0">
+                      <p className="text-xs font-semibold text-[#0F172A]">10:35 – 12:00</p>
+                      <p className="text-gray-400 text-xs">85 min</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-2">
+                    <span className="px-2 py-0.5 bg-yellow-50 border border-yellow-100 rounded-full text-xs text-yellow-700 font-medium">⭐ 4.4</span>
+                    <span className="px-2 py-0.5 bg-blue-50 border border-blue-100 rounded-full text-xs text-blue-700 font-medium">Romantic spot</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Plan footer */}
+            <div className="px-6 py-4 bg-gray-50/60 border-t border-gray-100 flex items-center justify-between">
+              <div className="flex gap-4 text-xs text-gray-500">
+                <span>⏱ 4h total</span>
+                <span>📍 3 stops</span>
+                <span>💰 Free–₹500</span>
+              </div>
+              <Link href="/plan" className="px-4 py-2 bg-[#F43F5E] text-white text-xs font-bold rounded-xl hover:bg-accent-light transition-colors chip-press">
+                Build Mine →
+              </Link>
+            </div>
           </div>
         </section>
 
