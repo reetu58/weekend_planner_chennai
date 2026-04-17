@@ -113,9 +113,15 @@ function pickBest(
     else if (dist < 10) combined += 10;
     else if (dist < 15) combined += 5;
 
-    // ── Same-category-as-previous penalty (avoid temple → temple) ──
+    // ── Same-category penalties ──
+    // Consecutive same category (temple → temple): strong penalty
     if (existing.length > 0 && item.place.category === existing[existing.length - 1].category) {
-      combined -= 25;
+      combined -= 30;
+    }
+    // Category already used anywhere in the plan: heavy penalty
+    // A real planner never sends you to two beaches or two temples in one day
+    if (existing.some(p => p.category === item.place.category)) {
+      combined -= 50;
     }
 
     // ── Food context bonuses ──
