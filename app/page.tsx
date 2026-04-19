@@ -6,51 +6,52 @@ import { TrafficSummary } from '../types';
 
 const TEMPLATES = [
   {
-    title: 'The ECR Surf & Chill', tag: 'Coastal', hours: '6 Hours',
-    desc: 'Hidden cafes, surf schools, and private beach stretches far from the city noise.',
+    title: 'Marina to Besant Nagar', tag: 'Coastal', hours: '6 Hours',
+    desc: "Start at Asia's longest beach, end the evening at Elliot's with sundowners and seafood.",
     vibes: 'chill,nature', categories: 'beaches,food',
-    photo: 'https://images.unsplash.com/photo-1596895111956-bf1cf0599ce5?auto=format&fit=crop&w=800&q=80',
+    photo: 'https://images.pexels.com/photos/982673/pexels-photo-982673.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
   },
   {
-    title: 'Mylapore Mess Trail', tag: 'Culinary', hours: '4 Hours',
-    desc: 'Filter coffee, crispy vadas, and legendary meals housed in heritage buildings.',
+    title: 'Mylapore Food Crawl', tag: 'Culinary', hours: '4 Hours',
+    desc: 'Filter kaapi at Murugan, crispy vadas at Ratna Café, and heritage meals in Brahmin agraharam lanes.',
     vibes: 'foodie,social', categories: 'food',
-    photo: 'https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?auto=format&fit=crop&w=800&q=80',
+    photo: 'https://images.pexels.com/photos/2223247/pexels-photo-2223247.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
   },
   {
-    title: 'Pallava Architecture', tag: 'Heritage', hours: '5 Hours',
-    desc: 'A structured dive into the 7th-century rock-cut temples, avoiding the peak tourist sun.',
+    title: 'Kapaleeshwarar & Fort Walk', tag: 'Heritage', hours: '5 Hours',
+    desc: 'Dravidian gopurams, Fort St. George, and the colonial quarter — all before the afternoon heat peaks.',
     vibes: 'cultural', categories: 'culture',
-    photo: 'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80',
-    filter: 'sepia-[.2]',
+    photo: 'https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
   },
   {
-    title: 'Rooftops & Jazz', tag: 'Date Night', hours: 'Evening',
-    desc: 'Curated high-end dining in Nungambakkam followed by live indie music bars.',
+    title: 'Nungambakkam Evening', tag: 'Date Night', hours: 'Evening',
+    desc: 'Rooftop dining, Chamiers Road cafes, and live indie acts in the heart of Namma Chennai.',
     vibes: 'romantic,chill', categories: 'food,nightlife',
-    photo: 'https://images.unsplash.com/photo-1551632811-561f5b13ae6d?auto=format&fit=crop&w=800&q=80',
+    photo: 'https://images.pexels.com/photos/30403595/pexels-photo-30403595.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
   },
   {
-    title: 'Estuary Kayaking', tag: 'Nature', hours: 'Morning',
-    desc: 'Early dawn paddle-boarding and bird watching along the Muttukadu backwaters.',
+    title: 'Muttukadu Backwaters', tag: 'Nature', hours: 'Morning',
+    desc: 'Early morning kayaking, bird watching, and a quiet breakfast before OMR fills up.',
     vibes: 'nature,chill', categories: 'nature',
-    photo: 'https://images.unsplash.com/photo-1533475250499-5285741b6ae6?auto=format&fit=crop&w=800&q=80',
+    photo: 'https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
   },
   {
-    title: 'The Adrenaline Loop', tag: 'Active', hours: '8 Hours',
-    desc: 'Go-karting, ATV tracks on the beach, and paintballing all routed for logical flow.',
+    title: 'ECR Adventure Run', tag: 'Active', hours: '8 Hours',
+    desc: 'Go-karting at MGM Dizzee World, ATV rides at Muttukadu, and a sunset dip at Covelong.',
     vibes: 'adventure,social', categories: 'entertainment',
-    photo: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=800&q=80',
-    filter: 'grayscale-[0.3]',
+    photo: 'https://images.pexels.com/photos/1293261/pexels-photo-1293261.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
   },
 ];
 
 const MARQUEE_ITEMS = [
-  { src: 'https://images.unsplash.com/photo-1590418386187-578aa0e7d0f9?auto=format&fit=crop&w=600&q=80', label: 'Marina Beach' },
-  { src: 'https://images.unsplash.com/photo-1621508682046-609b5521b585?auto=format&fit=crop&w=600&q=80', label: 'DakshinaChitra', filter: 'sepia-[.3]' },
-  { src: 'https://images.unsplash.com/photo-1601362624503-4f11467bd29b?auto=format&fit=crop&w=600&q=80', label: 'Mylapore Cafes' },
-  { src: 'https://images.unsplash.com/photo-1588693822181-e23eb00e6cd1?auto=format&fit=crop&w=600&q=80', label: 'ECR Drive' },
-  { src: 'https://images.unsplash.com/photo-1625834317135-2aa367cd27ad?auto=format&fit=crop&w=600&q=80', label: 'Mahabalipuram' },
+  { src: '/api/photo?q=Marina+Beach+Chennai', label: 'Marina Beach' },
+  { src: '/api/photo?q=Kapaleeshwarar+Temple+Mylapore', label: 'Kapaleeshwarar Temple' },
+  { src: '/api/photo?q=Fort+St+George+Chennai', label: 'Fort St. George' },
+  { src: '/api/photo?q=Mahabalipuram+Shore+Temple', label: 'Mahabalipuram' },
+  { src: '/api/photo?q=Semmozhi+Poonga+Chennai', label: 'Semmozhi Poonga' },
+  { src: '/api/photo?q=Besant+Nagar+Beach+Chennai', label: 'Besant Nagar Beach' },
+  { src: '/api/photo?q=DakshinaChitra+Chennai', label: 'DakshinaChitra' },
+  { src: '/api/photo?q=ECR+East+Coast+Road+Chennai', label: 'ECR Drive' },
 ];
 
 const SEVERITY_COLOR: Record<string, string> = {
@@ -79,10 +80,10 @@ export default function Home() {
       <section className="relative min-h-[95vh] flex items-center justify-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=2000&q=80"
-            alt="Chennai Architecture"
+            src="https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+            alt="Kapaleeshwarar Temple Chennai"
             className="w-full h-full object-cover opacity-30 select-none pointer-events-none"
-            style={{ filter: 'sepia(0.2) hue-rotate(190deg)' }}
+            style={{ filter: 'sepia(0.15) hue-rotate(10deg)' }}
             loading="eager"
           />
         </div>
@@ -161,11 +162,11 @@ export default function Home() {
         <div className="marquee-container">
           <div className="marquee-track">
             {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((p, i) => (
-              <div key={i} className={`flex-shrink-0 w-72 h-40 rounded-2xl overflow-hidden mx-3 group relative cursor-pointer`}>
+              <div key={i} className="flex-shrink-0 w-72 h-40 rounded-2xl overflow-hidden mx-3 group relative cursor-pointer">
                 <img
                   src={p.src}
                   alt={p.label}
-                  className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-110${p.filter ? ` filter ${p.filter}` : ''}`}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                   onError={(e) => {
                     const t = e.target as HTMLImageElement;
@@ -468,8 +469,8 @@ export default function Home() {
       <section className="py-12 px-6 pb-24">
         <div className="max-w-6xl mx-auto bg-[#1E293B] rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col items-center text-center border border-white/10 shadow-2xl">
           <img
-            src="https://images.unsplash.com/photo-1601362624503-4f11467bd29b?auto=format&fit=crop&w=1600&q=80"
-            alt="Chennai Night Drive"
+            src="https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
+            alt="Chennai ECR sunset"
             className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
             loading="lazy"
           />
