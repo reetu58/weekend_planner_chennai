@@ -271,7 +271,7 @@ export default function MoodPage() {
         <div className="mb-16">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#F43F5E]/70 mb-4">Chennai · Weekend Discovery</p>
           <h1 className="font-playfair text-6xl md:text-8xl lg:text-[7rem] font-black leading-[0.95] tracking-tight text-white mb-6">
-            Pick Your<br /><em className="not-italic text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Mood.</em>
+            Choose Your<br /><em className="not-italic text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Escape.</em>
           </h1>
           <p className="text-slate-400 text-lg max-w-lg leading-relaxed">
             Six ways to spend a Chennai weekend. Each one mapped, timed, and ready to go.
@@ -375,7 +375,7 @@ export default function MoodPage() {
                   className="flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors mb-12 group"
                 >
                   <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                  Back to moods
+                  Back to escapes
                 </button>
 
                 {/* Tease / intro */}
