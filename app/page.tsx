@@ -117,7 +117,7 @@ export default function Home() {
               className="group px-8 py-4 rounded-full bg-[#F43F5E] text-white font-bold text-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(244,63,94,0.4)] btn-shine chip-press"
             >
               <span className="flex items-center gap-2">
-                Generate Itinerary
+                Start Planning
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
               </span>
             </Link>
@@ -487,7 +487,7 @@ export default function Home() {
               href="/plan"
               className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full bg-[#F43F5E] hover:bg-[#E11D48] text-white font-bold text-lg transition-all shadow-[0_0_40px_rgba(244,63,94,0.3)] hover:shadow-[0_0_60px_rgba(244,63,94,0.5)] hover:-translate-y-1 w-full sm:w-auto btn-shine chip-press"
             >
-              Generate My Itinerary
+              Start Planning
             </Link>
             <p className="text-slate-400 text-sm mt-6">100% Free · No account needed</p>
           </div>
