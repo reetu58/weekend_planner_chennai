@@ -54,13 +54,24 @@ const MARQUEE_ITEMS = [
   { src: '/api/photo?q=ECR+East+Coast+Road+Chennai', label: 'ECR Drive' },
 ];
 
-const SEVERITY_COLOR: Record<string, string> = {
-  clear: 'bg-green-500', light: 'bg-yellow-400', moderate: 'bg-orange-500',
+const SEVERITY_ORDER: Record<string, number> = {
+  standstill: 5, heavy: 4, moderate: 3, light: 2, clear: 1,
+};
+const SEVERITY_DOT: Record<string, string> = {
+  clear: 'bg-emerald-400', light: 'bg-yellow-400', moderate: 'bg-orange-500',
   heavy: 'bg-red-500', standstill: 'bg-red-700',
 };
+const SEVERITY_LABEL: Record<string, string> = {
+  clear: 'Clear', light: 'Light', moderate: 'Moderate',
+  heavy: 'Heavy', standstill: 'Standstill',
+};
 const SEVERITY_TEXT: Record<string, string> = {
-  clear: 'text-green-400', light: 'text-yellow-400', moderate: 'text-orange-400',
+  clear: 'text-emerald-400', light: 'text-yellow-300', moderate: 'text-orange-400',
   heavy: 'text-red-400', standstill: 'text-red-500',
+};
+const SEVERITY_BAR: Record<string, string> = {
+  clear: 'bg-emerald-400/30', light: 'bg-yellow-400/30', moderate: 'bg-orange-500/30',
+  heavy: 'bg-red-500/30', standstill: 'bg-red-700/30',
 };
 
 export default function Home() {
@@ -180,35 +191,53 @@ export default function Home() {
             <WeatherWidget />
           </div>
 
-          <div className="rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.2)] p-5 transition-transform hover:-translate-y-1 w-full md:w-80">
-            <div className="flex flex-col">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1 flex items-center gap-2">
+          <div className="rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.2)] p-5 w-full md:w-80">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
                 </span>
-                Traffic now{trafficSummary && !trafficSummary.isLive ? ' (est.)' : ''}
+                Traffic now
               </span>
-              {trafficSummary ? (
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {trafficSummary.corridors.slice(0, 3).map((c) => (
-                    <span
-                      key={c.name}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-white/10 bg-white/5 ${SEVERITY_TEXT[c.severity] ?? 'text-slate-300'}`}
-                    >
-                      <span className={`w-2 h-2 rounded-full ${SEVERITY_COLOR[c.severity] ?? 'bg-slate-400'}`} />
-                      {c.name}
-                      {c.avgDelay > 0 && <span className="text-slate-500"> +{c.avgDelay}m</span>}
-                    </span>
-                  ))}
-                  {trafficSummary.corridors.length === 0 && (
-                    <span className="text-sm text-emerald-400 font-medium mt-0.5">All corridors clear</span>
-                  )}
-                </div>
-              ) : (
-                <p className="text-sm text-slate-400 mt-2">Checking OMR / ECR / Adyar…</p>
+              {trafficSummary && (
+                <span className="text-[10px] text-slate-600 font-medium uppercase tracking-wider">
+                  {trafficSummary.isLive ? 'live' : 'est.'}
+                </span>
               )}
             </div>
+
+            {trafficSummary ? (() => {
+              const sorted = [...trafficSummary.corridors]
+                .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))
+                .slice(0, 5);
+              const worst = sorted[0];
+              return (
+                <div className="space-y-1">
+                  {sorted.map((c, i) => (
+                    <div key={c.name} className={`flex items-center gap-3 px-3 py-2 rounded-xl ${i === 0 ? SEVERITY_BAR[c.severity] + ' border border-white/5' : ''}`}>
+                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${SEVERITY_DOT[c.severity] ?? 'bg-slate-400'}`} />
+                      <span className={`text-sm font-semibold flex-1 ${i === 0 ? 'text-white' : 'text-slate-300'}`}>{c.name}</span>
+                      <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity] ?? 'text-slate-400'}`}>
+                        {SEVERITY_LABEL[c.severity]}
+                        {c.avgDelay > 0 && <span className="font-normal text-slate-500 ml-1">+{c.avgDelay}m</span>}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              );
+            })() : (
+              <div className="space-y-2 mt-1">
+                {['OMR', 'ECR', 'T. Nagar', 'Anna Salai'].map(name => (
+                  <div key={name} className="flex items-center gap-3 px-3 py-2">
+                    <span className="w-2 h-2 rounded-full bg-white/10 flex-shrink-0" />
+                    <span className="text-sm text-slate-600 flex-1">{name}</span>
+                    <span className="text-xs text-slate-700">—</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
