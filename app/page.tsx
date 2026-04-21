@@ -192,79 +192,97 @@ export default function Home() {
           <WeatherWidget />
 
           {/* Traffic */}
-          <div className="rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.2)] p-5 overflow-hidden relative">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
-                </span>
-                Road conditions
-              </span>
-              {trafficSummary && (
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${trafficSummary.isLive ? 'text-emerald-400' : 'text-slate-600'}`}>
-                  {trafficSummary.isLive ? 'Live' : 'Est.'}
-                </span>
-              )}
-            </div>
+          {(() => {
+            const sorted = trafficSummary
+              ? [...trafficSummary.corridors]
+                  .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))
+                  .slice(0, 5)
+              : null;
+            const worst = sorted?.[0];
 
-            {trafficSummary ? (() => {
-              const sorted = [...trafficSummary.corridors]
-                .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))
-                .slice(0, 5);
+            const TRAFFIC_ACCENT: Record<string, { text: string; bg: string; glow: string }> = {
+              clear:      { text: 'text-emerald-400', bg: 'bg-emerald-500/10', glow: 'shadow-[0_0_30px_rgba(52,211,153,0.12)]' },
+              light:      { text: 'text-yellow-300',  bg: 'bg-yellow-500/10',  glow: 'shadow-[0_0_30px_rgba(251,191,36,0.12)]' },
+              moderate:   { text: 'text-orange-400',  bg: 'bg-orange-500/10',  glow: 'shadow-[0_0_30px_rgba(249,115,22,0.12)]' },
+              heavy:      { text: 'text-red-400',      bg: 'bg-red-500/10',     glow: 'shadow-[0_0_30px_rgba(239,68,68,0.12)]' },
+              standstill: { text: 'text-red-500',      bg: 'bg-red-700/10',     glow: 'shadow-[0_0_30px_rgba(185,28,28,0.12)]' },
+            };
 
-              const FILL: Record<string, number> = { clear: 15, light: 35, moderate: 58, heavy: 78, standstill: 100 };
+            const accent = TRAFFIC_ACCENT[trafficSummary?.overall ?? 'clear'];
 
-              return (
-                <div className="space-y-3">
-                  {sorted.map((c, i) => (
-                    <div key={c.name}>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className={`text-sm font-semibold ${i === 0 ? 'text-white' : 'text-slate-300'}`}>
-                          {c.name}
-                          {i === 0 && (
-                            <span className="ml-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">worst now</span>
-                          )}
-                        </span>
-                        <div className="flex items-center gap-2">
-                          {c.avgDelay > 0 && (
-                            <span className="text-[11px] text-slate-500 font-medium">+{c.avgDelay}m</span>
-                          )}
-                          <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity]}`}>
-                            {SEVERITY_LABEL[c.severity]}
-                          </span>
-                        </div>
-                      </div>
-                      {/* Heat bar */}
-                      <div className="h-1.5 w-full rounded-full bg-white/5 overflow-hidden">
-                        <div
-                          className={`h-full rounded-full transition-all duration-700 ${
-                            c.severity === 'clear' ? 'bg-emerald-400' :
-                            c.severity === 'light' ? 'bg-yellow-400' :
-                            c.severity === 'moderate' ? 'bg-orange-500' :
-                            c.severity === 'heavy' ? 'bg-red-500' : 'bg-red-700'
-                          }`}
-                          style={{ width: `${FILL[c.severity] ?? 50}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              );
-            })() : (
-              <div className="space-y-3">
-                {['OMR', 'ECR', 'T. Nagar', 'Anna Salai', 'Mount Road'].map(name => (
-                  <div key={name}>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-sm text-slate-600">{name}</span>
-                    </div>
-                    <div className="h-1.5 w-full rounded-full bg-white/5 animate-pulse" />
+            return (
+              <div className={`relative rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md p-5 overflow-hidden ${accent.glow}`}>
+                {/* Ambient wash matching overall severity */}
+                <div className={`absolute inset-0 ${accent.bg} pointer-events-none`} />
+
+                <div className="relative">
+                  {/* Header — matches weather widget */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
+                      </span>
+                      Road conditions
+                    </span>
+                    <span className={`text-[10px] font-bold uppercase tracking-wider ${trafficSummary?.isLive ? 'text-emerald-400' : 'text-slate-600'}`}>
+                      {trafficSummary ? (trafficSummary.isLive ? 'Live' : 'Est.') : '—'}
+                    </span>
                   </div>
-                ))}
+
+                  {/* Hero — mirrors weather's icon + big text layout */}
+                  <div className="flex items-center gap-4 mb-5">
+                    <div className={`flex-shrink-0 ${accent.text}`}>
+                      <svg viewBox="0 0 64 64" className="w-14 h-14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="22" y="8" width="20" height="34" rx="4" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2"/>
+                        <circle cx="32" cy="18" r="4" fill="currentColor" opacity="0.5"/>
+                        <circle cx="32" cy="30" r="4" fill="currentColor" opacity="0.5"/>
+                        <circle cx="32" cy="42" r="4" fill={
+                          (trafficSummary?.overall ?? 'clear') === 'clear' ? '#34D399' :
+                          (trafficSummary?.overall ?? 'clear') === 'light' ? '#FBBF24' :
+                          (trafficSummary?.overall ?? 'clear') === 'moderate' ? '#F97316' : '#EF4444'
+                        } opacity="0.9"/>
+                        <line x1="20" y1="54" x2="44" y2="54" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity="0.3"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <div className={`text-4xl font-black leading-none ${trafficSummary ? accent.text : 'text-slate-600'}`}>
+                        {trafficSummary ? SEVERITY_LABEL[trafficSummary.overall] : '—'}
+                      </div>
+                      <p className="text-sm text-slate-400 mt-1">
+                        {worst ? `Worst: ${worst.name}` : 'Checking corridors…'}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Corridor grid — mirrors weather's stats grid */}
+                  <div className="grid grid-cols-1 gap-1.5">
+                    {sorted ? sorted.map(c => (
+                      <div key={c.name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5">
+                        <span className={`w-2 h-2 rounded-full flex-shrink-0 ${SEVERITY_DOT[c.severity]}`} />
+                        <span className="text-sm text-slate-300 flex-1 font-medium">{c.name}</span>
+                        <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity]}`}>{SEVERITY_LABEL[c.severity]}</span>
+                        {c.avgDelay > 0 && <span className="text-[11px] text-slate-600">+{c.avgDelay}m</span>}
+                      </div>
+                    )) : ['OMR', 'ECR', 'T. Nagar', 'Anna Salai', 'Mount Road'].map(name => (
+                      <div key={name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5 animate-pulse">
+                        <span className="w-2 h-2 rounded-full bg-white/10 flex-shrink-0" />
+                        <span className="text-sm text-slate-700 flex-1">{name}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Alert — mirrors weather alert strip */}
+                  {trafficSummary && (trafficSummary.overall === 'heavy' || trafficSummary.overall === 'standstill') && (
+                    <div className="mt-3 px-3 py-2 rounded-xl text-xs font-medium flex items-center gap-2 bg-red-500/10 text-red-400 border border-red-500/20">
+                      <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
+                      Heavy congestion — plan to leave before 8 AM or after 8 PM
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
+            );
+          })()}
 
         </div>
       </section>

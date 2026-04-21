@@ -94,11 +94,16 @@ export default function WeatherWidget() {
       <div className={`absolute inset-0 ${accent.bg} pointer-events-none`} />
 
       <div className="relative">
-        {/* Top row: city + live badge */}
+        {/* Top row: city + live badge — same structure as traffic card */}
         <div className="flex items-center justify-between mb-4">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Chennai</span>
-          <span className={`text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 ${weather.isLive ? 'text-emerald-400' : 'text-slate-600'}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${weather.isLive ? 'bg-emerald-400' : 'bg-slate-600'}`} />
+          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
+            </span>
+            Chennai weather
+          </span>
+          <span className={`text-[10px] font-bold uppercase tracking-wider ${weather.isLive ? 'text-emerald-400' : 'text-slate-600'}`}>
             {weather.isLive ? 'Live' : 'Est.'}
           </span>
         </div>
