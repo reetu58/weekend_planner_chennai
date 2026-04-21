@@ -186,12 +186,13 @@ export default function Home() {
 
       {/* ===== WEATHER + TRAFFIC ===== */}
       <section className="relative -mt-8 z-20 max-w-5xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <div className="rounded-2xl overflow-hidden border border-white/8 bg-white/[0.03] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.2)] transition-transform hover:-translate-y-1 w-full md:w-80">
-            <WeatherWidget />
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-          <div className="rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.2)] p-5 w-full md:w-80">
+          {/* Weather */}
+          <WeatherWidget />
+
+          {/* Traffic */}
+          <div className="rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.2)] p-5 overflow-hidden relative">
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
@@ -199,11 +200,11 @@ export default function Home() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
                 </span>
-                Traffic now
+                Road conditions
               </span>
               {trafficSummary && (
-                <span className="text-[10px] text-slate-600 font-medium uppercase tracking-wider">
-                  {trafficSummary.isLive ? 'live' : 'est.'}
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${trafficSummary.isLive ? 'text-emerald-400' : 'text-slate-600'}`}>
+                  {trafficSummary.isLive ? 'Live' : 'Est.'}
                 </span>
               )}
             </div>
@@ -212,33 +213,59 @@ export default function Home() {
               const sorted = [...trafficSummary.corridors]
                 .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))
                 .slice(0, 5);
-              const worst = sorted[0];
+
+              const FILL: Record<string, number> = { clear: 15, light: 35, moderate: 58, heavy: 78, standstill: 100 };
+
               return (
-                <div className="space-y-1">
+                <div className="space-y-3">
                   {sorted.map((c, i) => (
-                    <div key={c.name} className={`flex items-center gap-3 px-3 py-2 rounded-xl ${i === 0 ? SEVERITY_BAR[c.severity] + ' border border-white/5' : ''}`}>
-                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${SEVERITY_DOT[c.severity] ?? 'bg-slate-400'}`} />
-                      <span className={`text-sm font-semibold flex-1 ${i === 0 ? 'text-white' : 'text-slate-300'}`}>{c.name}</span>
-                      <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity] ?? 'text-slate-400'}`}>
-                        {SEVERITY_LABEL[c.severity]}
-                        {c.avgDelay > 0 && <span className="font-normal text-slate-500 ml-1">+{c.avgDelay}m</span>}
-                      </span>
+                    <div key={c.name}>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className={`text-sm font-semibold ${i === 0 ? 'text-white' : 'text-slate-300'}`}>
+                          {c.name}
+                          {i === 0 && (
+                            <span className="ml-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">worst now</span>
+                          )}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          {c.avgDelay > 0 && (
+                            <span className="text-[11px] text-slate-500 font-medium">+{c.avgDelay}m</span>
+                          )}
+                          <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity]}`}>
+                            {SEVERITY_LABEL[c.severity]}
+                          </span>
+                        </div>
+                      </div>
+                      {/* Heat bar */}
+                      <div className="h-1.5 w-full rounded-full bg-white/5 overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all duration-700 ${
+                            c.severity === 'clear' ? 'bg-emerald-400' :
+                            c.severity === 'light' ? 'bg-yellow-400' :
+                            c.severity === 'moderate' ? 'bg-orange-500' :
+                            c.severity === 'heavy' ? 'bg-red-500' : 'bg-red-700'
+                          }`}
+                          style={{ width: `${FILL[c.severity] ?? 50}%` }}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
               );
             })() : (
-              <div className="space-y-2 mt-1">
-                {['OMR', 'ECR', 'T. Nagar', 'Anna Salai'].map(name => (
-                  <div key={name} className="flex items-center gap-3 px-3 py-2">
-                    <span className="w-2 h-2 rounded-full bg-white/10 flex-shrink-0" />
-                    <span className="text-sm text-slate-600 flex-1">{name}</span>
-                    <span className="text-xs text-slate-700">—</span>
+              <div className="space-y-3">
+                {['OMR', 'ECR', 'T. Nagar', 'Anna Salai', 'Mount Road'].map(name => (
+                  <div key={name}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-sm text-slate-600">{name}</span>
+                    </div>
+                    <div className="h-1.5 w-full rounded-full bg-white/5 animate-pulse" />
                   </div>
                 ))}
               </div>
             )}
           </div>
+
         </div>
       </section>
 
