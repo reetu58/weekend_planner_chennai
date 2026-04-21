@@ -298,6 +298,9 @@ html { scroll-behavior: smooth; }
 .bg-sand { background: var(--bg); }
 .bg-accent-light { background: var(--accent-hover); }
 
+/* ===== EDITORIAL SERIF ===== */
+.font-playfair { font-family: 'Playfair Display', Georgia, serif; }
+
 /* ===== RESPONSIVE HELPERS ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
