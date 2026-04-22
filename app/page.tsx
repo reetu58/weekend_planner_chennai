@@ -58,7 +58,7 @@ const SEVERITY_ORDER: Record<string, number> = {
   standstill: 5, heavy: 4, moderate: 3, light: 2, clear: 1,
 };
 const SEVERITY_DOT: Record<string, string> = {
-  clear: 'bg-emerald-400', light: 'bg-yellow-400', moderate: 'bg-orange-500',
+  clear: 'bg-emerald-500', light: 'bg-yellow-500', moderate: 'bg-orange-500',
   heavy: 'bg-red-500', standstill: 'bg-red-700',
 };
 const SEVERITY_LABEL: Record<string, string> = {
@@ -66,12 +66,8 @@ const SEVERITY_LABEL: Record<string, string> = {
   heavy: 'Heavy', standstill: 'Standstill',
 };
 const SEVERITY_TEXT: Record<string, string> = {
-  clear: 'text-emerald-400', light: 'text-yellow-300', moderate: 'text-orange-400',
-  heavy: 'text-red-400', standstill: 'text-red-500',
-};
-const SEVERITY_BAR: Record<string, string> = {
-  clear: 'bg-emerald-400/30', light: 'bg-yellow-400/30', moderate: 'bg-orange-500/30',
-  heavy: 'bg-red-500/30', standstill: 'bg-red-700/30',
+  clear: 'text-emerald-600', light: 'text-yellow-600', moderate: 'text-orange-600',
+  heavy: 'text-red-600', standstill: 'text-red-700',
 };
 
 export default function Home() {
@@ -85,10 +81,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-[#FAFAF9] overflow-x-hidden">
+    <div className="min-h-screen bg-white text-[#0F172A] overflow-x-hidden">
 
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[95vh] flex items-center justify-center pt-20 overflow-hidden">
+      <section className="relative min-h-[95vh] bg-[#0F172A] flex items-center justify-center pt-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
@@ -103,7 +99,6 @@ export default function Home() {
         <div className="hero-dots absolute inset-0 opacity-20" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center text-center mt-12">
-          {/* Live badge */}
           <div className="animate-fade-in-down inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F43F5E]/10 border border-[#F43F5E]/30 text-[#FB7185] text-xs font-bold uppercase tracking-widest mb-8 shadow-[0_0_20px_rgba(244,63,94,0.15)] backdrop-blur-md">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FB7185] opacity-75" />
@@ -118,10 +113,9 @@ export default function Home() {
           </h1>
 
           <p className="animate-fade-in-up text-lg md:text-xl text-slate-400 max-w-2xl mb-12 font-medium leading-relaxed" style={{ animationDelay: '0.1s' }}>
-            64 handpicked Chennai spots, ordered around live OMR/ECR traffic. Pick your mood and start time — we sequence the rest.
+            64 handpicked Chennai spots, ordered around live OMR/ECR traffic. Pick your escape and start time — we sequence the rest.
           </p>
 
-          {/* CTA row */}
           <div className="animate-fade-in-up flex flex-col sm:flex-row items-center gap-5 mb-16" style={{ animationDelay: '0.2s' }}>
             <Link
               href="/plan"
@@ -135,7 +129,6 @@ export default function Home() {
             <span className="text-slate-500 text-sm">Free · No account needed</span>
           </div>
 
-          {/* Stats bar */}
           <div className="animate-fade-in-up w-full max-w-3xl grid grid-cols-3 gap-px bg-white/10 rounded-2xl p-px backdrop-blur-md overflow-hidden" style={{ animationDelay: '0.35s' }}>
             <div className="bg-[#0F172A]/80 px-4 py-4 backdrop-blur-xl flex flex-col items-center justify-center text-center">
               <span className="text-3xl font-black text-white">64+</span>
@@ -158,14 +151,14 @@ export default function Home() {
       </section>
 
       {/* ===== PHOTO MARQUEE ===== */}
-      <section className="relative py-12 border-y border-white/5 bg-[#0A1120]/50 overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0F172A] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0F172A] to-transparent z-10 pointer-events-none" />
+      <section className="relative py-12 border-y border-slate-100 bg-slate-50 overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
 
         <div className="marquee-container">
           <div className="marquee-track">
             {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((p, i) => (
-              <div key={i} className="flex-shrink-0 w-72 h-40 rounded-2xl overflow-hidden mx-3 group relative cursor-pointer">
+              <div key={i} className="flex-shrink-0 w-72 h-40 rounded-2xl overflow-hidden mx-3 group relative cursor-pointer shadow-md">
                 <img
                   src={p.src}
                   alt={p.label}
@@ -176,8 +169,8 @@ export default function Home() {
                     t.src = `https://placehold.co/600x300/1E293B/F43F5E?text=${encodeURIComponent(p.label)}`;
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/40 to-transparent" />
-                <span className="absolute bottom-4 left-4 font-bold text-white text-lg">{p.label}</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent" />
+                <span className="absolute bottom-4 left-4 font-bold text-white text-base">{p.label}</span>
               </div>
             ))}
           </div>
@@ -185,7 +178,7 @@ export default function Home() {
       </section>
 
       {/* ===== WEATHER + TRAFFIC ===== */}
-      <section className="relative -mt-8 z-20 max-w-5xl mx-auto px-6">
+      <section className="py-16 px-6 max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           {/* Weather */}
@@ -200,81 +193,76 @@ export default function Home() {
               : null;
             const worst = sorted?.[0];
 
-            const TRAFFIC_ACCENT: Record<string, { text: string; bg: string; glow: string }> = {
-              clear:      { text: 'text-emerald-400', bg: 'bg-emerald-500/10', glow: 'shadow-[0_0_30px_rgba(52,211,153,0.12)]' },
-              light:      { text: 'text-yellow-300',  bg: 'bg-yellow-500/10',  glow: 'shadow-[0_0_30px_rgba(251,191,36,0.12)]' },
-              moderate:   { text: 'text-orange-400',  bg: 'bg-orange-500/10',  glow: 'shadow-[0_0_30px_rgba(249,115,22,0.12)]' },
-              heavy:      { text: 'text-red-400',      bg: 'bg-red-500/10',     glow: 'shadow-[0_0_30px_rgba(239,68,68,0.12)]' },
-              standstill: { text: 'text-red-500',      bg: 'bg-red-700/10',     glow: 'shadow-[0_0_30px_rgba(185,28,28,0.12)]' },
+            const TRAFFIC_ACCENT: Record<string, { text: string; bg: string }> = {
+              clear:      { text: 'text-emerald-600', bg: 'bg-emerald-50' },
+              light:      { text: 'text-yellow-600',  bg: 'bg-yellow-50' },
+              moderate:   { text: 'text-orange-600',  bg: 'bg-orange-50' },
+              heavy:      { text: 'text-red-600',     bg: 'bg-red-50' },
+              standstill: { text: 'text-red-700',     bg: 'bg-red-50' },
             };
 
             const accent = TRAFFIC_ACCENT[trafficSummary?.overall ?? 'clear'];
 
             return (
-              <div className={`relative rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md p-5 overflow-hidden ${accent.glow}`}>
-                {/* Ambient wash matching overall severity */}
-                <div className={`absolute inset-0 ${accent.bg} pointer-events-none`} />
+              <div className="relative rounded-2xl border border-slate-200 bg-white shadow-sm p-5 overflow-hidden">
+                <div className={`absolute inset-0 ${accent.bg} opacity-50 pointer-events-none`} />
 
                 <div className="relative">
-                  {/* Header — matches weather widget */}
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
                       <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
                       </span>
                       Road conditions
                     </span>
-                    <span className={`text-[10px] font-bold uppercase tracking-wider ${trafficSummary?.isLive ? 'text-emerald-400' : 'text-slate-600'}`}>
+                    <span className={`text-[10px] font-bold uppercase tracking-wider ${trafficSummary?.isLive ? 'text-emerald-600' : 'text-slate-400'}`}>
                       {trafficSummary ? (trafficSummary.isLive ? 'Live' : 'Est.') : '—'}
                     </span>
                   </div>
 
-                  {/* Hero — mirrors weather's icon + big text layout */}
                   <div className="flex items-center gap-4 mb-5">
                     <div className={`flex-shrink-0 ${accent.text}`}>
                       <svg viewBox="0 0 64 64" className="w-14 h-14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="22" y="8" width="20" height="34" rx="4" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2"/>
-                        <circle cx="32" cy="18" r="4" fill="currentColor" opacity="0.5"/>
-                        <circle cx="32" cy="30" r="4" fill="currentColor" opacity="0.5"/>
+                        <circle cx="32" cy="18" r="4" fill="currentColor" opacity="0.4"/>
+                        <circle cx="32" cy="30" r="4" fill="currentColor" opacity="0.4"/>
                         <circle cx="32" cy="42" r="4" fill={
-                          (trafficSummary?.overall ?? 'clear') === 'clear' ? '#34D399' :
-                          (trafficSummary?.overall ?? 'clear') === 'light' ? '#FBBF24' :
-                          (trafficSummary?.overall ?? 'clear') === 'moderate' ? '#F97316' : '#EF4444'
+                          (trafficSummary?.overall ?? 'clear') === 'clear' ? '#16a34a' :
+                          (trafficSummary?.overall ?? 'clear') === 'light' ? '#ca8a04' :
+                          (trafficSummary?.overall ?? 'clear') === 'moderate' ? '#ea580c' : '#dc2626'
                         } opacity="0.9"/>
                         <line x1="20" y1="54" x2="44" y2="54" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity="0.3"/>
                       </svg>
                     </div>
                     <div>
-                      <div className={`text-4xl font-black leading-none ${trafficSummary ? accent.text : 'text-slate-600'}`}>
+                      <div className={`text-4xl font-black leading-none ${trafficSummary ? accent.text : 'text-slate-300'}`}>
                         {trafficSummary ? SEVERITY_LABEL[trafficSummary.overall] : '—'}
                       </div>
-                      <p className="text-sm text-slate-400 mt-1">
+                      <p className="text-sm text-slate-500 mt-1">
                         {worst ? `Worst: ${worst.name}` : 'Checking corridors…'}
                       </p>
                     </div>
                   </div>
 
-                  {/* Corridor grid — mirrors weather's stats grid */}
                   <div className="grid grid-cols-1 gap-1.5">
                     {sorted ? sorted.map(c => (
-                      <div key={c.name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5">
+                      <div key={c.name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white border border-slate-100">
                         <span className={`w-2 h-2 rounded-full flex-shrink-0 ${SEVERITY_DOT[c.severity]}`} />
-                        <span className="text-sm text-slate-300 flex-1 font-medium">{c.name}</span>
+                        <span className="text-sm text-slate-700 flex-1 font-medium">{c.name}</span>
                         <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity]}`}>{SEVERITY_LABEL[c.severity]}</span>
-                        {c.avgDelay > 0 && <span className="text-[11px] text-slate-600">+{c.avgDelay}m</span>}
+                        {c.avgDelay > 0 && <span className="text-[11px] text-slate-400">+{c.avgDelay}m</span>}
                       </div>
                     )) : ['OMR', 'ECR', 'T. Nagar', 'Anna Salai', 'Mount Road'].map(name => (
-                      <div key={name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5 animate-pulse">
-                        <span className="w-2 h-2 rounded-full bg-white/10 flex-shrink-0" />
-                        <span className="text-sm text-slate-700 flex-1">{name}</span>
+                      <div key={name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white border border-slate-100 animate-pulse">
+                        <span className="w-2 h-2 rounded-full bg-slate-200 flex-shrink-0" />
+                        <span className="text-sm text-slate-400 flex-1">{name}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Alert — mirrors weather alert strip */}
                   {trafficSummary && (trafficSummary.overall === 'heavy' || trafficSummary.overall === 'standstill') && (
-                    <div className="mt-3 px-3 py-2 rounded-xl text-xs font-medium flex items-center gap-2 bg-red-500/10 text-red-400 border border-red-500/20">
+                    <div className="mt-3 px-3 py-2 rounded-xl text-xs font-medium flex items-center gap-2 bg-red-50 text-red-600 border border-red-200">
                       <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
                       Heavy congestion — plan to leave before 8 AM or after 8 PM
                     </div>
@@ -287,11 +275,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== QUICK TEMPLATES ===== */}
+      {/* ===== CHOOSE YOUR ESCAPE ===== */}
       <section id="templates" className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">Choose your day.</h2>
-          <p className="text-slate-400 text-lg max-w-xl mx-auto">6 routes across Chennai, each timed around traffic corridors.</p>
+        <div className="mb-16">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#F43F5E] mb-4">Chennai · Weekend Discovery</p>
+          <h2 className="font-playfair text-5xl md:text-6xl font-black tracking-tight text-[#0F172A] mb-4">
+            Choose Your Escape.
+          </h2>
+          <p className="text-slate-500 text-lg max-w-xl">Six ways to spend your Chennai weekend, each timed around traffic corridors.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -311,7 +302,7 @@ export default function Home() {
                   el.src = `https://placehold.co/600x750/1E293B/F43F5E?text=${encodeURIComponent(t.title)}`;
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/50 to-transparent" />
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#F43F5E]/50 rounded-3xl transition-colors duration-300" />
 
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
@@ -334,20 +325,20 @@ export default function Home() {
       </section>
 
       {/* ===== SAMPLE PLAN PREVIEW ===== */}
-      <section id="preview" className="py-24 relative overflow-hidden bg-[#1E293B]/30 border-y border-white/5">
+      <section id="preview" className="py-24 relative overflow-hidden bg-slate-50 border-y border-slate-100">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#F43F5E]/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
 
           {/* Copy — 5 cols */}
           <div className="lg:col-span-5 order-2 lg:order-1">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#F43F5E]/20 text-[#F43F5E] mb-6 border border-[#F43F5E]/30">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#F43F5E]/10 text-[#F43F5E] mb-6 border border-[#F43F5E]/20">
               <svg viewBox="0 0 256 256" className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg">
                 <path d="M208,104a32.06,32.06,0,0,0-30.56,22.62L142,112.32A48.09,48.09,0,0,0,96,72.57V55.43a32,32,0,1,0-16,0V72.57a48,48,0,0,0,0,110.86v17.14a32,32,0,1,0,16,0V183.43A48.09,48.09,0,0,0,142,143.68l35.44-14.3A32,32,0,1,0,208,104ZM72,40a16,16,0,1,1,16,16A16,16,0,0,1,72,40Zm32,176a16,16,0,1,1-16-16A16,16,0,0,1,104,216Zm24-48a32,32,0,1,1,32-32A32,32,0,0,1,128,168Zm80-48a16,16,0,1,1,16-16A16,16,0,0,1,208,120Z" />
               </svg>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">Ordered by geography, not guesswork.</h2>
-            <p className="text-slate-300 text-lg mb-8 leading-relaxed">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-6">Ordered by geography, not guesswork.</h2>
+            <p className="text-slate-500 text-lg mb-8 leading-relaxed">
               Stops are sequenced to cut across Chennai efficiently — accounting for travel time, parking, and when each corridor gets heavy. We tell you exactly when to leave.
             </p>
 
@@ -356,29 +347,29 @@ export default function Home() {
                 { title: 'Parking buffer', desc: 'Adds 15–30 min at busy spots like Besant Nagar Beach or Marina.' },
                 { title: 'Heat scheduling', desc: 'Moves outdoor stops earlier when afternoon temps climb past 35°C.' },
               ].map(item => (
-                <li key={item.title} className="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.03] border border-white/8 backdrop-blur-sm">
-                  <div className="text-[#FB7185] mt-1 flex-shrink-0">
+                <li key={item.title} className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                  <div className="text-[#F43F5E] mt-1 flex-shrink-0">
                     <svg viewBox="0 0 256 256" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
                       <path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-bold text-white">{item.title}</h4>
-                    <p className="text-sm text-slate-400 mt-1">{item.desc}</p>
+                    <h4 className="font-bold text-[#0F172A]">{item.title}</h4>
+                    <p className="text-sm text-slate-500 mt-1">{item.desc}</p>
                   </div>
                 </li>
               ))}
             </ul>
 
-            <Link href="/plan" className="inline-flex items-center gap-2 text-[#F43F5E] font-bold hover:text-[#FB7185] transition-colors">
+            <Link href="/plan" className="inline-flex items-center gap-2 text-[#F43F5E] font-bold hover:text-[#E11D48] transition-colors">
               Plan my weekend
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
             </Link>
           </div>
 
-          {/* Itinerary card — 7 cols */}
+          {/* Itinerary card — 7 cols, kept dark as product mockup */}
           <div className="lg:col-span-7 order-1 lg:order-2 flex justify-center lg:justify-end">
-            <div className="w-full max-w-lg bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-6 rounded-3xl relative shadow-2xl">
+            <div className="w-full max-w-lg bg-[#0F172A] border border-white/10 p-6 rounded-3xl relative shadow-2xl">
               <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
                 <div>
                   <h3 className="text-xl font-bold text-white">Saturday: ECR Day</h3>
@@ -390,11 +381,10 @@ export default function Home() {
               <div className="relative pl-6 space-y-8">
                 <div className="absolute left-[27px] top-4 bottom-8 w-[2px] bg-white/10" />
 
-                {/* Stop 1 */}
                 <div className="relative">
                   <div className="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-white border-2 border-[#0F172A] z-10" />
                   <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">09:00 AM · Breakfast</div>
-                  <div className="bg-[#0F172A]/60 rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
+                  <div className="bg-white/[0.06] rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
                     <img src="/api/photo?q=Murugan+Idli+Shop+Chennai" className="w-16 h-16 rounded-xl object-cover flex-shrink-0" alt="Murugan Idli Shop" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/64x64/1E293B/F43F5E?text=M'; }} />
                     <div>
                       <h4 className="font-bold text-white text-base">Murugan Idli Shop</h4>
@@ -403,9 +393,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Traffic leg */}
                 <div className="relative -left-[45px] py-2 flex items-center gap-3 z-10">
-                  <div className="w-8 h-8 rounded-full bg-[#0F172A] border border-white/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
                     <svg viewBox="0 0 24 24" className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" /></svg>
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/30 px-3 py-1.5 rounded-full flex items-center gap-2 text-xs">
@@ -414,11 +403,10 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Stop 2 */}
                 <div className="relative">
                   <div className="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-white border-2 border-[#0F172A] z-10" />
                   <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">10:45 AM · Museum</div>
-                  <div className="bg-[#0F172A]/60 rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
+                  <div className="bg-white/[0.06] rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
                     <img src="/api/photo?q=DakshinaChitra+Museum+Chennai" className="w-16 h-16 rounded-xl object-cover flex-shrink-0" alt="DakshinaChitra Museum" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/64x64/1E293B/F43F5E?text=D'; }} />
                     <div>
                       <h4 className="font-bold text-white text-base">DakshinaChitra Museum</h4>
@@ -427,9 +415,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Traffic leg */}
                 <div className="relative -left-[45px] py-2 flex items-center gap-3 z-10">
-                  <div className="w-8 h-8 rounded-full bg-[#0F172A] border border-white/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
                     <svg viewBox="0 0 24 24" className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" /></svg>
                   </div>
                   <div className="bg-green-500/10 border border-green-500/30 px-3 py-1.5 rounded-full flex items-center gap-2 text-xs">
@@ -438,11 +425,10 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Stop 3 */}
                 <div className="relative">
                   <div className="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-white border-2 border-[#0F172A] z-10" />
                   <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">01:00 PM · Lunch</div>
-                  <div className="bg-[#0F172A]/60 rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
+                  <div className="bg-white/[0.06] rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
                     <img src="/api/photo?q=Covelong+Beach+Chennai" className="w-16 h-16 rounded-xl object-cover flex-shrink-0" alt="Covelong Beach" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/64x64/1E293B/F43F5E?text=C'; }} />
                     <div>
                       <h4 className="font-bold text-white text-base">Surf Turf & Cafe</h4>
@@ -452,7 +438,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#151f32] to-transparent rounded-b-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0F172A] to-transparent rounded-b-3xl pointer-events-none" />
             </div>
           </div>
         </div>
@@ -461,53 +447,46 @@ export default function Home() {
       {/* ===== HOW IT WORKS ===== */}
       <section id="how-it-works" className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-4">How it works.</h2>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-4">How it works.</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-12 relative">
-          <div className="hidden md:block absolute top-[40px] left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-[#F43F5E]/30 to-transparent" />
+          <div className="hidden md:block absolute top-[40px] left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-[#F43F5E]/20 to-transparent" />
 
-          {/* Step 1 */}
-          <div className="relative flex flex-col items-center text-center">
-            <div className="absolute -top-12 -left-4 text-[150px] font-black text-white/[0.02] leading-none select-none z-0">1</div>
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-white/10 flex items-center justify-center mb-6 relative z-10 shadow-xl">
-              <svg viewBox="0 0 256 256" className="w-8 h-8 text-[#F43F5E] fill-current" xmlns="http://www.w3.org/2000/svg">
-                <path d="M40,88H73a32,32,0,0,0,62,0H216a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H183a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16H121a32,32,0,0,0,62,0h33a8,8,0,0,0,0-16Zm-64,24a16,16,0,1,1,16-16A16,16,0,0,1,152,192Z" />
-              </svg>
+          {[
+            {
+              n: '1', title: 'Pick your day',
+              body: 'Choose your area in Chennai, how long you have, and what kind of day you want.',
+              icon: <path d="M40,88H73a32,32,0,0,0,62,0H216a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H183a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16H121a32,32,0,0,0,62,0h33a8,8,0,0,0,0-16Zm-64,24a16,16,0,1,1,16-16A16,16,0,0,1,152,192Z" />,
+            },
+            {
+              n: '2', title: 'We sort the route',
+              body: 'Stops are ordered around live traffic on OMR, ECR, and Adyar. We tell you when to leave.',
+              icon: <path d="M216,64H176V40a8,8,0,0,0-16,0V64H96V40a8,8,0,0,0-16,0V64H40A16,16,0,0,0,24,80V192a16,16,0,0,0,16,16H80v24a8,8,0,0,0,16,0V208h64v24a8,8,0,0,0,16,0V208h40a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64Zm0,128H40V80H216V192ZM80,112a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,112Zm0,40a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,152Z" />,
+            },
+            {
+              n: '3', title: 'Navigate and go',
+              body: 'One multi-stop Google Maps link, ready on your phone. Turn the key and go.',
+              icon: <path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.94-96.05a16,16,0,0,0,0-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.82Z" />,
+            },
+          ].map((step) => (
+            <div key={step.n} className="relative flex flex-col items-center text-center">
+              <div className="absolute -top-12 -left-4 text-[150px] font-black text-slate-100 leading-none select-none z-0">{step.n}</div>
+              <div className="w-20 h-20 rounded-2xl bg-white border border-slate-200 shadow-md flex items-center justify-center mb-6 relative z-10">
+                <svg viewBox="0 0 256 256" className="w-8 h-8 text-[#F43F5E] fill-current" xmlns="http://www.w3.org/2000/svg">
+                  {step.icon}
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-[#0F172A] mb-3 relative z-10">{step.title}</h3>
+              <p className="text-slate-500 text-sm max-w-xs relative z-10">{step.body}</p>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3 relative z-10">Pick your day</h3>
-            <p className="text-slate-400 text-sm max-w-xs relative z-10">Choose your area in Chennai, how long you have, and what kind of day you want.</p>
-          </div>
-
-          {/* Step 2 */}
-          <div className="relative flex flex-col items-center text-center mt-8 md:mt-0">
-            <div className="absolute -top-12 -left-4 text-[150px] font-black text-white/[0.02] leading-none select-none z-0">2</div>
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-white/10 flex items-center justify-center mb-6 relative z-10 shadow-xl">
-              <svg viewBox="0 0 256 256" className="w-8 h-8 text-[#F43F5E] fill-current" xmlns="http://www.w3.org/2000/svg">
-                <path d="M216,64H176V40a8,8,0,0,0-16,0V64H96V40a8,8,0,0,0-16,0V64H40A16,16,0,0,0,24,80V192a16,16,0,0,0,16,16H80v24a8,8,0,0,0,16,0V208h64v24a8,8,0,0,0,16,0V208h40a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64Zm0,128H40V80H216V192ZM80,112a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,112Zm0,40a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,152Z" />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-3 relative z-10">We sort the route</h3>
-            <p className="text-slate-400 text-sm max-w-xs relative z-10">Stops are ordered around live traffic on OMR, ECR, and Adyar. We tell you when to leave.</p>
-          </div>
-
-          {/* Step 3 */}
-          <div className="relative flex flex-col items-center text-center mt-8 md:mt-0">
-            <div className="absolute -top-12 -left-4 text-[150px] font-black text-white/[0.02] leading-none select-none z-0">3</div>
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#1E293B] to-[#0F172A] border border-white/10 flex items-center justify-center mb-6 relative z-10 shadow-xl">
-              <svg viewBox="0 0 256 256" className="w-8 h-8 text-[#F43F5E] fill-current" xmlns="http://www.w3.org/2000/svg">
-                <path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.94-96.05a16,16,0,0,0,0-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.82Z" />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-3 relative z-10">Navigate and go</h3>
-            <p className="text-slate-400 text-sm max-w-xs relative z-10">One multi-stop Google Maps link, ready on your phone. Turn the key and go.</p>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* ===== BOTTOM CTA BANNER ===== */}
       <section className="py-12 px-6 pb-24">
-        <div className="max-w-6xl mx-auto bg-[#1E293B] rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col items-center text-center border border-white/10 shadow-2xl">
+        <div className="max-w-6xl mx-auto bg-[#0F172A] rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col items-center text-center border border-white/5 shadow-2xl">
           <img
             src="https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
             alt="Chennai ECR sunset"
