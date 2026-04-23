@@ -183,8 +183,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== WEATHER + TRAFFIC — dark navy band ===== */}
-      <section className="bg-[#0C1629] py-16 px-6">
+      {/* ===== WEATHER + TRAFFIC — indigo-violet band ===== */}
+      <section className="relative py-16 px-6 bg-gradient-to-br from-violet-950 via-indigo-950 to-purple-900 overflow-hidden">
+        {/* Subtle glow orbs */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-indigo-400/10 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -282,7 +285,7 @@ export default function Home() {
       </section>
 
       {/* ===== CHOOSE YOUR ESCAPE — centered ===== */}
-      <section id="templates" className="py-24 px-6 max-w-7xl mx-auto">
+      <section id="templates" className="py-24 px-6 max-w-screen-xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#F43F5E] mb-4">Chennai · Weekend Discovery</p>
           <h2 className="font-playfair text-5xl md:text-6xl font-black tracking-tight text-[#0F172A] mb-4">
@@ -291,12 +294,12 @@ export default function Home() {
           <p className="text-slate-500 text-lg max-w-xl mx-auto">Six ways to spend your Chennai weekend, each timed around traffic corridors.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {TEMPLATES.map((t) => (
             <Link
               key={t.title}
               href={`/plan?vibes=${t.vibes}&categories=${t.categories}`}
-              className="group relative aspect-[4/5] rounded-3xl overflow-hidden cursor-pointer"
+              className="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer"
             >
               <img
                 src={t.photo}
