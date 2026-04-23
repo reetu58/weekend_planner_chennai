@@ -87,11 +87,11 @@ export default function WeatherWidget() {
   const accent = getWeatherAccent(weather.condition, weather.temperature);
 
   return (
-    <div className={`relative rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md p-5 overflow-hidden ${accent.glow}`}>
+    <div className={`relative rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md p-4 overflow-hidden ${accent.glow}`}>
       <div className={`absolute inset-0 ${accent.bg} pointer-events-none`} />
 
       <div className="relative">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3">
           <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
@@ -104,20 +104,20 @@ export default function WeatherWidget() {
           </span>
         </div>
 
-        <div className="flex items-center gap-4 mb-5">
+        <div className="flex items-center gap-3 mb-3">
           <div className={`${accent.text} flex-shrink-0`}>
-            <WeatherIcon condition={weather.condition} className="w-14 h-14" />
+            <WeatherIcon condition={weather.condition} className="w-10 h-10" />
           </div>
           <div>
             <div className="flex items-start">
-              <span className="text-5xl font-black text-white leading-none">{weather.temperature}</span>
-              <span className="text-xl text-white/40 font-light mt-1 ml-0.5">°C</span>
+              <span className="text-4xl font-black text-white leading-none">{weather.temperature}</span>
+              <span className="text-lg text-white/40 font-light mt-0.5 ml-0.5">°C</span>
             </div>
-            <p className="text-sm text-slate-400 mt-1">{weather.condition}</p>
+            <p className="text-xs text-slate-400 mt-0.5">{weather.condition}</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-1.5">
           <div className="flex flex-col items-center gap-1 p-2.5 rounded-xl bg-white/[0.04] border border-white/5">
             <svg className="w-4 h-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>

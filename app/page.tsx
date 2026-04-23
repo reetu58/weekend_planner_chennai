@@ -184,7 +184,7 @@ export default function Home() {
       </section>
 
       {/* ===== WEATHER + TRAFFIC — indigo-violet band ===== */}
-      <section className="relative py-16 px-6 bg-gradient-to-br from-violet-950 via-indigo-950 to-purple-900 overflow-hidden">
+      <section className="relative py-10 px-6 bg-gradient-to-br from-violet-950 via-indigo-950 to-purple-900 overflow-hidden">
         {/* Subtle glow orbs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-indigo-400/10 rounded-full blur-3xl pointer-events-none" />
@@ -199,7 +199,7 @@ export default function Home() {
               const sorted = trafficSummary
                 ? [...trafficSummary.corridors]
                     .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))
-                    .slice(0, 5)
+                    .slice(0, 3)
                 : null;
               const worst = sorted?.[0];
 
@@ -213,11 +213,11 @@ export default function Home() {
               const accent = TRAFFIC_ACCENT[trafficSummary?.overall ?? 'clear'];
 
               return (
-                <div className={`relative rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md p-5 overflow-hidden ${accent.glow}`}>
+                <div className={`relative rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md p-4 overflow-hidden ${accent.glow}`}>
                   <div className={`absolute inset-0 ${accent.bg} pointer-events-none`} />
 
                   <div className="relative">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-3">
                       <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
                         <span className="relative flex h-2 w-2">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
@@ -230,9 +230,9 @@ export default function Home() {
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-4 mb-5">
+                    <div className="flex items-center gap-3 mb-3">
                       <div className={`flex-shrink-0 ${accent.text}`}>
-                        <svg viewBox="0 0 64 64" className="w-14 h-14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg viewBox="0 0 64 64" className="w-10 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <rect x="22" y="8" width="20" height="34" rx="4" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2"/>
                           <circle cx="32" cy="18" r="4" fill="currentColor" opacity="0.5"/>
                           <circle cx="32" cy="30" r="4" fill="currentColor" opacity="0.5"/>
@@ -245,10 +245,10 @@ export default function Home() {
                         </svg>
                       </div>
                       <div>
-                        <div className={`text-4xl font-black leading-none ${trafficSummary ? accent.text : 'text-slate-600'}`}>
+                        <div className={`text-3xl font-black leading-none ${trafficSummary ? accent.text : 'text-slate-600'}`}>
                           {trafficSummary ? SEVERITY_LABEL[trafficSummary.overall] : '—'}
                         </div>
-                        <p className="text-sm text-slate-400 mt-1">
+                        <p className="text-xs text-slate-400 mt-1">
                           {worst ? `Worst: ${worst.name}` : 'Checking corridors…'}
                         </p>
                       </div>
@@ -262,7 +262,7 @@ export default function Home() {
                           <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity]}`}>{SEVERITY_LABEL[c.severity]}</span>
                           {c.avgDelay > 0 && <span className="text-[11px] text-slate-600">+{c.avgDelay}m</span>}
                         </div>
-                      )) : ['OMR', 'ECR', 'T. Nagar', 'Anna Salai', 'Mount Road'].map(name => (
+                      )) : ['OMR', 'ECR', 'T. Nagar'].map(name => (
                         <div key={name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5 animate-pulse">
                           <span className="w-2 h-2 rounded-full bg-white/10 flex-shrink-0" />
                           <span className="text-sm text-slate-700 flex-1">{name}</span>
@@ -294,12 +294,12 @@ export default function Home() {
           <p className="text-slate-500 text-lg max-w-xl mx-auto">Six ways to spend your Chennai weekend, each timed around traffic corridors.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {TEMPLATES.map((t) => (
             <Link
               key={t.title}
               href={`/plan?vibes=${t.vibes}&categories=${t.categories}`}
-              className="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer"
+              className="group relative aspect-[2/3] rounded-3xl overflow-hidden cursor-pointer"
             >
               <img
                 src={t.photo}
@@ -459,7 +459,7 @@ export default function Home() {
               },
             ].map((step) => (
               <div key={step.n} className="relative flex flex-col items-center text-center">
-                <div className="absolute -top-12 -left-4 text-[150px] font-black text-rose-100 leading-none select-none z-0">{step.n}</div>
+                <div className="absolute -top-12 -left-4 text-[150px] font-black text-[#0F172A] leading-none select-none z-0">{step.n}</div>
                 <div className="w-20 h-20 rounded-2xl bg-white border border-rose-200 shadow-md flex items-center justify-center mb-6 relative z-10">
                   <svg viewBox="0 0 256 256" className="w-8 h-8 text-[#F43F5E] fill-current" xmlns="http://www.w3.org/2000/svg">
                     {step.icon}
