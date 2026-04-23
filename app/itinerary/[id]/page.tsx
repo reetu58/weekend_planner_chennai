@@ -66,7 +66,7 @@ export default function ItineraryPage() {
             <span className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin block" />
           </div>
           <p className="text-white font-medium text-lg">Building your plan</p>
-          <p className="text-white/40 text-sm mt-1">Checking traffic · Optimising route</p>
+          <p className="text-white/40 text-sm mt-1">Sorting stops around traffic</p>
         </div>
       </div>
     );
@@ -172,13 +172,15 @@ export default function ItineraryPage() {
           <div className="lg:col-span-3">
             <div className="flex items-start justify-between mb-8">
               <div>
-                <h1 className="text-3xl font-medium tracking-tight text-white mb-1">Your weekend plan</h1>
+                <h1 className="text-3xl font-black tracking-tight text-white mb-1">{dateLabel}</h1>
                 <p className="text-sm text-white/40 flex items-center gap-2">
-                  <span className="text-white/30">{itinerary.stops.length} stops</span>
+                  <span className="text-white/40">{itinerary.stops.length} stops</span>
                   <span className="text-white/15">·</span>
-                  <span className="text-white/30">{dateLabel}</span>
+                  <span className="text-white/40">{formatDuration(itinerary.totalDuration)}</span>
                   <span className="text-white/15">·</span>
-                  <span className="text-white/30">traffic-optimised</span>
+                  <span className={`font-semibold ${dot.color === 'bg-emerald-400' ? 'text-emerald-400' : dot.color === 'bg-yellow-400' ? 'text-yellow-400' : dot.color === 'bg-orange-500' ? 'text-orange-400' : 'text-red-400'}`}>
+                    {dot.label} roads
+                  </span>
                 </p>
               </div>
               <Link
@@ -209,7 +211,7 @@ export default function ItineraryPage() {
                 className="flex-1 text-center py-3.5 border border-white/10 text-white/70 rounded-xl font-semibold hover:bg-white/5 hover:text-white transition-all text-sm flex items-center justify-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                Edit Preferences
+                Adjust Plan
               </Link>
             </div>
           </div>
@@ -257,9 +259,9 @@ export default function ItineraryPage() {
                         ? 'Free' : `₹${itinerary.totalCost.min}–${itinerary.totalCost.max}`
                     },
                   ].map(stat => (
-                    <div key={stat.label} className="p-3 rounded-xl bg-white/[0.02] border border-white/8">
-                      <p className="text-[10px] text-white/30 uppercase tracking-widest font-bold mb-1">{stat.label}</p>
-                      <p className="text-sm font-semibold text-white/80">{stat.value}</p>
+                    <div key={stat.label} className="p-3 rounded-xl bg-white/5 border border-white/10">
+                      <p className="text-[10px] text-white/40 uppercase tracking-widest font-bold mb-1">{stat.label}</p>
+                      <p className="text-sm font-bold text-white">{stat.value}</p>
                     </div>
                   ))}
                 </div>
