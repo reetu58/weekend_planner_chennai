@@ -58,7 +58,7 @@ const SEVERITY_ORDER: Record<string, number> = {
   standstill: 5, heavy: 4, moderate: 3, light: 2, clear: 1,
 };
 const SEVERITY_DOT: Record<string, string> = {
-  clear: 'bg-emerald-500', light: 'bg-yellow-500', moderate: 'bg-orange-500',
+  clear: 'bg-emerald-400', light: 'bg-yellow-400', moderate: 'bg-orange-500',
   heavy: 'bg-red-500', standstill: 'bg-red-700',
 };
 const SEVERITY_LABEL: Record<string, string> = {
@@ -66,8 +66,8 @@ const SEVERITY_LABEL: Record<string, string> = {
   heavy: 'Heavy', standstill: 'Standstill',
 };
 const SEVERITY_TEXT: Record<string, string> = {
-  clear: 'text-emerald-600', light: 'text-yellow-600', moderate: 'text-orange-600',
-  heavy: 'text-red-600', standstill: 'text-red-700',
+  clear: 'text-emerald-400', light: 'text-yellow-300', moderate: 'text-orange-400',
+  heavy: 'text-red-400', standstill: 'text-red-500',
 };
 
 export default function Home() {
@@ -83,78 +83,84 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#0F172A] overflow-x-hidden">
 
-      {/* ===== HERO ===== */}
-      <section className="relative min-h-[95vh] bg-[#0F172A] flex items-center justify-center pt-20 overflow-hidden">
+      {/* ===== HERO — pastel light ===== */}
+      <section className="relative min-h-[95vh] flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-br from-rose-50 via-white to-slate-50">
+        {/* Very faint background image */}
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
             alt="Kapaleeshwarar Temple Chennai"
-            className="w-full h-full object-cover opacity-30 select-none pointer-events-none"
-            style={{ filter: 'sepia(0.15) hue-rotate(10deg)' }}
+            className="w-full h-full object-cover opacity-[0.06] select-none pointer-events-none"
+            style={{ filter: 'sepia(0.2) saturate(0.5) brightness(1.2)' }}
             loading="eager"
           />
         </div>
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0F172A]/90 via-[#0F172A]/60 to-[#0F172A]" />
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,rgba(244,63,94,0.10)_0%,transparent_70%)]" />
-        <div className="hero-dots absolute inset-0 opacity-20" />
+        {/* Soft gradient overlay */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-rose-50/80 via-white/60 to-white/90" />
+        {/* Decorative blobs */}
+        <div className="absolute top-24 right-[10%] w-96 h-96 bg-rose-100 rounded-full blur-3xl opacity-50 pointer-events-none" />
+        <div className="absolute bottom-16 left-[5%] w-72 h-72 bg-pink-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
+        <div className="hero-dots absolute inset-0 opacity-[0.06]" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center text-center mt-12">
-          <div className="animate-fade-in-down inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F43F5E]/10 border border-[#F43F5E]/30 text-[#FB7185] text-xs font-bold uppercase tracking-widest mb-8 shadow-[0_0_20px_rgba(244,63,94,0.15)] backdrop-blur-md">
+          {/* Live badge */}
+          <div className="animate-fade-in-down inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F43F5E]/10 border border-[#F43F5E]/20 text-[#F43F5E] text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-sm">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FB7185] opacity-75" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
             </span>
             Live traffic data
           </div>
 
-          <h1 className="animate-fade-in-up text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-200 to-slate-500 tracking-tighter leading-[1.1] mb-6">
+          <h1 className="animate-fade-in-up text-6xl md:text-8xl font-black tracking-tighter leading-[1.05] mb-6 text-[#0F172A]">
             Your weekend.<br />
-            <span className="text-white">Zero traffic.</span>
+            <span className="text-[#F43F5E]">Zero traffic.</span>
           </h1>
 
-          <p className="animate-fade-in-up text-lg md:text-xl text-slate-400 max-w-2xl mb-12 font-medium leading-relaxed" style={{ animationDelay: '0.1s' }}>
+          <p className="animate-fade-in-up text-lg md:text-xl text-slate-500 max-w-2xl mb-12 font-medium leading-relaxed" style={{ animationDelay: '0.1s' }}>
             64 handpicked Chennai spots, ordered around live OMR/ECR traffic. Pick your escape and start time — we sequence the rest.
           </p>
 
+          {/* CTA */}
           <div className="animate-fade-in-up flex flex-col sm:flex-row items-center gap-5 mb-16" style={{ animationDelay: '0.2s' }}>
             <Link
               href="/plan"
-              className="group px-8 py-4 rounded-full bg-[#F43F5E] text-white font-bold text-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(244,63,94,0.4)] btn-shine chip-press"
+              className="group px-8 py-4 rounded-full bg-[#F43F5E] text-white font-bold text-lg transition-all hover:scale-105 hover:shadow-[0_8px_30px_rgba(244,63,94,0.35)] btn-shine chip-press"
             >
               <span className="flex items-center gap-2">
                 Start Planning
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
               </span>
             </Link>
-            <span className="text-slate-500 text-sm">Free · No account needed</span>
+            <span className="text-slate-400 text-sm">Free · No account needed</span>
           </div>
 
-          <div className="animate-fade-in-up w-full max-w-3xl grid grid-cols-3 gap-px bg-white/10 rounded-2xl p-px backdrop-blur-md overflow-hidden" style={{ animationDelay: '0.35s' }}>
-            <div className="bg-[#0F172A]/80 px-4 py-4 backdrop-blur-xl flex flex-col items-center justify-center text-center">
-              <span className="text-3xl font-black text-white">64+</span>
-              <span className="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">Handpicked spots</span>
+          {/* Stats bar */}
+          <div className="animate-fade-in-up w-full max-w-3xl grid grid-cols-3 divide-x divide-slate-200 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden" style={{ animationDelay: '0.35s' }}>
+            <div className="px-4 py-5 flex flex-col items-center justify-center text-center">
+              <span className="text-3xl font-black text-[#0F172A]">64+</span>
+              <span className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-1">Handpicked spots</span>
             </div>
-            <div className="bg-[#0F172A]/80 px-4 py-4 backdrop-blur-xl flex flex-col items-center justify-center text-center">
+            <div className="px-4 py-5 flex flex-col items-center justify-center text-center">
               <span className="text-3xl font-black text-[#F43F5E] flex justify-center">
                 <svg viewBox="0 0 256 256" className="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg">
                   <path d="M234.35,129,53.34,50a8,8,0,0,0-10.15,10.15L80,128,43.19,196A8,8,0,0,0,50,208a8.22,8.22,0,0,0,3.34-.73l181-79A8,8,0,0,0,234.35,129Z" />
                 </svg>
               </span>
-              <span className="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">Traffic-aware routing</span>
+              <span className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-1">Traffic-aware routing</span>
             </div>
-            <div className="bg-[#0F172A]/80 px-4 py-4 backdrop-blur-xl flex flex-col items-center justify-center text-center">
-              <span className="text-3xl font-black text-white">0₹</span>
-              <span className="text-xs text-slate-400 font-medium uppercase tracking-wider mt-1">No sign-up</span>
+            <div className="px-4 py-5 flex flex-col items-center justify-center text-center">
+              <span className="text-3xl font-black text-[#0F172A]">0₹</span>
+              <span className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-1">No sign-up</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ===== PHOTO MARQUEE ===== */}
-      <section className="relative py-12 border-y border-slate-100 bg-slate-50 overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-
+      <section className="relative py-12 border-y border-slate-100 bg-white overflow-hidden">
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
         <div className="marquee-container">
           <div className="marquee-track">
             {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((p, i) => (
@@ -177,112 +183,112 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== WEATHER + TRAFFIC ===== */}
-      <section className="py-16 px-6 max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* ===== WEATHER + TRAFFIC — dark navy band ===== */}
+      <section className="bg-[#0C1629] py-16 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-          {/* Weather */}
-          <WeatherWidget />
+            {/* Weather */}
+            <WeatherWidget />
 
-          {/* Traffic */}
-          {(() => {
-            const sorted = trafficSummary
-              ? [...trafficSummary.corridors]
-                  .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))
-                  .slice(0, 5)
-              : null;
-            const worst = sorted?.[0];
+            {/* Traffic */}
+            {(() => {
+              const sorted = trafficSummary
+                ? [...trafficSummary.corridors]
+                    .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))
+                    .slice(0, 5)
+                : null;
+              const worst = sorted?.[0];
 
-            const TRAFFIC_ACCENT: Record<string, { text: string; bg: string }> = {
-              clear:      { text: 'text-emerald-600', bg: 'bg-emerald-50' },
-              light:      { text: 'text-yellow-600',  bg: 'bg-yellow-50' },
-              moderate:   { text: 'text-orange-600',  bg: 'bg-orange-50' },
-              heavy:      { text: 'text-red-600',     bg: 'bg-red-50' },
-              standstill: { text: 'text-red-700',     bg: 'bg-red-50' },
-            };
+              const TRAFFIC_ACCENT: Record<string, { text: string; bg: string; glow: string }> = {
+                clear:      { text: 'text-emerald-400', bg: 'bg-emerald-500/10', glow: 'shadow-[0_0_30px_rgba(52,211,153,0.12)]' },
+                light:      { text: 'text-yellow-300',  bg: 'bg-yellow-500/10',  glow: 'shadow-[0_0_30px_rgba(251,191,36,0.12)]' },
+                moderate:   { text: 'text-orange-400',  bg: 'bg-orange-500/10',  glow: 'shadow-[0_0_30px_rgba(249,115,22,0.12)]' },
+                heavy:      { text: 'text-red-400',     bg: 'bg-red-500/10',     glow: 'shadow-[0_0_30px_rgba(239,68,68,0.12)]' },
+                standstill: { text: 'text-red-500',     bg: 'bg-red-700/10',     glow: 'shadow-[0_0_30px_rgba(185,28,28,0.12)]' },
+              };
+              const accent = TRAFFIC_ACCENT[trafficSummary?.overall ?? 'clear'];
 
-            const accent = TRAFFIC_ACCENT[trafficSummary?.overall ?? 'clear'];
+              return (
+                <div className={`relative rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md p-5 overflow-hidden ${accent.glow}`}>
+                  <div className={`absolute inset-0 ${accent.bg} pointer-events-none`} />
 
-            return (
-              <div className="relative rounded-2xl border border-slate-200 bg-white shadow-sm p-5 overflow-hidden">
-                <div className={`absolute inset-0 ${accent.bg} opacity-50 pointer-events-none`} />
-
-                <div className="relative">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                        <span className="relative flex h-2 w-2">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
+                        </span>
+                        Road conditions
                       </span>
-                      Road conditions
-                    </span>
-                    <span className={`text-[10px] font-bold uppercase tracking-wider ${trafficSummary?.isLive ? 'text-emerald-600' : 'text-slate-400'}`}>
-                      {trafficSummary ? (trafficSummary.isLive ? 'Live' : 'Est.') : '—'}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-4 mb-5">
-                    <div className={`flex-shrink-0 ${accent.text}`}>
-                      <svg viewBox="0 0 64 64" className="w-14 h-14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="22" y="8" width="20" height="34" rx="4" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2"/>
-                        <circle cx="32" cy="18" r="4" fill="currentColor" opacity="0.4"/>
-                        <circle cx="32" cy="30" r="4" fill="currentColor" opacity="0.4"/>
-                        <circle cx="32" cy="42" r="4" fill={
-                          (trafficSummary?.overall ?? 'clear') === 'clear' ? '#16a34a' :
-                          (trafficSummary?.overall ?? 'clear') === 'light' ? '#ca8a04' :
-                          (trafficSummary?.overall ?? 'clear') === 'moderate' ? '#ea580c' : '#dc2626'
-                        } opacity="0.9"/>
-                        <line x1="20" y1="54" x2="44" y2="54" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity="0.3"/>
-                      </svg>
+                      <span className={`text-[10px] font-bold uppercase tracking-wider ${trafficSummary?.isLive ? 'text-emerald-400' : 'text-slate-600'}`}>
+                        {trafficSummary ? (trafficSummary.isLive ? 'Live' : 'Est.') : '—'}
+                      </span>
                     </div>
-                    <div>
-                      <div className={`text-4xl font-black leading-none ${trafficSummary ? accent.text : 'text-slate-300'}`}>
-                        {trafficSummary ? SEVERITY_LABEL[trafficSummary.overall] : '—'}
-                      </div>
-                      <p className="text-sm text-slate-500 mt-1">
-                        {worst ? `Worst: ${worst.name}` : 'Checking corridors…'}
-                      </p>
-                    </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 gap-1.5">
-                    {sorted ? sorted.map(c => (
-                      <div key={c.name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white border border-slate-100">
-                        <span className={`w-2 h-2 rounded-full flex-shrink-0 ${SEVERITY_DOT[c.severity]}`} />
-                        <span className="text-sm text-slate-700 flex-1 font-medium">{c.name}</span>
-                        <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity]}`}>{SEVERITY_LABEL[c.severity]}</span>
-                        {c.avgDelay > 0 && <span className="text-[11px] text-slate-400">+{c.avgDelay}m</span>}
+                    <div className="flex items-center gap-4 mb-5">
+                      <div className={`flex-shrink-0 ${accent.text}`}>
+                        <svg viewBox="0 0 64 64" className="w-14 h-14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="22" y="8" width="20" height="34" rx="4" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2"/>
+                          <circle cx="32" cy="18" r="4" fill="currentColor" opacity="0.5"/>
+                          <circle cx="32" cy="30" r="4" fill="currentColor" opacity="0.5"/>
+                          <circle cx="32" cy="42" r="4" fill={
+                            (trafficSummary?.overall ?? 'clear') === 'clear' ? '#34D399' :
+                            (trafficSummary?.overall ?? 'clear') === 'light' ? '#FBBF24' :
+                            (trafficSummary?.overall ?? 'clear') === 'moderate' ? '#F97316' : '#EF4444'
+                          } opacity="0.9"/>
+                          <line x1="20" y1="54" x2="44" y2="54" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity="0.3"/>
+                        </svg>
                       </div>
-                    )) : ['OMR', 'ECR', 'T. Nagar', 'Anna Salai', 'Mount Road'].map(name => (
-                      <div key={name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white border border-slate-100 animate-pulse">
-                        <span className="w-2 h-2 rounded-full bg-slate-200 flex-shrink-0" />
-                        <span className="text-sm text-slate-400 flex-1">{name}</span>
+                      <div>
+                        <div className={`text-4xl font-black leading-none ${trafficSummary ? accent.text : 'text-slate-600'}`}>
+                          {trafficSummary ? SEVERITY_LABEL[trafficSummary.overall] : '—'}
+                        </div>
+                        <p className="text-sm text-slate-400 mt-1">
+                          {worst ? `Worst: ${worst.name}` : 'Checking corridors…'}
+                        </p>
                       </div>
-                    ))}
-                  </div>
-
-                  {trafficSummary && (trafficSummary.overall === 'heavy' || trafficSummary.overall === 'standstill') && (
-                    <div className="mt-3 px-3 py-2 rounded-xl text-xs font-medium flex items-center gap-2 bg-red-50 text-red-600 border border-red-200">
-                      <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
-                      Heavy congestion — plan to leave before 8 AM or after 8 PM
                     </div>
-                  )}
+
+                    <div className="grid grid-cols-1 gap-1.5">
+                      {sorted ? sorted.map(c => (
+                        <div key={c.name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5">
+                          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${SEVERITY_DOT[c.severity]}`} />
+                          <span className="text-sm text-slate-300 flex-1 font-medium">{c.name}</span>
+                          <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity]}`}>{SEVERITY_LABEL[c.severity]}</span>
+                          {c.avgDelay > 0 && <span className="text-[11px] text-slate-600">+{c.avgDelay}m</span>}
+                        </div>
+                      )) : ['OMR', 'ECR', 'T. Nagar', 'Anna Salai', 'Mount Road'].map(name => (
+                        <div key={name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5 animate-pulse">
+                          <span className="w-2 h-2 rounded-full bg-white/10 flex-shrink-0" />
+                          <span className="text-sm text-slate-700 flex-1">{name}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {trafficSummary && (trafficSummary.overall === 'heavy' || trafficSummary.overall === 'standstill') && (
+                      <div className="mt-3 px-3 py-2 rounded-xl text-xs font-medium flex items-center gap-2 bg-red-500/10 text-red-400 border border-red-500/20">
+                        <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
+                        Heavy congestion — plan to leave before 8 AM or after 8 PM
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })()}
-
+              );
+            })()}
+          </div>
         </div>
       </section>
 
-      {/* ===== CHOOSE YOUR ESCAPE ===== */}
+      {/* ===== CHOOSE YOUR ESCAPE — centered ===== */}
       <section id="templates" className="py-24 px-6 max-w-7xl mx-auto">
-        <div className="mb-16">
+        <div className="text-center mb-16">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#F43F5E] mb-4">Chennai · Weekend Discovery</p>
           <h2 className="font-playfair text-5xl md:text-6xl font-black tracking-tight text-[#0F172A] mb-4">
             Choose Your Escape.
           </h2>
-          <p className="text-slate-500 text-lg max-w-xl">Six ways to spend your Chennai weekend, each timed around traffic corridors.</p>
+          <p className="text-slate-500 text-lg max-w-xl mx-auto">Six ways to spend your Chennai weekend, each timed around traffic corridors.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -304,7 +310,6 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/50 to-transparent" />
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#F43F5E]/50 rounded-3xl transition-colors duration-300" />
-
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
                 <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
                   <div className="flex items-center gap-2 mb-3">
@@ -329,8 +334,6 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#F43F5E]/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
-
-          {/* Copy — 5 cols */}
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#F43F5E]/10 text-[#F43F5E] mb-6 border border-[#F43F5E]/20">
               <svg viewBox="0 0 256 256" className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg">
@@ -339,9 +342,8 @@ export default function Home() {
             </div>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-6">Ordered by geography, not guesswork.</h2>
             <p className="text-slate-500 text-lg mb-8 leading-relaxed">
-              Stops are sequenced to cut across Chennai efficiently — accounting for travel time, parking, and when each corridor gets heavy. We tell you exactly when to leave.
+              Stops are sequenced to cut across Chennai efficiently — accounting for travel time, parking, and when each corridor gets heavy.
             </p>
-
             <ul className="space-y-4 mb-10">
               {[
                 { title: 'Parking buffer', desc: 'Adds 15–30 min at busy spots like Besant Nagar Beach or Marina.' },
@@ -360,14 +362,13 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-
             <Link href="/plan" className="inline-flex items-center gap-2 text-[#F43F5E] font-bold hover:text-[#E11D48] transition-colors">
               Plan my weekend
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
             </Link>
           </div>
 
-          {/* Itinerary card — 7 cols, kept dark as product mockup */}
+          {/* Itinerary card — kept dark as product mockup */}
           <div className="lg:col-span-7 order-1 lg:order-2 flex justify-center lg:justify-end">
             <div className="w-full max-w-lg bg-[#0F172A] border border-white/10 p-6 rounded-3xl relative shadow-2xl">
               <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
@@ -377,115 +378,100 @@ export default function Home() {
                 </div>
                 <span className="px-3 py-1 bg-[#F43F5E]/20 text-[#FB7185] text-xs font-bold rounded-full border border-[#F43F5E]/30">Traffic-timed</span>
               </div>
-
               <div className="relative pl-6 space-y-8">
                 <div className="absolute left-[27px] top-4 bottom-8 w-[2px] bg-white/10" />
-
                 <div className="relative">
                   <div className="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-white border-2 border-[#0F172A] z-10" />
                   <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">09:00 AM · Breakfast</div>
                   <div className="bg-white/[0.06] rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
                     <img src="/api/photo?q=Murugan+Idli+Shop+Chennai" className="w-16 h-16 rounded-xl object-cover flex-shrink-0" alt="Murugan Idli Shop" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/64x64/1E293B/F43F5E?text=M'; }} />
-                    <div>
-                      <h4 className="font-bold text-white text-base">Murugan Idli Shop</h4>
-                      <p className="text-xs text-slate-400 mt-1">Besant Nagar · ★ 4.8</p>
-                    </div>
+                    <div><h4 className="font-bold text-white text-base">Murugan Idli Shop</h4><p className="text-xs text-slate-400 mt-1">Besant Nagar · ★ 4.8</p></div>
                   </div>
                 </div>
-
                 <div className="relative -left-[45px] py-2 flex items-center gap-3 z-10">
                   <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
                     <svg viewBox="0 0 24 24" className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" /></svg>
                   </div>
                   <div className="bg-yellow-500/10 border border-yellow-500/30 px-3 py-1.5 rounded-full flex items-center gap-2 text-xs">
-                    <span className="w-2 h-2 rounded-full bg-yellow-500 flex-shrink-0" />
-                    <span className="text-yellow-400 font-medium">35 min · Moderate on OMR</span>
+                    <span className="w-2 h-2 rounded-full bg-yellow-500 flex-shrink-0" /><span className="text-yellow-400 font-medium">35 min · Moderate on OMR</span>
                   </div>
                 </div>
-
                 <div className="relative">
                   <div className="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-white border-2 border-[#0F172A] z-10" />
                   <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">10:45 AM · Museum</div>
                   <div className="bg-white/[0.06] rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
-                    <img src="/api/photo?q=DakshinaChitra+Museum+Chennai" className="w-16 h-16 rounded-xl object-cover flex-shrink-0" alt="DakshinaChitra Museum" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/64x64/1E293B/F43F5E?text=D'; }} />
-                    <div>
-                      <h4 className="font-bold text-white text-base">DakshinaChitra Museum</h4>
-                      <p className="text-xs text-slate-400 mt-1">ECR · ★ 4.9 · ~2 hrs</p>
-                    </div>
+                    <img src="/api/photo?q=DakshinaChitra+Museum+Chennai" className="w-16 h-16 rounded-xl object-cover flex-shrink-0" alt="DakshinaChitra" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/64x64/1E293B/F43F5E?text=D'; }} />
+                    <div><h4 className="font-bold text-white text-base">DakshinaChitra Museum</h4><p className="text-xs text-slate-400 mt-1">ECR · ★ 4.9 · ~2 hrs</p></div>
                   </div>
                 </div>
-
                 <div className="relative -left-[45px] py-2 flex items-center gap-3 z-10">
                   <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
                     <svg viewBox="0 0 24 24" className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M12 5l7 7-7 7" /></svg>
                   </div>
                   <div className="bg-green-500/10 border border-green-500/30 px-3 py-1.5 rounded-full flex items-center gap-2 text-xs">
-                    <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
-                    <span className="text-green-400 font-medium">15 min · Clear to Kovalam</span>
+                    <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" /><span className="text-green-400 font-medium">15 min · Clear to Kovalam</span>
                   </div>
                 </div>
-
                 <div className="relative">
                   <div className="absolute -left-[30px] top-1 w-3 h-3 rounded-full bg-white border-2 border-[#0F172A] z-10" />
                   <div className="text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">01:00 PM · Lunch</div>
                   <div className="bg-white/[0.06] rounded-2xl p-3 border border-white/5 flex gap-4 items-center">
                     <img src="/api/photo?q=Covelong+Beach+Chennai" className="w-16 h-16 rounded-xl object-cover flex-shrink-0" alt="Covelong Beach" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).src = 'https://placehold.co/64x64/1E293B/F43F5E?text=C'; }} />
-                    <div>
-                      <h4 className="font-bold text-white text-base">Surf Turf & Cafe</h4>
-                      <p className="text-xs text-slate-400 mt-1">Kovalam Beach · ★ 4.6</p>
-                    </div>
+                    <div><h4 className="font-bold text-white text-base">Surf Turf & Cafe</h4><p className="text-xs text-slate-400 mt-1">Kovalam Beach · ★ 4.6</p></div>
                   </div>
                 </div>
               </div>
-
               <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-[#0F172A] to-transparent rounded-b-3xl pointer-events-none" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== HOW IT WORKS ===== */}
-      <section id="how-it-works" className="py-24 max-w-7xl mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-4">How it works.</h2>
-        </div>
+      {/* ===== HOW IT WORKS — rose-tinted ===== */}
+      <section id="how-it-works" className="py-24 bg-gradient-to-br from-rose-50 via-pink-50 to-rose-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-[#0F172A] mb-4">How it works.</h2>
+            <p className="text-slate-500 text-base max-w-md mx-auto">Three steps from idea to navigation link.</p>
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-12 relative">
-          <div className="hidden md:block absolute top-[40px] left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-[#F43F5E]/20 to-transparent" />
+          <div className="grid md:grid-cols-3 gap-12 relative">
+            <div className="hidden md:block absolute top-[40px] left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-[#F43F5E]/30 to-transparent" />
 
-          {[
-            {
-              n: '1', title: 'Pick your day',
-              body: 'Choose your area in Chennai, how long you have, and what kind of day you want.',
-              icon: <path d="M40,88H73a32,32,0,0,0,62,0H216a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H183a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16H121a32,32,0,0,0,62,0h33a8,8,0,0,0,0-16Zm-64,24a16,16,0,1,1,16-16A16,16,0,0,1,152,192Z" />,
-            },
-            {
-              n: '2', title: 'We sort the route',
-              body: 'Stops are ordered around live traffic on OMR, ECR, and Adyar. We tell you when to leave.',
-              icon: <path d="M216,64H176V40a8,8,0,0,0-16,0V64H96V40a8,8,0,0,0-16,0V64H40A16,16,0,0,0,24,80V192a16,16,0,0,0,16,16H80v24a8,8,0,0,0,16,0V208h64v24a8,8,0,0,0,16,0V208h40a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64Zm0,128H40V80H216V192ZM80,112a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,112Zm0,40a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,152Z" />,
-            },
-            {
-              n: '3', title: 'Navigate and go',
-              body: 'One multi-stop Google Maps link, ready on your phone. Turn the key and go.',
-              icon: <path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.94-96.05a16,16,0,0,0,0-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.82Z" />,
-            },
-          ].map((step) => (
-            <div key={step.n} className="relative flex flex-col items-center text-center">
-              <div className="absolute -top-12 -left-4 text-[150px] font-black text-slate-100 leading-none select-none z-0">{step.n}</div>
-              <div className="w-20 h-20 rounded-2xl bg-white border border-slate-200 shadow-md flex items-center justify-center mb-6 relative z-10">
-                <svg viewBox="0 0 256 256" className="w-8 h-8 text-[#F43F5E] fill-current" xmlns="http://www.w3.org/2000/svg">
-                  {step.icon}
-                </svg>
+            {[
+              {
+                n: '1', title: 'Pick your day',
+                body: 'Choose your area in Chennai, how long you have, and what kind of day you want.',
+                icon: <path d="M40,88H73a32,32,0,0,0,62,0H216a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H183a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16H121a32,32,0,0,0,62,0h33a8,8,0,0,0,0-16Zm-64,24a16,16,0,1,1,16-16A16,16,0,0,1,152,192Z" />,
+              },
+              {
+                n: '2', title: 'We sort the route',
+                body: 'Stops are ordered around live traffic on OMR, ECR, and Adyar. We tell you when to leave.',
+                icon: <path d="M216,64H176V40a8,8,0,0,0-16,0V64H96V40a8,8,0,0,0-16,0V64H40A16,16,0,0,0,24,80V192a16,16,0,0,0,16,16H80v24a8,8,0,0,0,16,0V208h64v24a8,8,0,0,0,16,0V208h40a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64Zm0,128H40V80H216V192ZM80,112a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,112Zm0,40a8,8,0,0,1,8-8h80a8,8,0,0,1,0,16H88A8,8,0,0,1,80,152Z" />,
+              },
+              {
+                n: '3', title: 'Navigate and go',
+                body: 'One multi-stop Google Maps link, ready on your phone. Turn the key and go.',
+                icon: <path d="M231.87,114l-168-95.89A16,16,0,0,0,40.92,37.34L71.55,128,40.92,218.67A16,16,0,0,0,56,240a16.15,16.15,0,0,0,7.93-2.1l167.94-96.05a16,16,0,0,0,0-27.89ZM56,224a.56.56,0,0,0,0-.12L85.74,136H144a8,8,0,0,0,0-16H85.74L56.06,32.16A.46.46,0,0,0,56,32l168,95.82Z" />,
+              },
+            ].map((step) => (
+              <div key={step.n} className="relative flex flex-col items-center text-center">
+                <div className="absolute -top-12 -left-4 text-[150px] font-black text-rose-100 leading-none select-none z-0">{step.n}</div>
+                <div className="w-20 h-20 rounded-2xl bg-white border border-rose-200 shadow-md flex items-center justify-center mb-6 relative z-10">
+                  <svg viewBox="0 0 256 256" className="w-8 h-8 text-[#F43F5E] fill-current" xmlns="http://www.w3.org/2000/svg">
+                    {step.icon}
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-[#0F172A] mb-3 relative z-10">{step.title}</h3>
+                <p className="text-slate-500 text-sm max-w-xs relative z-10">{step.body}</p>
               </div>
-              <h3 className="text-2xl font-bold text-[#0F172A] mb-3 relative z-10">{step.title}</h3>
-              <p className="text-slate-500 text-sm max-w-xs relative z-10">{step.body}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ===== BOTTOM CTA BANNER ===== */}
-      <section className="py-12 px-6 pb-24">
+      <section className="py-12 px-6 pb-24 bg-white">
         <div className="max-w-6xl mx-auto bg-[#0F172A] rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col items-center text-center border border-white/5 shadow-2xl">
           <img
             src="https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
@@ -494,14 +480,11 @@ export default function Home() {
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/80 to-transparent" />
-
           <div className="relative z-10 max-w-2xl">
             <h2 className="text-5xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight">
               Stop deciding.<br />Start going.
             </h2>
-            <p className="text-lg text-slate-300 mb-10">
-              Pick your spots, we handle the order. No account, no cost.
-            </p>
+            <p className="text-lg text-slate-300 mb-10">Pick your spots, we handle the order. No account, no cost.</p>
             <Link
               href="/plan"
               className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full bg-[#F43F5E] hover:bg-[#E11D48] text-white font-bold text-lg transition-all shadow-[0_0_40px_rgba(244,63,94,0.3)] hover:shadow-[0_0_60px_rgba(244,63,94,0.5)] hover:-translate-y-1 w-full sm:w-auto btn-shine chip-press"
