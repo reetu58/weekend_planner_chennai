@@ -48,7 +48,7 @@ export default function PlanPage() {
             Plan your escape.
           </h1>
           <p className="text-slate-500 text-base">
-            Pick a date, tell us your vibe — we'll handle the route.
+            Pick a date, tell us your vibe — we&apos;ll handle the route.
           </p>
         </div>
 
