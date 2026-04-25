@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather + Road Conditions — Weekendaa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0a0f1e;
+      --navy-card:   rgba(12, 20, 44, 0.72);
+      --navy-row:    rgba(255, 255, 255, 0.04);
+      --cyan:        #00d4ff;
+      --cyan-dim:    rgba(0, 212, 255, 0.12);
+      --cyan-glow:   rgba(0, 212, 255, 0.25);
+      --amber:       #f59e0b;
+      --amber-dim:   rgba(245, 158, 11, 0.12);
+      --amber-glow:  rgba(245, 158, 11, 0.30);
+      --emerald:     #10b981;
+      --yellow:      #fbbf24;
+      --orange:      #f97316;
+      --red:         #ef4444;
+      --red-dark:    #b91c1c;
+      --white:       #ffffff;
+      --slate:       #94a3b8;
+      --border:      rgba(255, 255, 255, 0.08);
+      --font-orb:    'Orbitron', monospace;
+      --font-ui:     'Inter', sans-serif;
+    }
+
+    html, body {
+      background: var(--navy);
+      min-height: 100vh;
+      font-family: var(--font-ui);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── AMBIENT BACKGROUND ───────────────────────────── */
+    .scene {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      animation: orbDrift 12s ease-in-out infinite alternate;
+    }
+    .orb-1 {
+      width: 480px; height: 480px;
+      top: -120px; left: -100px;
+      background: radial-gradient(circle, rgba(0,212,255,0.10) 0%, transparent 70%);
+      animation-delay: 0s;
+    }
+    .orb-2 {
+      width: 360px; height: 360px;
+      bottom: -80px; right: -60px;
+      background: radial-gradient(circle, rgba(245,158,11,0.10) 0%, transparent 70%);
+      animation-delay: -4s;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 70%);
+      animation-delay: -8s;
+    }
+
+    @keyframes orbDrift {
+      0%   { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, 20px) scale(1.1); }
+    }
+
+    /* Subtle grid overlay */
+    .scene::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* ── GRID ─────────────────────────────────────────── */
+    .grid {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+    @media (max-width: 680px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── GLASS CARD ───────────────────────────────────── */
+    .card {
+      background: var(--navy-card);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .card:nth-child(1) { animation-delay: 0.10s; }
+    .card:nth-child(2) { animation-delay: 0.22s; }
+
+    @keyframes cardIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* top-edge glow line */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 16px; right: 16px;
+      height: 1px;
+      border-radius: 999px;
+    }
+    .card.weather::before {
+      background: linear-gradient(90deg, transparent, var(--amber), transparent);
+      box-shadow: 0 0 12px var(--amber-glow);
+    }
+    .card.traffic::before {
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+
+    /* inner glow tint */
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      pointer-events: none;
+    }
+    .card.weather::after {
+      background: radial-gradient(ellipse at 80% 0%, rgba(245,158,11,0.06) 0%, transparent 60%);
+    }
+    .card.traffic::after {
+      background: radial-gradient(ellipse at 20% 0%, rgba(0,212,255,0.06) 0%, transparent 60%);
+    }
+
+    /* ── CARD HEADER ──────────────────────────────────── */
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .card-label {
+      font-family: var(--font-orb);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--slate);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-label-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .card.weather .card-label-dot { background: var(--amber); }
+    .card.traffic .card-label-dot { background: var(--cyan); }
+
+    /* LIVE badge */
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-family: var(--font-orb);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+    }
+    .card.weather .live-badge {
+      background: rgba(245,158,11,0.12);
+      border: 1px solid rgba(245,158,11,0.25);
+      color: var(--amber);
+    }
+    .card.traffic .live-badge {
+      background: rgba(0,212,255,0.10);
+      border: 1px solid rgba(0,212,255,0.22);
+      color: var(--cyan);
+    }
+
+    .live-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .card.weather .live-dot { background: var(--amber); }
+    .card.traffic .live-dot { background: var(--cyan); }
+
+    .live-dot::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      animation: livePulse 1.8s ease-out infinite;
+    }
+    .card.weather .live-dot::before { background: var(--amber); }
+    .card.traffic .live-dot::before { background: var(--cyan); }
+
+    @keyframes livePulse {
+      0%   { opacity: 0.7; transform: scale(1); }
+      70%  { opacity: 0;   transform: scale(2.4); }
+      100% { opacity: 0;   transform: scale(2.4); }
+    }
+
+    /* ── WEATHER HERO ─────────────────────────────────── */
+    .weather-hero {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.40s forwards;
+    }
+
+    .temp-block {}
+    .temp-value {
+      font-family: var(--font-orb);
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--amber);
+      letter-spacing: -2px;
+      text-shadow: 0 0 40px var(--amber-glow), 0 0 80px rgba(245,158,11,0.15);
+    }
+    .temp-unit {
+      font-family: var(--font-orb);
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(245,158,11,0.5);
+      vertical-align: super;
+      margin-left: 2px;
+    }
+    .temp-condition {
+      font-size: 13px;
+      color: var(--slate);
+      margin-top: 4px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* thermometer SVG icon */
+    .weather-icon {
+      width: 52px;
+      height: 52px;
+      color: var(--amber);
+      flex-shrink: 0;
+      filter: drop-shadow(0 0 10px var(--amber-glow));
+    }
+
+    /* ── WEATHER STATS ────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .stat-pill {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 10px 8px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .stat-pill:nth-child(1) { animation-delay: 0.50s; }
+    .stat-pill:nth-child(2) { animation-delay: 0.58s; }
+    .stat-pill:nth-child(3) { animation-delay: 0.66s; }
+
+    .stat-icon {
+      width: 16px; height: 16px;
+      margin: 0 auto 6px;
+      color: var(--slate);
+    }
+    .stat-value {
+      font-family: var(--font-orb);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .stat-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--slate);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-top: 3px;
+    }
+
+    /* heat alert strip */
+    .heat-alert {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: rgba(239,68,68,0.10);
+      border: 1px solid rgba(239,68,68,0.20);
+      font-size: 11px;
+      font-weight: 600;
+      color: #fca5a5;
+      opacity: 0;
+      animation: fadeUp 0.45s 0.74s forwards;
+    }
+    .heat-alert svg { flex-shrink: 0; }
+
+    /* ── TRAFFIC HERO ─────────────────────────────────── */
+    .traffic-hero {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp 0.5s cubic-bezier(0.22,1,0.36,1) 0.52s forwards;
+    }
+
+    .traffic-overall {
+      font-family: var(--font-orb);
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .traffic-worst {
+      font-size: 12px;
+      color: var(--slate);
+      margin-top: 5px;
+      font-weight: 500;
+    }
+
+    .traffic-icon {
+      width: 48px; height: 48px;
+      flex-shrink: 0;
+    }
+
+    /* ── TRAFFIC ROWS ─────────────────────────────────── */
+    .corridor-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .corridor-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 11px;
+      background: var(--navy-row);
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      opacity: 0;
+      animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
+      transition: background 0.2s;
+    }
+    .corridor-row:nth-child(1) { animation-delay: 0.62s; }
+    .corridor-row:nth-child(2) { animation-delay: 0.70s; }
+    .corridor-row:nth-child(3) { animation-delay: 0.78s; }
+
+    .corridor-row:hover { background: rgba(255,255,255,0.07); }
+
+    /* Left accent bar */
+    .corridor-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 3px 0 0 3px;
+    }
+
+    /* Severity colors */
+    .sev-clear   .corridor-row::before, .row-clear::before   { background: #10b981; }
+    .sev-light   .corridor-row::before, .row-light::before   { background: #fbbf24; }
+    .sev-moderate .corridor-row::before, .row-moderate::before { background: #f97316; }
+    .sev-heavy   .corridor-row::before, .row-heavy::before   { background: #ef4444; }
+    .sev-standstill .corridor-row::before, .row-standstill::before { background: #b91c1c; }
+
+    .row-clear::before    { background: #10b981; }
+    .row-light::before    { background: #fbbf24; }
+    .row-moderate::before { background: #f97316; }
+    .row-heavy::before    { background: #ef4444; }
+    .row-standstill::before { background: #991b1b; }
+
+    /* Standstill gets extra attention */
+    .row-standstill {
+      background: rgba(185,28,28,0.12) !important;
+      border-color: rgba(185,28,28,0.25) !important;
+    }
+    .row-heavy {
+      background: rgba(239,68,68,0.07) !important;
+    }
+
+    .sev-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .row-clear    .sev-dot { background: #10b981; box-shadow: 0 0 6px #10b98166; }
+    .row-light    .sev-dot { background: #fbbf24; box-shadow: 0 0 6px #fbbf2466; }
+    .row-moderate .sev-dot { background: #f97316; box-shadow: 0 0 6px #f9731666; }
+    .row-heavy    .sev-dot { background: #ef4444; box-shadow: 0 0 8px #ef444466; }
+    .row-standstill .sev-dot {
+      background: #b91c1c;
+      box-shadow: 0 0 10px #b91c1c99;
+      animation: redPulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes redPulse {
+      0%, 100% { box-shadow: 0 0 8px #b91c1c99; }
+      50%       { box-shadow: 0 0 18px #ef4444cc; }
+    }
+
+    .corridor-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e8f0;
+      flex: 1;
+      letter-spacing: 0.01em;
+    }
+
+    .sev-label {
+      font-family: var(--font-orb);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .row-clear    .sev-label { color: #34d399; }
+    .row-light    .sev-label { color: #fcd34d; }
+    .row-moderate .sev-label { color: #fb923c; }
+    .row-heavy    .sev-label { color: #f87171; }
+    .row-standstill .sev-label { color: #fca5a5; }
+
+    .delay-chip {
+      font-size: 10px;
+      color: var(--slate);
+      font-weight: 500;
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 2px 7px;
+    }
+
+    /* ── DIVIDER ──────────────────────────────────────── */
+    .section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 0;
+    }
+
+    /* ── FOOTER STATUS BAR ────────────────────────────── */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--slate);
+      opacity: 0;
+      animation: fadeUp 0.4s 0.88s forwards;
+    }
+    .status-bar .orb-tag {
+      font-family: var(--font-orb);
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      color: rgba(148,163,184,0.5);
+    }
+    .status-updated {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .status-dot { width: 5px; height: 5px; border-radius: 50%; background: #10b981; }
+
+    /* ── SHARED ANIMATIONS ────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION TITLE ────────────────────────────────── */
+    .section-title {
+      text-align: center;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.5s 0s forwards;
+    }
+    .section-eyebrow {
+      font-family: var(--font-orb);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+    .section-heading {
+      font-family: var(--font-orb);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .section-heading span { color: var(--amber); }
+  </style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div style="width:100%;max-width:900px;position:relative;z-index:10;">
+
+    <div class="section-title">
+      <p class="section-eyebrow">Chennai · Live Intelligence</p>
+      <h2 class="section-heading">Weather &amp; <span>Road Conditions</span></h2>
+    </div>
+
+    <div class="grid">
+
+      <!-- ══ WEATHER CARD ══════════════════════════════ -->
+      <div class="card weather">
+
+        <div class="card-header">
+          <span class="card-label">
+            <span class="card-label-dot"></span>
+            Chennai Weather
+          </span>
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            LIVE
+          </div>
+        </div>
+
+        <div class="weather-hero">
+          <!-- Thermometer + Sun SVG -->
+          <svg class="weather-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Sun rays -->
+            <line x1="32" y1="4"  x2="32" y2="11"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="32" y1="34" x2="32" y2="41"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="11" y1="22" x2="4"  y2="22"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="53" y1="22" x2="60" y2="22"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="9"  x2="19" y2="14"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="50" y1="30" x2="45" y2="35"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="50" y1="9"  x2="45" y2="14"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="35" x2="19" y2="30"  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Sun core -->
+            <circle cx="32" cy="22" r="9" fill="currentColor" opacity="0.9"/>
+            <!-- Thermometer body -->
+            <rect x="44" y="32" width="8" height="22" rx="4" fill="currentColor" opacity="0.2" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="46" y="34" width="4" height="15" rx="2" fill="currentColor" opacity="0.7"/>
+            <circle cx="48" cy="56" r="5" fill="currentColor" opacity="0.95"/>
+            <circle cx="48" cy="56" r="3" fill="currentColor"/>
+          </svg>
+
+          <div class="temp-block">
+            <div>
+              <span class="temp-value">38</span><span class="temp-unit">°C</span>
+            </div>
+            <div class="temp-condition">Extreme Heat · Feels like 42°C</div>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-pill">
+            <!-- Humidity drop -->
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/>
+            </svg>
+            <div class="stat-value" style="color:#60a5fa;">68<span style="font-size:10px;color:#64748b;">%</span></div>
+            <div class="stat-label">Humidity</div>
+          </div>
+          <div class="stat-pill">
+            <!-- Rain cloud -->
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="19" x2="8" y2="21"/><line x1="8" y1="13" x2="8" y2="15"/>
+              <line x1="16" y1="19" x2="16" y2="21"/><line x1="16" y1="13" x2="16" y2="15"/>
+              <line x1="12" y1="21" x2="12" y2="23"/><line x1="12" y1="15" x2="12" y2="17"/>
+              <path d="M20 16.58A5 5 0 0018 7h-1.26A8 8 0 104 15.25"/>
+            </svg>
+            <div class="stat-value" style="color:var(--amber);">12<span style="font-size:10px;color:#64748b;">%</span></div>
+            <div class="stat-label">Rain</div>
+          </div>
+          <div class="stat-pill">
+            <!-- Wind -->
+            <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1114 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"/>
+            </svg>
+            <div class="stat-value" style="color:#a78bfa;">18<span style="font-size:9px;font-family:var(--font-ui);color:#64748b;"> km/h</span></div>
+            <div class="stat-label">Wind</div>
+          </div>
+        </div>
+
+        <div class="heat-alert">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/>
+          </svg>
+          Extreme heat — plan outdoor stops before 9 AM
+        </div>
+
+        <div class="section-divider" style="margin-top:16px;"></div>
+        <div class="status-bar">
+          <span class="orb-tag">OPEN-METEO · IAD1</span>
+          <span class="status-updated">
+            <span class="status-dot"></span>
+            Updated just now
+          </span>
+        </div>
+
+      </div>
+
+      <!-- ══ TRAFFIC CARD ══════════════════════════════ -->
+      <div class="card traffic">
+
+        <div class="card-header">
+          <span class="card-label">
+            <span class="card-label-dot"></span>
+            Road Conditions
+          </span>
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            LIVE
+          </div>
+        </div>
+
+        <div class="traffic-hero">
+          <!-- Traffic light SVG -->
+          <svg class="traffic-icon" viewBox="0 0 48 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="4" width="28" height="46" rx="6" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
+            <!-- Red light -->
+            <circle cx="24" cy="16" r="7" fill="rgba(239,68,68,0.2)" stroke="#ef4444" stroke-width="1.5"/>
+            <!-- Amber light (active) -->
+            <circle cx="24" cy="27" r="7" fill="#f59e0b" opacity="0.9"/>
+            <circle cx="24" cy="27" r="5" fill="#fbbf24"/>
+            <!-- Green light -->
+            <circle cx="24" cy="38" r="7" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1.5"/>
+            <!-- Pole -->
+            <line x1="24" y1="50" x2="24" y2="60" stroke="rgba(0,212,255,0.3)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+
+          <div>
+            <div class="traffic-overall" style="color:var(--amber);">Moderate</div>
+            <div class="traffic-worst">Worst: OMR Sholinganallur</div>
+          </div>
+        </div>
+
+        <div class="corridor-list">
+
+          <div class="corridor-row row-heavy">
+            <span class="sev-dot"></span>
+            <span class="corridor-name">OMR — Sholinganallur</span>
+            <span class="sev-label">Heavy</span>
+            <span class="delay-chip">+18m</span>
+          </div>
+
+          <div class="corridor-row row-moderate">
+            <span class="sev-dot"></span>
+            <span class="corridor-name">T. Nagar — Usman Rd</span>
+            <span class="sev-label">Moderate</span>
+            <span class="delay-chip">+9m</span>
+          </div>
+
+          <div class="corridor-row row-standstill">
+            <span class="sev-dot"></span>
+            <span class="corridor-name">Anna Salai — Gemini</span>
+            <span class="sev-label">Standstill</span>
+            <span class="delay-chip">+32m</span>
+          </div>
+
+        </div>
+
+        <div class="section-divider"></div>
+        <div class="status-bar">
+          <span class="orb-tag">TOMTOM · CHENNAI</span>
+          <span class="status-updated">
+            <span class="status-dot" style="background:#f59e0b;"></span>
+            3 corridors tracked
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
