@@ -66,12 +66,6 @@ export default function Nav() {
                 )}
               </Link>
             ))}
-            <Link
-              href="/plan"
-              className="ml-4 px-5 py-2 bg-[#F43F5E] text-white rounded-xl text-sm font-bold hover:bg-accent-light hover:shadow-glow-accent transition-all duration-300 btn-shine chip-press"
-            >
-              Plan Now
-            </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -107,13 +101,6 @@ export default function Nav() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/plan"
-              className="mt-2 text-center py-3 bg-[#F43F5E] text-white rounded-xl text-sm font-bold hover:bg-accent-light transition-colors"
-              onClick={() => setMenuOpen(false)}
-            >
-              Plan Now
-            </Link>
           </div>
         </div>
       </div>
