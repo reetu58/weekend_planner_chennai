@@ -473,32 +473,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== BOTTOM CTA BANNER ===== */}
-      <section className="py-12 px-6 pb-24 bg-white">
-        <div className="max-w-6xl mx-auto bg-[#0F172A] rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col items-center text-center border border-white/5 shadow-2xl">
-          <img
-            src="https://images.pexels.com/photos/1212600/pexels-photo-1212600.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
-            alt="Chennai ECR sunset"
-            className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/80 to-transparent" />
-          <div className="relative z-10 max-w-2xl">
-            <h2 className="text-5xl md:text-7xl font-black tracking-tight text-white mb-6 leading-tight">
-              Stop deciding.<br />Start going.
-            </h2>
-            <p className="text-lg text-slate-300 mb-10">Pick your spots, we handle the order. No account, no cost.</p>
-            <Link
-              href="/plan"
-              className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full bg-[#F43F5E] hover:bg-[#E11D48] text-white font-bold text-lg transition-all shadow-[0_0_40px_rgba(244,63,94,0.3)] hover:shadow-[0_0_60px_rgba(244,63,94,0.5)] hover:-translate-y-1 w-full sm:w-auto btn-shine chip-press"
-            >
-              Start Planning
-            </Link>
-            <p className="text-slate-500 text-sm mt-6">Free · No account needed</p>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 }
