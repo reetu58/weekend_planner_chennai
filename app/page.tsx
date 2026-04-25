@@ -83,24 +83,24 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#0F172A] overflow-x-hidden">
 
-      {/* ===== HERO — pastel light ===== */}
+      {/* ===== HERO — travel guide ===== */}
       <section className="relative min-h-[95vh] flex items-center justify-center pt-20 overflow-hidden bg-gradient-to-br from-rose-50 via-white to-slate-50">
-        {/* Very faint background image */}
+        {/* Travel-guide background image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.pexels.com/photos/10070972/pexels-photo-10070972.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
-            alt="Kapaleeshwarar Temple Chennai"
-            className="w-full h-full object-cover opacity-[0.06] select-none pointer-events-none"
-            style={{ filter: 'sepia(0.2) saturate(0.5) brightness(1.2)' }}
+            src="https://images.pexels.com/photos/1603650/pexels-photo-1603650.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+            alt="ECR coastal road Chennai"
+            className="w-full h-full object-cover opacity-[0.18] select-none pointer-events-none"
+            style={{ filter: 'sepia(0.05) saturate(1.3) brightness(1.05)' }}
             loading="eager"
           />
         </div>
-        {/* Soft gradient overlay */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-rose-50/80 via-white/60 to-white/90" />
+        {/* Gradient overlay — keeps text crisp, lets image breathe */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-rose-50/65 via-white/50 to-white/88" />
         {/* Decorative blobs */}
-        <div className="absolute top-24 right-[10%] w-96 h-96 bg-rose-100 rounded-full blur-3xl opacity-50 pointer-events-none" />
-        <div className="absolute bottom-16 left-[5%] w-72 h-72 bg-pink-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
-        <div className="hero-dots absolute inset-0 opacity-[0.06]" />
+        <div className="absolute top-24 right-[10%] w-96 h-96 bg-rose-100 rounded-full blur-3xl opacity-40 pointer-events-none" />
+        <div className="absolute bottom-16 left-[5%] w-72 h-72 bg-pink-50 rounded-full blur-3xl opacity-50 pointer-events-none" />
+        <div className="hero-dots absolute inset-0 opacity-[0.04]" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center text-center mt-12">
           {/* Live badge */}
