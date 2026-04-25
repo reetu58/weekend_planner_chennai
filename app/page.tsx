@@ -88,10 +88,10 @@ export default function Home() {
         {/* Travel-guide background image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.pexels.com/photos/1603650/pexels-photo-1603650.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
-            alt="ECR coastal road Chennai"
-            className="w-full h-full object-cover opacity-[0.18] select-none pointer-events-none"
-            style={{ filter: 'sepia(0.05) saturate(1.3) brightness(1.05)' }}
+            src="https://images.pexels.com/photos/31653799/pexels-photo-31653799.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+            alt="Chennai Marina Beach lighthouse"
+            className="w-full h-full object-cover opacity-[0.10] select-none pointer-events-none"
+            style={{ filter: 'sepia(0.1) saturate(1.1) brightness(1.05)' }}
             loading="eager"
           />
         </div>
