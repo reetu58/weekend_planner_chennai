@@ -90,13 +90,13 @@ export default function Home() {
           <img
             src="https://images.pexels.com/photos/31653799/pexels-photo-31653799.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
             alt="Chennai Marina Beach lighthouse"
-            className="w-full h-full object-cover opacity-[0.10] select-none pointer-events-none"
-            style={{ filter: 'sepia(0.1) saturate(1.1) brightness(1.05)' }}
+            className="w-full h-full object-cover opacity-[0.28] select-none pointer-events-none"
+            style={{ filter: 'sepia(0.08) saturate(1.2) brightness(1.0)' }}
             loading="eager"
           />
         </div>
         {/* Gradient overlay — keeps text crisp, lets image breathe */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-rose-50/65 via-white/50 to-white/88" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-rose-50/40 via-white/30 to-white/75" />
         {/* Decorative blobs */}
         <div className="absolute top-24 right-[10%] w-96 h-96 bg-rose-100 rounded-full blur-3xl opacity-40 pointer-events-none" />
         <div className="absolute bottom-16 left-[5%] w-72 h-72 bg-pink-50 rounded-full blur-3xl opacity-50 pointer-events-none" />
