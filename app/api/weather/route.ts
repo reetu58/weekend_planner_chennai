@@ -4,16 +4,25 @@ const CHENNAI_LAT = 13.0827;
 const CHENNAI_LNG = 80.2707;
 
 let weatherCache: { data: any; timestamp: number } = { data: null, timestamp: 0 };
-const CACHE_DURATION = 30 * 60 * 1000;
+const CACHE_DURATION = 15 * 60 * 1000; // 15 min — more responsive
 
-function mapWeatherCode(code: number): { condition: string; icon: string } {
+function mapWeatherCode(code: number, tempC: number): { condition: string; icon: string } {
+  // Extreme heat override — Chennai heat wave takes priority
+  if (tempC >= 40) return { condition: 'Extreme heat', icon: '🌡️' };
+  if (tempC >= 37) return { condition: 'Hot & sunny', icon: '☀️' };
+
+  // WMO weather codes
   if (code === 0) return { condition: 'Clear sky', icon: '☀️' };
-  if (code <= 3) return { condition: 'Partly cloudy', icon: '⛅' };
-  if (code <= 48) return { condition: 'Foggy', icon: '🌫️' };
-  if (code <= 67) return { condition: 'Rainy', icon: '🌧️' };
+  if (code <= 2) return { condition: 'Partly cloudy', icon: '⛅' };
+  if (code === 3) return { condition: 'Overcast', icon: '☁️' };
+  if (code <= 48) return { condition: 'Hazy / foggy', icon: '🌫️' };
+  if (code <= 55) return { condition: 'Light drizzle', icon: '🌦️' };
+  if (code <= 65) return { condition: 'Rainy', icon: '🌧️' };
+  if (code <= 67) return { condition: 'Heavy rain', icon: '🌧️' };
   if (code <= 82) return { condition: 'Rain showers', icon: '🌧️' };
+  if (code <= 94) return { condition: 'Showers', icon: '🌦️' };
   if (code <= 99) return { condition: 'Thunderstorm', icon: '⛈️' };
-  return { condition: 'Unknown', icon: '🌡️' };
+  return { condition: 'Partly cloudy', icon: '⛅' };
 }
 
 export async function GET() {
@@ -24,16 +33,17 @@ export async function GET() {
   try {
     const res = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${CHENNAI_LAT}&longitude=${CHENNAI_LNG}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=precipitation_probability_max&timezone=Asia/Kolkata&forecast_days=1`,
-      { next: { revalidate: 1800 } }
+      { cache: 'no-store' }
     );
 
     if (res.ok) {
       const data = await res.json();
       const current = data.current;
-      const { condition, icon } = mapWeatherCode(current.weather_code);
+      const temp = Math.round(current.temperature_2m);
+      const { condition, icon } = mapWeatherCode(current.weather_code, temp);
 
       const weather = {
-        temperature: Math.round(current.temperature_2m),
+        temperature: temp,
         condition,
         icon,
         humidity: current.relative_humidity_2m,
@@ -48,8 +58,8 @@ export async function GET() {
     throw new Error('Open-Meteo failed');
   } catch {
     return NextResponse.json({
-      temperature: 32, condition: 'Partly cloudy', icon: '⛅',
-      humidity: 70, rainChance: 20, windSpeed: 12, isLive: false,
+      temperature: 38, condition: 'Hot & sunny', icon: '☀️',
+      humidity: 65, rainChance: 10, windSpeed: 12, isLive: false,
     });
   }
 }

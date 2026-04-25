@@ -4,6 +4,25 @@ import { WeatherData } from '../types';
 
 function WeatherIcon({ condition, className }: { condition: string; className?: string }) {
   const c = condition.toLowerCase();
+  if (c.includes('extreme') || c.includes('heat') || c.includes('hot')) {
+    return (
+      <svg viewBox="0 0 64 64" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="28" r="11" fill="currentColor" opacity="0.9"/>
+        <line x1="32" y1="8" x2="32" y2="13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="32" y1="43" x2="32" y2="48" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="12" y1="28" x2="17" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="47" y1="28" x2="52" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="17" y1="13" x2="21" y2="17" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="43" y1="39" x2="47" y2="43" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="47" y1="13" x2="43" y2="17" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        <line x1="21" y1="39" x2="17" y2="43" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+        {/* thermometer */}
+        <rect x="29" y="44" width="6" height="14" rx="3" fill="currentColor" opacity="0.4" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="30.5" y="45" width="3" height="10" rx="1.5" fill="currentColor" opacity="0.8"/>
+        <circle cx="32" cy="57" r="3.5" fill="currentColor" opacity="0.9"/>
+      </svg>
+    );
+  }
   if (c.includes('rain') || c.includes('shower') || c.includes('drizzle')) {
     return (
       <svg viewBox="0 0 64 64" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,14 +67,16 @@ function WeatherIcon({ condition, className }: { condition: string; className?: 
 
 function getWeatherAccent(condition: string, temp: number): { text: string; bg: string; glow: string } {
   const c = condition.toLowerCase();
+  if (c.includes('extreme') || c.includes('heat') || temp >= 40)
+    return { text: 'text-red-400', bg: 'bg-red-500/10', glow: 'shadow-[0_0_30px_rgba(239,68,68,0.2)]' };
+  if (temp >= 37)
+    return { text: 'text-orange-400', bg: 'bg-orange-500/10', glow: 'shadow-[0_0_30px_rgba(249,115,22,0.15)]' };
   if (c.includes('rain') || c.includes('shower') || c.includes('drizzle'))
     return { text: 'text-blue-400', bg: 'bg-blue-500/10', glow: 'shadow-[0_0_30px_rgba(96,165,250,0.15)]' };
   if (c.includes('thunder') || c.includes('storm'))
     return { text: 'text-purple-400', bg: 'bg-purple-500/10', glow: 'shadow-[0_0_30px_rgba(168,85,247,0.15)]' };
   if (c.includes('cloud') || c.includes('overcast') || c.includes('fog') || c.includes('mist') || c.includes('haze'))
     return { text: 'text-slate-300', bg: 'bg-slate-500/10', glow: 'shadow-[0_0_20px_rgba(148,163,184,0.1)]' };
-  if (temp >= 38)
-    return { text: 'text-red-400', bg: 'bg-red-500/10', glow: 'shadow-[0_0_30px_rgba(239,68,68,0.15)]' };
   return { text: 'text-yellow-400', bg: 'bg-yellow-500/10', glow: 'shadow-[0_0_30px_rgba(251,191,36,0.15)]' };
 }
 
