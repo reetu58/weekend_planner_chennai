@@ -21,6 +21,16 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Light-background pages need dark text when nav is unscrolled
+  const isLightPage = pathname === '/' || pathname === '/plan' || pathname === '/explore';
+  const useDarkText = isLightPage && !scrolled;
+
+  const textColor = useDarkText ? 'text-[#0F172A]' : 'text-white';
+  const subTextColor = useDarkText ? 'text-slate-400' : 'text-white/30';
+  const linkActive = useDarkText ? 'bg-slate-100 text-[#0F172A]' : 'bg-white/15 text-white';
+  const linkInactive = useDarkText ? 'text-slate-500 hover:text-[#0F172A] hover:bg-slate-100' : 'text-white/60 hover:text-white hover:bg-white/8';
+  const hamburgerColor = useDarkText ? 'bg-[#0F172A]' : 'bg-white';
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled
@@ -32,11 +42,11 @@ export default function Nav() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-9 h-9 rounded-xl bg-[#F43F5E] flex items-center justify-center shadow-md group-hover:shadow-glow-accent transition-all duration-300 group-hover:scale-105">
-              <span className="text-[#0F172A] font-black text-lg">W</span>
+              <span className="text-white font-black text-lg">W</span>
             </div>
             <div className="flex flex-col leading-tight">
-              <span className="text-white text-lg font-bold tracking-tight">Weekendaa</span>
-              <span className="text-white/30 text-[10px] font-light tracking-[0.2em]">CHENNAI</span>
+              <span className={`${textColor} text-lg font-bold tracking-tight transition-colors duration-300`}>Weekendaa</span>
+              <span className={`${subTextColor} text-[10px] font-light tracking-[0.2em] transition-colors duration-300`}>CHENNAI</span>
             </div>
           </Link>
 
@@ -47,9 +57,7 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                  pathname === link.href
-                    ? 'bg-white/15 text-white shadow-inner-soft'
-                    : 'text-white/60 hover:text-white hover:bg-white/8'
+                  pathname === link.href ? linkActive : linkInactive
                 }`}
               >
                 {link.label}
@@ -72,9 +80,9 @@ export default function Nav() {
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-label="Toggle menu"
           >
-            <span className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${menuOpen ? 'translate-y-2 rotate-45' : ''}`} />
-            <span className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0 scale-0' : ''}`} />
-            <span className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
+            <span className={`block h-0.5 w-5 ${hamburgerColor} rounded-full transition-all duration-300 ${menuOpen ? 'translate-y-2 rotate-45' : ''}`} />
+            <span className={`block h-0.5 w-5 ${hamburgerColor} rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0 scale-0' : ''}`} />
+            <span className={`block h-0.5 w-5 ${hamburgerColor} rounded-full transition-all duration-300 ${menuOpen ? '-translate-y-2 -rotate-45' : ''}`} />
           </button>
         </div>
       </div>
