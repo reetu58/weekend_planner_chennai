@@ -1,8 +1,7 @@
 'use client';
 import Link from 'next/link';
-import WeatherWidget from '../components/weather-widget';
 import { useState, useEffect } from 'react';
-import { TrafficSummary } from '../types';
+import { TrafficSummary, WeatherData } from '../types';
 
 const TEMPLATES = [
   {
@@ -71,9 +70,17 @@ const SEVERITY_TEXT: Record<string, string> = {
 };
 
 export default function Home() {
+  const [weather, setWeather] = useState<WeatherData | null>(null);
   const [trafficSummary, setTrafficSummary] = useState<TrafficSummary | null>(null);
 
   useEffect(() => {
+    fetch('/api/weather')
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setWeather(d); })
+      .catch(() => setWeather({
+        temperature: 32, condition: 'Partly cloudy', icon: '⛅',
+        humidity: 70, rainChance: 20, windSpeed: 12, isLive: false,
+      }));
     fetch('/api/traffic?summary=true')
       .then(r => r.ok ? r.json() : null)
       .then(setTrafficSummary)
@@ -183,104 +190,135 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== WEATHER + TRAFFIC — indigo-violet band ===== */}
-      <section className="relative py-10 px-6 bg-gradient-to-br from-violet-950 via-indigo-950 to-purple-900 overflow-hidden">
-        {/* Subtle glow orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-indigo-400/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {/* ===== WEATHER + TRAFFIC — compact cards ===== */}
+      <section className="py-8 px-6 bg-white border-b border-slate-100">
+        <div className="max-w-3xl mx-auto flex flex-col md:flex-row gap-4 justify-center">
 
-            {/* Weather */}
-            <WeatherWidget />
-
-            {/* Traffic */}
-            {(() => {
-              const sorted = trafficSummary
-                ? [...trafficSummary.corridors]
-                    .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))
-                    .slice(0, 3)
-                : null;
-              const worst = sorted?.[0];
-
-              const TRAFFIC_ACCENT: Record<string, { text: string; bg: string; glow: string }> = {
-                clear:      { text: 'text-emerald-400', bg: 'bg-emerald-500/10', glow: 'shadow-[0_0_30px_rgba(52,211,153,0.12)]' },
-                light:      { text: 'text-yellow-300',  bg: 'bg-yellow-500/10',  glow: 'shadow-[0_0_30px_rgba(251,191,36,0.12)]' },
-                moderate:   { text: 'text-orange-400',  bg: 'bg-orange-500/10',  glow: 'shadow-[0_0_30px_rgba(249,115,22,0.12)]' },
-                heavy:      { text: 'text-red-400',     bg: 'bg-red-500/10',     glow: 'shadow-[0_0_30px_rgba(239,68,68,0.12)]' },
-                standstill: { text: 'text-red-500',     bg: 'bg-red-700/10',     glow: 'shadow-[0_0_30px_rgba(185,28,28,0.12)]' },
-              };
-              const accent = TRAFFIC_ACCENT[trafficSummary?.overall ?? 'clear'];
-
-              return (
-                <div className={`relative rounded-2xl border border-white/8 bg-white/[0.03] backdrop-blur-md p-4 overflow-hidden ${accent.glow}`}>
-                  <div className={`absolute inset-0 ${accent.bg} pointer-events-none`} />
-
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                        <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F43F5E]" />
-                        </span>
-                        Road conditions
-                      </span>
-                      <span className={`text-[10px] font-bold uppercase tracking-wider ${trafficSummary?.isLive ? 'text-emerald-400' : 'text-slate-600'}`}>
-                        {trafficSummary ? (trafficSummary.isLive ? 'Live' : 'Est.') : '—'}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className={`flex-shrink-0 ${accent.text}`}>
-                        <svg viewBox="0 0 64 64" className="w-10 h-10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect x="22" y="8" width="20" height="34" rx="4" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2"/>
-                          <circle cx="32" cy="18" r="4" fill="currentColor" opacity="0.5"/>
-                          <circle cx="32" cy="30" r="4" fill="currentColor" opacity="0.5"/>
-                          <circle cx="32" cy="42" r="4" fill={
-                            (trafficSummary?.overall ?? 'clear') === 'clear' ? '#34D399' :
-                            (trafficSummary?.overall ?? 'clear') === 'light' ? '#FBBF24' :
-                            (trafficSummary?.overall ?? 'clear') === 'moderate' ? '#F97316' : '#EF4444'
-                          } opacity="0.9"/>
-                          <line x1="20" y1="54" x2="44" y2="54" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity="0.3"/>
-                        </svg>
+          {/* ── Weather card ── */}
+          {(() => {
+            const c = (weather?.condition ?? '').toLowerCase();
+            const isRain  = c.includes('rain') || c.includes('drizzle') || c.includes('shower');
+            const isCloud = c.includes('cloud') || c.includes('overcast') || c.includes('fog') || c.includes('mist') || c.includes('haze');
+            const isStorm = c.includes('thunder') || c.includes('storm');
+            const isHot   = (weather?.temperature ?? 0) >= 38;
+            const wStyle  = isRain  ? { iconBg: 'bg-blue-100',   iconColor: 'text-blue-500'   }
+                          : isStorm ? { iconBg: 'bg-purple-100', iconColor: 'text-purple-500' }
+                          : isCloud ? { iconBg: 'bg-slate-100',  iconColor: 'text-slate-400'  }
+                          : isHot   ? { iconBg: 'bg-red-100',    iconColor: 'text-red-500'    }
+                          :           { iconBg: 'bg-amber-100',  iconColor: 'text-amber-500'  };
+            return (
+              <div className="flex items-center justify-between bg-white border border-slate-200 rounded-2xl p-5 w-full md:flex-1 shadow-card hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 flex items-center gap-1.5">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#F43F5E]" />
+                    </span>
+                    Live in Chennai
+                  </span>
+                  {weather ? (
+                    <>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-black text-[#0F172A]">{weather.temperature}°</span>
+                        <span className="text-slate-500 font-medium text-sm truncate">{weather.condition}</span>
                       </div>
-                      <div>
-                        <div className={`text-3xl font-black leading-none ${trafficSummary ? accent.text : 'text-slate-600'}`}>
-                          {trafficSummary ? SEVERITY_LABEL[trafficSummary.overall] : '—'}
-                        </div>
-                        <p className="text-xs text-slate-400 mt-1">
-                          {worst ? `Worst: ${worst.name}` : 'Checking corridors…'}
-                        </p>
-                      </div>
+                      <span className="text-xs text-slate-400 mt-1">Humidity {weather.humidity}% · Wind {weather.windSpeed} km/h</span>
+                    </>
+                  ) : (
+                    <div className="space-y-2 mt-1">
+                      <div className="h-8 w-28 bg-slate-100 rounded-lg animate-pulse" />
+                      <div className="h-3 w-40 bg-slate-100 rounded animate-pulse" />
                     </div>
-
-                    <div className="grid grid-cols-1 gap-1.5">
-                      {sorted ? sorted.map(c => (
-                        <div key={c.name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5">
-                          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${SEVERITY_DOT[c.severity]}`} />
-                          <span className="text-sm text-slate-300 flex-1 font-medium">{c.name}</span>
-                          <span className={`text-xs font-bold ${SEVERITY_TEXT[c.severity]}`}>{SEVERITY_LABEL[c.severity]}</span>
-                          {c.avgDelay > 0 && <span className="text-[11px] text-slate-600">+{c.avgDelay}m</span>}
-                        </div>
-                      )) : ['OMR', 'ECR', 'T. Nagar'].map(name => (
-                        <div key={name} className="flex items-center gap-3 px-3 py-2 rounded-xl bg-white/[0.04] border border-white/5 animate-pulse">
-                          <span className="w-2 h-2 rounded-full bg-white/10 flex-shrink-0" />
-                          <span className="text-sm text-slate-700 flex-1">{name}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {trafficSummary && (trafficSummary.overall === 'heavy' || trafficSummary.overall === 'standstill') && (
-                      <div className="mt-3 px-3 py-2 rounded-xl text-xs font-medium flex items-center gap-2 bg-red-500/10 text-red-400 border border-red-500/20">
-                        <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/></svg>
-                        Heavy congestion — plan to leave before 8 AM or after 8 PM
-                      </div>
-                    )}
-                  </div>
+                  )}
                 </div>
-              );
-            })()}
-          </div>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ml-4 ${wStyle.iconBg}`}>
+                  {isRain ? (
+                    <svg viewBox="0 0 24 24" className={`w-6 h-6 ${wStyle.iconColor}`} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 104 16.25"/>
+                      <line x1="8" y1="19" x2="8" y2="21"/><line x1="8" y1="13" x2="8" y2="15"/>
+                      <line x1="16" y1="19" x2="16" y2="21"/><line x1="16" y1="13" x2="16" y2="15"/>
+                      <line x1="12" y1="21" x2="12" y2="23"/><line x1="12" y1="15" x2="12" y2="17"/>
+                    </svg>
+                  ) : isStorm ? (
+                    <svg viewBox="0 0 24 24" className={`w-6 h-6 ${wStyle.iconColor}`} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M19 16.9A5 5 0 0018 7h-1.26a8 8 0 10-11.62 9"/>
+                      <polyline points="13 11 9 17 15 17 11 23"/>
+                    </svg>
+                  ) : isCloud ? (
+                    <svg viewBox="0 0 24 24" className={`w-6 h-6 ${wStyle.iconColor}`} fill="currentColor">
+                      <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" className={`w-6 h-6 ${wStyle.iconColor}`} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="5"/>
+                      <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* ── Traffic card ── */}
+          {(() => {
+            const worst = trafficSummary
+              ? [...trafficSummary.corridors]
+                  .sort((a, b) => (SEVERITY_ORDER[b.severity] ?? 0) - (SEVERITY_ORDER[a.severity] ?? 0))[0]
+              : null;
+            const overall = trafficSummary?.overall ?? 'clear';
+            const tStyle: Record<string, { iconBg: string; iconColor: string; textColor: string; dot: string }> = {
+              clear:      { iconBg: 'bg-emerald-100', iconColor: 'text-emerald-600', textColor: 'text-emerald-600', dot: '#16A34A' },
+              light:      { iconBg: 'bg-yellow-100',  iconColor: 'text-yellow-600',  textColor: 'text-yellow-600',  dot: '#CA8A04' },
+              moderate:   { iconBg: 'bg-orange-100',  iconColor: 'text-orange-600',  textColor: 'text-orange-600',  dot: '#EA580C' },
+              heavy:      { iconBg: 'bg-red-100',     iconColor: 'text-red-600',     textColor: 'text-red-600',     dot: '#DC2626' },
+              standstill: { iconBg: 'bg-red-200',     iconColor: 'text-red-700',     textColor: 'text-red-700',     dot: '#B91C1C' },
+            };
+            const ts = tStyle[overall] ?? tStyle.clear;
+            return (
+              <div className="flex items-center justify-between bg-white border border-slate-200 rounded-2xl p-5 w-full md:flex-1 shadow-card hover:-translate-y-1 transition-transform duration-300 cursor-default">
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 flex items-center gap-1.5">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F43F5E] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#F43F5E]" />
+                    </span>
+                    Traffic Monitor
+                  </span>
+                  {trafficSummary ? (
+                    <>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-xl font-black text-[#0F172A] leading-tight truncate">{worst?.name ?? 'All clear'}</span>
+                      </div>
+                      <span className={`text-sm font-medium mt-0.5 ${ts.textColor}`}>
+                        {worst
+                          ? `${SEVERITY_LABEL[worst.severity]} congestion${worst.avgDelay > 0 ? ` · +${worst.avgDelay}m` : ''}`
+                          : 'Roads are clear'}
+                      </span>
+                      <span className="text-xs text-slate-400 mt-1">Overall: {SEVERITY_LABEL[overall]}</span>
+                    </>
+                  ) : (
+                    <div className="space-y-2 mt-1">
+                      <div className="h-6 w-32 bg-slate-100 rounded-lg animate-pulse" />
+                      <div className="h-3 w-40 bg-slate-100 rounded animate-pulse" />
+                    </div>
+                  )}
+                </div>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ml-4 ${ts.iconBg}`}>
+                  <svg viewBox="0 0 64 64" className={`w-6 h-6 ${ts.iconColor}`} fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="22" y="8" width="20" height="34" rx="4" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2"/>
+                    <circle cx="32" cy="18" r="4" fill="currentColor" opacity="0.35"/>
+                    <circle cx="32" cy="30" r="4" fill="currentColor" opacity="0.35"/>
+                    <circle cx="32" cy="42" r="4" fill={ts.dot} opacity="0.95"/>
+                    <line x1="20" y1="54" x2="44" y2="54" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" opacity="0.3"/>
+                  </svg>
+                </div>
+              </div>
+            );
+          })()}
+
         </div>
       </section>
 
