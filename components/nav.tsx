@@ -21,11 +21,15 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const textColor = 'text-white';
-  const subTextColor = 'text-white/30';
-  const linkActive = 'bg-white/15 text-white';
-  const linkInactive = 'text-white/60 hover:text-white hover:bg-white/8';
-  const hamburgerColor = 'bg-white';
+  // Light-background pages need dark text when nav is unscrolled
+  const isLightPage = pathname === '/' || pathname === '/plan' || pathname === '/explore';
+  const useDarkText = isLightPage && !scrolled;
+
+  const textColor = useDarkText ? 'text-[#0F172A]' : 'text-white';
+  const subTextColor = useDarkText ? 'text-slate-400' : 'text-white/30';
+  const linkActive = useDarkText ? 'bg-slate-100 text-[#0F172A]' : 'bg-white/15 text-white';
+  const linkInactive = useDarkText ? 'text-slate-500 hover:text-[#0F172A] hover:bg-slate-100' : 'text-white/60 hover:text-white hover:bg-white/8';
+  const hamburgerColor = useDarkText ? 'bg-[#0F172A]' : 'bg-white';
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
