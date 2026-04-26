@@ -323,21 +323,21 @@ export default function Home() {
       </section>
 
       {/* ===== CHOOSE YOUR ESCAPE — centered ===== */}
-      <section id="templates" className="py-24 px-6 max-w-screen-xl mx-auto">
+      <section id="templates" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#F43F5E] mb-4">Chennai · Weekend Discovery</p>
           <h2 className="font-playfair text-5xl md:text-6xl font-black tracking-tight text-[#0F172A] mb-4">
-            Choose Your Escape.
+            Choose your vibe.
           </h2>
-          <p className="text-slate-500 text-lg max-w-xl mx-auto">Six ways to spend your Chennai weekend, each timed around traffic corridors.</p>
+          <p className="text-slate-500 text-lg max-w-xl mx-auto">Six distinct flavors of Chennai, heavily curated. Select a template and let our engine map out the perfect timing.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {TEMPLATES.map((t) => (
             <Link
               key={t.title}
               href={`/plan?vibes=${t.vibes}&categories=${t.categories}`}
-              className="group relative aspect-[2/3] rounded-3xl overflow-hidden cursor-pointer"
+              className="group relative aspect-[4/5] rounded-3xl overflow-hidden cursor-pointer"
             >
               <img
                 src={t.photo}
@@ -349,20 +349,21 @@ export default function Home() {
                   el.src = `https://placehold.co/600x750/1E293B/F43F5E?text=${encodeURIComponent(t.title)}`;
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/55 to-transparent" />
               <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#F43F5E]/50 rounded-3xl transition-colors duration-300" />
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
                 <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
                   <div className="flex items-center gap-2 mb-3">
                     <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white">{t.tag}</span>
-                    <span className="text-slate-300 text-xs">{t.hours}</span>
+                    <span className="text-slate-300 text-xs font-medium flex items-center gap-1">
+                      <svg className="w-3 h-3 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                      </svg>
+                      {t.hours}
+                    </span>
                   </div>
-                  <h3 className="text-2xl font-black text-white mb-2">{t.title}</h3>
+                  <h3 className="text-3xl font-black text-white mb-2">{t.title}</h3>
                   <p className="text-slate-300 text-sm line-clamp-2">{t.desc}</p>
-                  <div className="mt-3 flex items-center text-xs font-bold text-[#F43F5E] opacity-0 group-hover:opacity-100 transition-opacity">
-                    Plan this
-                    <svg className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" /></svg>
-                  </div>
                 </div>
               </div>
             </Link>
