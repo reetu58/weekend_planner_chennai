@@ -165,13 +165,13 @@ export default function Home() {
       </section>
 
       {/* ===== PHOTO MARQUEE ===== */}
-      <section className="relative py-12 border-y border-slate-100 bg-white overflow-hidden">
+      <section className="relative py-16 border-y border-slate-100 bg-white overflow-hidden">
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
         <div className="marquee-container">
           <div className="marquee-track">
             {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((p, i) => (
-              <div key={i} className="flex-shrink-0 w-72 h-40 rounded-2xl overflow-hidden mx-3 group relative cursor-pointer shadow-md">
+              <div key={i} className="flex-shrink-0 w-80 sm:w-96 md:w-[440px] h-56 md:h-64 rounded-3xl overflow-hidden mx-3 md:mx-4 group relative cursor-pointer shadow-md">
                 <img
                   src={p.src}
                   alt={p.label}
@@ -179,11 +179,11 @@ export default function Home() {
                   loading="lazy"
                   onError={(e) => {
                     const t = e.target as HTMLImageElement;
-                    t.src = `https://placehold.co/600x300/1E293B/F43F5E?text=${encodeURIComponent(p.label)}`;
+                    t.src = `https://placehold.co/800x500/1E293B/F43F5E?text=${encodeURIComponent(p.label)}`;
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent" />
-                <span className="absolute bottom-4 left-4 font-bold text-white text-base">{p.label}</span>
+                <span className="absolute bottom-5 left-5 font-bold text-white text-lg">{p.label}</span>
               </div>
             ))}
           </div>
