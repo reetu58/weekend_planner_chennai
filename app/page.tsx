@@ -337,7 +337,7 @@ export default function Home() {
             <Link
               key={t.title}
               href={`/plan?vibes=${t.vibes}&categories=${t.categories}`}
-              className="group relative aspect-[4/5] rounded-3xl overflow-hidden cursor-pointer"
+              className="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer bg-[#0F172A]"
             >
               <img
                 src={t.photo}
@@ -346,25 +346,27 @@ export default function Home() {
                 loading="lazy"
                 onError={(e) => {
                   const el = e.target as HTMLImageElement;
-                  el.src = `https://placehold.co/600x750/1E293B/F43F5E?text=${encodeURIComponent(t.title)}`;
+                  el.src = `https://placehold.co/600x800/1E293B/F43F5E?text=${encodeURIComponent(t.title)}`;
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/55 to-transparent" />
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#F43F5E]/50 rounded-3xl transition-colors duration-300" />
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white">{t.tag}</span>
-                    <span className="text-slate-300 text-xs font-medium flex items-center gap-1">
-                      <svg className="w-3 h-3 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                      </svg>
-                      {t.hours}
-                    </span>
-                  </div>
-                  <h3 className="text-3xl font-black text-white mb-2">{t.title}</h3>
-                  <p className="text-slate-300 text-sm line-clamp-2">{t.desc}</p>
-                </div>
+              {/* Slim gradient — only behind the title, photo dominates */}
+              <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/70 to-transparent" />
+              <div className="absolute inset-0 ring-2 ring-transparent group-hover:ring-[#F43F5E]/60 rounded-3xl transition-colors duration-300" />
+
+              {/* Tag — top */}
+              <span className="absolute top-5 left-5 bg-white/15 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+                {t.tag}
+              </span>
+              <span className="absolute top-5 right-5 inline-flex items-center gap-1 text-[10px] font-semibold text-white/80 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+                {t.hours}
+              </span>
+
+              {/* Title — bottom */}
+              <div className="absolute inset-x-0 bottom-0 p-6 transform transition-transform duration-300 group-hover:-translate-y-1">
+                <h3 className="font-playfair text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">{t.title}</h3>
               </div>
             </Link>
           ))}
