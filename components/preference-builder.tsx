@@ -220,7 +220,6 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
   const [startLat, setStartLat] = useState<number | undefined>(undefined);
   const [startLng, setStartLng] = useState<number | undefined>(undefined);
   const [distanceLimit, setDistanceLimit] = useState<DistanceLimit>(0);
-  const [activeTab, setActiveTab] = useState<'mood' | 'places'>('mood');
 
   const toggleVibe = (v: Vibe) =>
     setVibes(prev => prev.includes(v) ? prev.filter(x => x !== v) : [...prev, v]);
@@ -310,57 +309,42 @@ export default function PreferenceBuilder({ onGenerate, isGenerating }: Props) {
 
       <div className="border-t border-slate-100" />
 
-      {/* Section: Mood & Places — tabbed */}
+      {/* Section: Mood */}
       <section className="flex flex-col gap-0">
-        <SectionLabel label="Mood & Places" />
-
-        {/* Tabs */}
-        <div role="tablist" aria-label="Mood and Places" className="flex items-center gap-1 mb-5 p-1 bg-slate-100 rounded-xl w-fit">
-          {([
-            { id: 'mood', label: 'Mood', count: vibes.length },
-            { id: 'places', label: 'Places', count: categories.length },
-          ] as const).map(tab => {
-            const active = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                role="tab"
-                aria-selected={active}
-                onClick={() => setActiveTab(tab.id)}
-                className={`relative px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 inline-flex items-center gap-2 ${
-                  active
-                    ? 'bg-white text-[#0F172A] shadow-sm'
-                    : 'text-slate-500 hover:text-[#0F172A]'
-                }`}
-              >
-                {tab.label}
-                {tab.count > 0 && (
-                  <span className={`inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[10px] font-bold ${
-                    active ? 'bg-[#F43F5E] text-white' : 'bg-slate-200 text-slate-600'
-                  }`}>
-                    {tab.count}
-                  </span>
-                )}
-              </button>
-            );
-          })}
+        <div className="flex items-center gap-3 mb-5">
+          <span className="text-sm font-bold text-[#0F172A]">Mood</span>
+          {vibes.length > 0 && (
+            <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[10px] font-bold bg-[#F43F5E] text-white">
+              {vibes.length}
+            </span>
+          )}
+          <span className="flex-1 h-px bg-slate-100" />
         </div>
+        <div className="flex flex-wrap gap-2.5">
+          {(Object.keys(VIBE_LABELS) as Vibe[]).map(v => (
+            <Chip key={v} label={VIBE_LABELS[v]} selected={vibes.includes(v)} onClick={() => toggleVibe(v)} />
+          ))}
+        </div>
+      </section>
 
-        {/* Panels */}
-        {activeTab === 'mood' ? (
-          <div role="tabpanel" aria-label="Mood" className="flex flex-wrap gap-2.5">
-            {(Object.keys(VIBE_LABELS) as Vibe[]).map(v => (
-              <Chip key={v} label={VIBE_LABELS[v]} selected={vibes.includes(v)} onClick={() => toggleVibe(v)} />
-            ))}
-          </div>
-        ) : (
-          <div role="tabpanel" aria-label="Places" className="flex flex-wrap gap-2.5">
-            {(Object.keys(CATEGORY_LABELS) as PlaceCategory[]).map(c => (
-              <Chip key={c} label={CATEGORY_LABELS[c]} selected={categories.includes(c)} onClick={() => toggleCategory(c)} />
-            ))}
-          </div>
-        )}
+      <div className="border-t border-slate-100" />
+
+      {/* Section: Places */}
+      <section className="flex flex-col gap-0">
+        <div className="flex items-center gap-3 mb-5">
+          <span className="text-sm font-bold text-[#0F172A]">Places</span>
+          {categories.length > 0 && (
+            <span className="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full text-[10px] font-bold bg-[#F43F5E] text-white">
+              {categories.length}
+            </span>
+          )}
+          <span className="flex-1 h-px bg-slate-100" />
+        </div>
+        <div className="flex flex-wrap gap-2.5">
+          {(Object.keys(CATEGORY_LABELS) as PlaceCategory[]).map(c => (
+            <Chip key={c} label={CATEGORY_LABELS[c]} selected={categories.includes(c)} onClick={() => toggleCategory(c)} />
+          ))}
+        </div>
       </section>
 
       <div className="border-t border-slate-100" />
