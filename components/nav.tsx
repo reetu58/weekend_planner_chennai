@@ -26,9 +26,9 @@ export default function Nav() {
   const useDarkText = isLightPage && !scrolled;
 
   const textColor = useDarkText ? 'text-[#0F172A]' : 'text-white';
-  const subTextColor = useDarkText ? 'text-slate-400' : 'text-white/30';
-  const linkActive = useDarkText ? 'bg-slate-100 text-[#0F172A]' : 'bg-white/15 text-white';
-  const linkInactive = useDarkText ? 'text-slate-500 hover:text-[#0F172A] hover:bg-slate-100' : 'text-white/60 hover:text-white hover:bg-white/8';
+  const subTextColor = useDarkText ? 'text-slate-600 font-medium' : 'text-white/40';
+  const linkActive = useDarkText ? 'bg-slate-900 text-white shadow-sm' : 'bg-white/15 text-white';
+  const linkInactive = useDarkText ? 'text-[#0F172A] hover:bg-slate-900/10' : 'text-white/70 hover:text-white hover:bg-white/8';
   const hamburgerColor = useDarkText ? 'bg-[#0F172A]' : 'bg-white';
 
   return (
@@ -56,7 +56,7 @@ export default function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                className={`relative px-4 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
                   pathname === link.href ? linkActive : linkInactive
                 }`}
               >

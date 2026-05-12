@@ -124,7 +124,7 @@ export default function Home() {
             <span className="text-[#F43F5E]">Zero traffic.</span>
           </h1>
 
-          <p className="animate-fade-in-up text-lg md:text-xl text-slate-500 max-w-2xl mb-12 font-medium leading-relaxed" style={{ animationDelay: '0.1s' }}>
+          <p className="animate-fade-in-up text-lg md:text-xl text-slate-800 max-w-2xl mb-12 font-semibold leading-relaxed" style={{ animationDelay: '0.1s' }}>
             64 handpicked Chennai spots, ordered around live OMR/ECR traffic. Pick your escape and start time — we sequence the rest.
           </p>
 
@@ -139,14 +139,14 @@ export default function Home() {
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
               </span>
             </Link>
-            <span className="text-slate-400 text-sm">Free · No account needed</span>
+            <span className="text-slate-700 text-sm font-semibold">Free · No account needed</span>
           </div>
 
           {/* Stats bar */}
           <div className="animate-fade-in-up w-full max-w-3xl grid grid-cols-3 divide-x divide-slate-200 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden" style={{ animationDelay: '0.35s' }}>
             <div className="px-4 py-5 flex flex-col items-center justify-center text-center">
               <span className="text-3xl font-black text-[#0F172A]">64+</span>
-              <span className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-1">Handpicked spots</span>
+              <span className="text-xs text-slate-700 font-bold uppercase tracking-wider mt-1">Handpicked spots</span>
             </div>
             <div className="px-4 py-5 flex flex-col items-center justify-center text-center">
               <span className="text-3xl font-black text-[#F43F5E] flex justify-center">
@@ -154,11 +154,11 @@ export default function Home() {
                   <path d="M234.35,129,53.34,50a8,8,0,0,0-10.15,10.15L80,128,43.19,196A8,8,0,0,0,50,208a8.22,8.22,0,0,0,3.34-.73l181-79A8,8,0,0,0,234.35,129Z" />
                 </svg>
               </span>
-              <span className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-1">Traffic-aware routing</span>
+              <span className="text-xs text-slate-700 font-bold uppercase tracking-wider mt-1">Traffic-aware routing</span>
             </div>
             <div className="px-4 py-5 flex flex-col items-center justify-center text-center">
               <span className="text-3xl font-black text-[#0F172A]">0₹</span>
-              <span className="text-xs text-slate-500 font-medium uppercase tracking-wider mt-1">No sign-up</span>
+              <span className="text-xs text-slate-700 font-bold uppercase tracking-wider mt-1">No sign-up</span>
             </div>
           </div>
         </div>
