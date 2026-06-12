@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "../components/nav";
 import Footer from "../components/footer";
+import ChatWidget from "../components/chat-widget";
 
 export const metadata: Metadata = {
   title: "Weekendaa — Chennai Weekend Planner",
@@ -44,6 +45,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <ChatWidget />
       </body>
     </html>
   );
