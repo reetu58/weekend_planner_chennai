@@ -56,6 +56,9 @@ Built with Next.js 14, React 18, TypeScript, and Tailwind CSS.
 # Install dependencies
 npm install
 
+# (Optional) Enable the LLM-powered chat assistant
+export ANTHROPIC_API_KEY=sk-ant-...
+
 # Run development server
 npm run dev
 
@@ -67,6 +70,12 @@ npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
+
+## Environment Variables
+
+| Variable | Required? | Purpose |
+|----------|-----------|---------|
+| `ANTHROPIC_API_KEY` | Optional | Enables the LLM-powered chat assistant (`claude-opus-4-8`). When unset, the chat falls back to a rule-based intent matcher with no loss of functionality. |
 
 ## Project Structure
 
