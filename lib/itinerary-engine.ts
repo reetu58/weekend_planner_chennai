@@ -15,6 +15,11 @@ function getMaxStops(durationMinutes: number): number {
   return 5;
 }
 
+function toMinutes(hhmm: string): number {
+  const [h, m] = hhmm.split(':').map(Number);
+  return h * 60 + (m || 0);
+}
+
 function getTimeString(baseTime: string, addMinutes: number): string {
   const [h, m] = baseTime.split(':').map(Number);
   const totalMin = h * 60 + m + addMinutes;
@@ -114,12 +119,39 @@ export async function generateItinerary(prefs: UserPrefs): Promise<Itinerary> {
     }
   }
 
+  // 3b. Meal-slot enforcement — if the trip window crosses lunch (12–14:30) or
+  // dinner (19–21:30) and we don't already have a food stop, swap the lowest-
+  // scoring non-food pick for the best-ranked food place.
+  const departureTime = prefs.departureTime || getDefaultDepartureTime(prefs.timeSlot);
+  const tripStartMin = toMinutes(departureTime);
+  const tripEndMin = tripStartMin + prefs.duration;
+  const covers = (a: number, b: number) => tripStartMin <= b && tripEndMin >= a;
+  const needsMealStop =
+    !selected.some((p) => p.category === 'food') &&
+    (covers(12 * 60, 14 * 60 + 30) || covers(19 * 60, 21 * 60 + 30));
+
+  if (needsMealStop) {
+    const bestFood = filteredScored.find(
+      (s) => s.place.category === 'food' && !selected.includes(s.place),
+    );
+    if (bestFood) {
+      if (selected.length < maxStops) {
+        selected.push(bestFood.place);
+      } else {
+        // Replace the last non-food pick (lowest-scoring of the lineup).
+        const swapIdx = [...selected].reverse().findIndex((p) => p.category !== 'food');
+        if (swapIdx >= 0) {
+          selected[selected.length - 1 - swapIdx] = bestFood.place;
+        }
+      }
+    }
+  }
+
   // 4. Optimize stop order
   const startCoords = AREA_COORDINATES[prefs.startArea] || { lat: 13.0418, lng: 80.2341 };
   const ordered = optimizeStopOrder(selected, startCoords.lat, startCoords.lng);
 
   // 5. Build itinerary stops with timing
-  const departureTime = prefs.departureTime || getDefaultDepartureTime(prefs.timeSlot);
   let currentTime = departureTime;
   let totalTravelTime = 0;
   let totalTrafficOverhead = 0;
